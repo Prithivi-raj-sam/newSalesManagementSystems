@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
+import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
+import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 
@@ -66,7 +68,21 @@ public class EmployeeController {
 		AccountsEmployeeDTO dto=employeeservice.getAccountsandEmployee(id);
 		model.addAttribute("getAccounts", dto.getAccountList());
 		model.addAttribute("getEmployee", dto.getEmployee());
-		return "accounts-employee";
+		return "list-accounts-employee";
+	}
+	@GetMapping("/getleadsandemployee")
+	public String getLeadsandEmployee(@RequestParam("id")int id,Model model) {
+		LeadsEmployeeDTO dto=employeeservice.getLeadsAndEmployee(id);
+		model.addAttribute("getemployee", dto.getEmployee());
+		model.addAttribute("getleads", dto.getLeadlist());
+		return "list-employee-leads";
+	}
+	@GetMapping("/getsalesandemployee")
+	public String getSalesAndEmployee(@RequestParam("id")int id,Model model) {
+		SalesEmployeeDTO dto=employeeservice.getSalesEmployee(id);
+		model.addAttribute("getEmployee", dto.getEmployee());
+		model.addAttribute("getSales", dto.getSalesList());
+		return "list-sales-employee";
 	}
 	
 }

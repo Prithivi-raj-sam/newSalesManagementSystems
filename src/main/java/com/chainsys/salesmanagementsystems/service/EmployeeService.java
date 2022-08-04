@@ -6,9 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
+import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
+import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.EmployeeRepository;
+import com.chainsys.salesmanagementsystems.repository.LeadRepository;
+import com.chainsys.salesmanagementsystems.repository.SalesRepository;
 
 @Service
 public class EmployeeService {
@@ -18,6 +22,10 @@ public class EmployeeService {
 	
 	@Autowired
 	private AccountRepository accountRepository;
+	@Autowired
+	private LeadRepository leadRepository;
+	@Autowired
+	private SalesRepository salesRepository;
 	
 	public void insertEmployee(Employee employee) {
 		employeeRepository.save(employee);
@@ -36,9 +44,20 @@ public class EmployeeService {
 	}
 	public AccountsEmployeeDTO getAccountsandEmployee(int id) {
 		AccountsEmployeeDTO dto=new AccountsEmployeeDTO();
-		System.out.println(getEmployeeById(id));
 		dto.setEmployee(getEmployeeById(id));
 		dto.setAccountList(accountRepository.findByEmployeeEmployeeId(id));
+		return dto;
+	}
+	public LeadsEmployeeDTO getLeadsAndEmployee(int id) {
+		LeadsEmployeeDTO dto=new LeadsEmployeeDTO();
+		dto.setEmployee(getEmployeeById(id));
+		dto.setLeadlist(leadRepository.findByEmployeeEmployeeId(id));
+		return dto;
+	}
+	public SalesEmployeeDTO getSalesEmployee(int id) {
+		SalesEmployeeDTO dto=new SalesEmployeeDTO();
+		dto.setEmployee(getEmployeeById(id));
+		dto.setSalesList(salesRepository.findBySellerId(id));
 		return dto;
 	}
 }

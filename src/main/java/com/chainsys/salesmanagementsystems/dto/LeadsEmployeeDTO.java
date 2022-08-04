@@ -5,7 +5,7 @@ import java.util.List;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
 
-public class LeadsEmployee {
+public class LeadsEmployeeDTO {
 	private List<Lead> leadlist;
 	private Employee employee;
 	

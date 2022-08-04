@@ -49,6 +49,15 @@ public class Employee {
 	@OneToMany(mappedBy="employee",fetch=FetchType.LAZY)
 	private List<Lead> leadlist;
 	
+	@OneToMany(mappedBy="employee",fetch=FetchType.LAZY)
+	private List<Sales>salesList;
+	
+	public List<Sales> getSalesList() {
+		return salesList;
+	}
+	public void setSalesList(List<Sales> salesList) {
+		this.salesList = salesList;
+	}
 	public List<Lead> getLeadlist() {
 		return leadlist;
 	}

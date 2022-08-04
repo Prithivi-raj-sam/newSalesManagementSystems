@@ -11,4 +11,5 @@ public interface SalesRepository extends CrudRepository<Sales,Integer>{
 	List<Sales> findAll();
 	Sales findById(int id);
 	void deleteById(int id);
+	List<Sales> findBySellerId(int id);
 }
