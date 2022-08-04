@@ -30,12 +30,12 @@ public class LeadsController {
 	public String addLeadForm(Model model) {
 		Lead lead=new Lead();
 		model.addAttribute("addLead", lead);
-		return "add-lead-form";
+		return "add-leads-form";
 	}
 	@PostMapping("/addlead")
-	public String addLead(@ModelAttribute("id")Lead lead,Model model) {
+	public String addLead(@ModelAttribute("addLead")Lead lead,Model model) {
 		leadservice.insertLead(lead);
-		return "add-lead-form";
+		return "add-leads-form";
 	}
 	@GetMapping("/deletelead")
 	public String deleteLeadsById(@RequestParam("id")int id,Model model) {
@@ -52,11 +52,11 @@ public class LeadsController {
 	public String updateLeadForm(@RequestParam("id")int id,Model model) {
 		Lead lead=leadservice.getLeadById(id);
 		model.addAttribute("updateLead", lead);
-		return "update-lead-form";
+		return "update-leads-form";
 	}
 	@PostMapping("/updatelead")
-	public String updateLead(@ModelAttribute("id")Lead lead,Model model) {
+	public String updateLead(@ModelAttribute("updateLead")Lead lead,Model model) {
 		leadservice.updateLead(lead);
-		return "update-lead-form";
+		return "update-leads-form";
 	}
 }

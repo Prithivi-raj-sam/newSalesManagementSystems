@@ -10,7 +10,7 @@
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
-			<form:form action="" method="post" modelAttribute="addEmployee">
+			<form:form action="" method="post" modelAttribute="territory">
 				<div>
 					<label for="territoryId">Territory id</label>
 					<div>

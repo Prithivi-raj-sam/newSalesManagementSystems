@@ -24,7 +24,7 @@ public class SalesController {
 	public String addSalesServiceForm(Model model) {
 		Sales sales =new Sales();
 		model.addAttribute("addsales", sales);
-		return "add-sales-from";
+		return "add-sales-form";
 	}
 	@PostMapping("/addsales")
 	public String addSales(@ModelAttribute("addsales")Sales sales,Model model) {
@@ -52,7 +52,7 @@ public class SalesController {
 	public String updateSalesServiceForm(@RequestParam("id")int id,Model model) {
 		Sales sales =salesService.getSalesById(id);
 		model.addAttribute("updatesales", sales);
-		return "update-sales-from";
+		return "update-sales-form";
 	}
 	@PostMapping("/updatesales")
 	public String updateSales(@ModelAttribute("updatesales")Sales sales,Model model) {

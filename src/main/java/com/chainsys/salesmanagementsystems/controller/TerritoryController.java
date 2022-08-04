@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.dto.AccountsTerritoryDTO;
+import com.chainsys.salesmanagementsystems.dto.EmployeeTerritoryDTO;
 import com.chainsys.salesmanagementsystems.model.Territory;
+import com.chainsys.salesmanagementsystems.repository.EmployeeRepository;
+import com.chainsys.salesmanagementsystems.service.AccountService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
 
 @Controller
@@ -19,6 +23,11 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 public class TerritoryController {
 	@Autowired
 	private TerritoryService territoryService;
+	
+	@Autowired
+	private AccountService accountService;
+	@Autowired
+	private EmployeeRepository employeeRepository;
 	
 	@GetMapping("/addterritoryform")
 	public String addTerritoryForm(Model model) {
@@ -59,4 +68,19 @@ public class TerritoryController {
 		territoryService.updateTerritory(ter);
 		return "update-territory-form";
 	}
+	@GetMapping("/getaccountsandterritory")
+	public String getAccountAndTerritory(@RequestParam("id")int id,Model model) {
+		AccountsTerritoryDTO dto=territoryService.getAccountandTerritory(id);
+		model.addAttribute("getTerritory", dto.getTerritory());
+		model.addAttribute("getAccounts", dto.getAccountList());
+		return "list-accounts-territory";
+}
+	 @GetMapping("/getemployeeandterritory")
+	 public String getEmployeesAndTerritory(@RequestParam("id")int id,Model model) {
+		 EmployeeTerritoryDTO dto=territoryService.getTErritoryAndEmployee(id);
+		 model.addAttribute("getTerritory", dto.getTerritory());
+		 model.addAttribute("getEmployee", dto.getEmployeeList());
+		 return "list-employees-territory";
+	 }
+	
 }

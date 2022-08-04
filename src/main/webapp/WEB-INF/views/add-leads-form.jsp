@@ -10,65 +10,47 @@
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
-			<form:form action="addemployee" method="post" modelAttribute="addEmployee">
+			<form:form action="addlead" method="post" modelAttribute="addLead">
 				<div>
-					<label for="employeeId">Employee id</label>
+					<label for="leadId">Lead Id</label>
 					<div>
-						<form:input path="employeeId" />
+						<form:input path="leadId" />
 					</div>
 				</div>
 				<div>
-					<label for="employeeName">Employee Name</label>
+					<label for="accountId">Account Id</label>
 					<div>
-						<form:input path="employeeName" />
+						<form:input path="accountId" />
 					</div>
 				</div>
 				<div>
-					<label for="employeePhone">Employee Phone</label>
+					<label for="status">Status</label>
 					<div>
-						<form:input path="employeePhone" />
+						<form:input path="status" />
 					</div>
 				</div>
 				<div>
-					<label for="email">Email</label>
+					<label for="sellerId">SellerId</label>
 					<div>
-						<form:input path="email" />
+						<form:input path="sellerId" />
 					</div>
 				</div>
 				<div>
-					<label for="address">Address</label>
+					<label for="leadDate">Lead Date</label>
 					<div>
-						<form:input path="address" />
+						<form:input path="leadDate" />
 					</div>
 				</div>
 				<div>
-					<label for="territoryId">Territory Id</label>
+					<label for="stages">Stage</label>
 					<div>
-						<form:input path="territoryId" />
+						<form:input path="stages" />
 					</div>
 				</div>
 				<div>
-					<label for="password">Password</label>
+					<label for="propability">Probability</label>
 					<div>
-						<form:input path="password" />
-					</div>
-				</div>
-				<div>
-					<label for="passwordLastChangeDate">Password Last Change Date</label>
-					<div>
-						<form:input path="passwordLastChangeDate" />
-					</div>
-				</div>
-				<div>
-					<label for="role">Role</label>
-					<div>
-						<form:input path="role" />
-					</div>
-				</div>
-				<div>
-					<label for="profile">Profile</label>
-					<div>
-						<form:input path="profile" type="file" accept=".png"/>
+						<form:input path="propability" />
 					</div>
 				</div>
 				<div>

@@ -11,4 +11,6 @@ public interface LeadRepository extends CrudRepository<Lead,Integer>{
 	List<Lead> findAll();
 	Lead findById(int id);
 	void deleteById(int id);
+	List<Lead> findByAccountAccountId(int id);
+	List<Lead> findByEmployeeEmployeeId(int id);
 }

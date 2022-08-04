@@ -1,8 +1,12 @@
 package com.chainsys.salesmanagementsystems.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +19,29 @@ public class Territory {
 	private String territoryName;
 	@Column(name = "no_of_customers")
 	private int noOfCustomer;
+
+	@OneToMany(mappedBy="territory", fetch=FetchType.LAZY)
+	private List<Account>accountList;
+	
+	@OneToMany(mappedBy="territory" ,fetch=FetchType.LAZY)
+	private List<Employee> employeeList;
+	
+	
+	public List<Employee> getEmployeeList() {
+		return employeeList;
+	}
+
+	public void setEmployeeList(List<Employee> employeeList) {
+		this.employeeList = employeeList;
+	}
+
+	public List<Account> getAccountList() {
+		return accountList;
+	}
+
+	public void setAccountList(List<Account> accountList) {
+		this.accountList = accountList;
+	}
 
 	public int getTerritoryId() {
 		return territoryId;

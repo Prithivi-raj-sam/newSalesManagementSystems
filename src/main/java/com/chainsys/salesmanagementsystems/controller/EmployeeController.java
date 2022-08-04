@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 
@@ -59,6 +60,13 @@ public class EmployeeController {
 	public String updateEmployee(@ModelAttribute("updateEmployee")Employee employee, Model model) {
 		employeeservice.updateEmployee(employee);
 		return "update-employee-form";
+	}
+	@GetMapping("/getaccountsemployee")
+	public String getAccountsAndEmplyee(@RequestParam("id")int id,Model model) {
+		AccountsEmployeeDTO dto=employeeservice.getAccountsandEmployee(id);
+		model.addAttribute("getAccounts", dto.getAccountList());
+		model.addAttribute("getEmployee", dto.getEmployee());
+		return "accounts-employee";
 	}
 	
 }

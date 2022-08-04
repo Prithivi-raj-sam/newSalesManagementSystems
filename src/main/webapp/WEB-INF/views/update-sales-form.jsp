@@ -5,12 +5,24 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Update Leads</title>
+<title>Insert title here</title>
 </head>
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
-			<form:form action="updatelead" method="post" modelAttribute="updateLead">
+			<form:form action="updatesales" method="post" modelAttribute="updatesales">
+				<div>
+					<label for="salesId"> Sales id</label>
+					<div>
+						<form:input path="salesId" />
+					</div>
+				</div>
+				<div>
+					<label for="sellerId">Seller Name</label>
+					<div>
+						<form:input path="sellerId" />
+					</div>
+				</div>
 				<div>
 					<label for="leadId">Lead Id</label>
 					<div>
@@ -18,39 +30,15 @@
 					</div>
 				</div>
 				<div>
-					<label for="accountId">Account Id</label>
+					<label for="salesDate">sales Date</label>
 					<div>
-						<form:input path="accountId" />
+						<form:input path="salesDate" />
 					</div>
 				</div>
 				<div>
-					<label for="status">Status</label>
+					<label for="amount">Amount</label>
 					<div>
-						<form:input path="status" />
-					</div>
-				</div>
-				<div>
-					<label for="sellerId">SellerId</label>
-					<div>
-						<form:input path="sellerId" />
-					</div>
-				</div>
-				<div>
-					<label for="leadDate">Lead Date</label>
-					<div>
-						<form:input path="leadDate" />
-					</div>
-				</div>
-				<div>
-					<label for="stages">Stage</label>
-					<div>
-						<form:input path="stages" />
-					</div>
-				</div>
-				<div>
-					<label for="propability">Probability</label>
-					<div>
-						<form:input path="propability" />
+						<form:input path="amount" />
 					</div>
 				</div>
 				<div>

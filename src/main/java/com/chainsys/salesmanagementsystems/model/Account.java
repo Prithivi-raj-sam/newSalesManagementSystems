@@ -1,10 +1,15 @@
 package com.chainsys.salesmanagementsystems.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,7 +33,7 @@ public class Account {
 	@Column(name="account_type")
 	private String accountType;
 	@Column(name="marketer_id")
-	private int marketId;
+	private int employeeId;
 	@Column(name="lead_through_channel")
 	private String leadThroughChannel;
 	@Column(name="customer_join_date")
@@ -36,6 +41,36 @@ public class Account {
 	@Column(name="territory_id")
 	private int territoryId;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="marketer_id", insertable=false,updatable=false,nullable=false)
+	private Employee employee;
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="territory_id",insertable=false,updatable=false,nullable=false)
+	private Territory territory;
+	
+	@OneToMany(mappedBy="account",fetch=FetchType.LAZY)
+	private List<Lead> leadsList;
+	
+	public Territory getTerritory() {
+		return territory;
+	}
+	public void setTerritory(Territory territory) {
+		this.territory = territory;
+	}
+	public int getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+	public Employee getEmployee() {
+		return employee;
+	}
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 	public int getAccountId() {
 		return accountId;
 	}
@@ -84,12 +119,7 @@ public class Account {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-	public int getMarketId() {
-		return marketId;
-	}
-	public void setMarketId(int marketId) {
-		this.marketId = marketId;
-	}
+	
 	public String getLeadThroughChannel() {
 		return leadThroughChannel;
 	}

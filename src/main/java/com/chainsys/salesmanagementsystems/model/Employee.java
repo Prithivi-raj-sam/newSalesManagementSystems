@@ -2,10 +2,15 @@ package com.chainsys.salesmanagementsystems.model;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +39,34 @@ public class Employee {
 	@Column(name="emp_profile")
 	private File profile;
 	
+	@OneToMany(mappedBy="employee",fetch=FetchType.LAZY)
+	private List<Account> accountList;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="Territory_id", insertable=false,updatable=false,nullable=false)
+	private Territory territory;
+	
+	@OneToMany(mappedBy="employee",fetch=FetchType.LAZY)
+	private List<Lead> leadlist;
+	
+	public List<Lead> getLeadlist() {
+		return leadlist;
+	}
+	public void setLeadlist(List<Lead> leadlist) {
+		this.leadlist = leadlist;
+	}
+	public Territory getTerritory() {
+		return territory;
+	}
+	public void setTerritory(Territory territory) {
+		this.territory = territory;
+	}
+	public List<Account> getAccountList() {
+		return accountList;
+	}
+	public void setAccountList(List<Account> accountList) {
+		this.accountList = accountList;
+	}
 	public int getEmployeeId() {
 		return employeeId;
 	}
