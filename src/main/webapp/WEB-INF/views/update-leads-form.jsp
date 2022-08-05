@@ -30,9 +30,9 @@
 					</div>
 				</div>
 				<div>
-					<label for="sellerId">SellerId</label>
+					<label for="employeeId">SellerId</label>
 					<div>
-						<form:input path="sellerId" />
+						<form:input path="employeeId" />
 					</div>
 				</div>
 				<div>

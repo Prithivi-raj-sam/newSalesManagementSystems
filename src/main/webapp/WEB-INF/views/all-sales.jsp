@@ -23,7 +23,7 @@
 			<c:forEach var="allsales" items="${allSales}">
 			   <tr>
 			   	  <td>${allsales.salesId}</td>
-			   	  <td>${allsales.sellerId}</td>
+			   	  <td>${allsales.employeeId}</td>
 			   	  <td>${allsales.leadId}</td>
 			   	  <td>${allsales.salesDate}</td>
 			   	  <td>${allsales.amount}</td>

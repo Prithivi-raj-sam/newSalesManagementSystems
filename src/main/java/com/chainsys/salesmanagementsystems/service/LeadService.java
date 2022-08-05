@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
+import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.LeadRepository;
+import com.chainsys.salesmanagementsystems.repository.SalesRepository;
 
 @Service
 public class LeadService {
 
 	@Autowired
 	private LeadRepository leadRepository;
-	
+	@Autowired
+	private SalesRepository salesRepository;
 	
 	public void insertLead(Lead lead) {
 		leadRepository.save(lead);
@@ -31,6 +34,14 @@ public class LeadService {
 	}
 	public Lead getLeadById(int id) {
 		return leadRepository.findById(id);
+	}
+	public SalesLeadsDTO getSalesAndLeads(int id) {
+		SalesLeadsDTO dto=new SalesLeadsDTO();
+		dto.setLead(getLeadById(id));
+		dto.setSales(salesRepository.findByLeadId(id));
+		System.out.println(getLeadById(id).getLeadId());
+		System.out.println(salesRepository.findByLeadId(id).getLeadId());
+		return dto; 
 	}
 	
 }

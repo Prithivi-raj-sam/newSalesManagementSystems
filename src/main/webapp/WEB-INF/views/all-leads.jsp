@@ -28,7 +28,7 @@
 			   	  <td>${allLeads.leadId}</td>
 			   	  <td>${allLeads.accountId}</td>
 			   	  <td>${allLeads.status}</td>
-			   	  <td>${allLeads.sellerId}</td>
+			   	  <td>${allLeads.employeeId}</td>
 			   	  <td>${allLeads.leadDate}</td>
 			   	  <td>${allLeads.stages}</td>
 			   	  <td>${allLeads.propability}</td>

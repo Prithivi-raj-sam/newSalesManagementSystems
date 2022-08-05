@@ -60,9 +60,9 @@
 					</div>
 				</div>
 				<div>
-					<label for="marketId">Market Id</label>
+					<label for="employeeId">Market Id</label>
 					<div>
-						<form:input path="marketId" readonl="true"/>
+						<form:input path=""employeeId"" readonl="true"/>
 					</div>
 				</div>
 				<div>

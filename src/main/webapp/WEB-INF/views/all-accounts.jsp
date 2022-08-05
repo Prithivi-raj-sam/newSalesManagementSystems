@@ -37,7 +37,7 @@
 			   	  <td>${allaccount.contactPersonPhone}</td>
 			   	  <td>${allaccount.address}</td>
 			   	  <td>${allaccount.accountType}</td>
-			   	  <td>${allaccount.marketId}</td>
+			   	  <td>${allaccount.employeeId}</td>
 			   	  <td>${allaccount.leadThroughChannel}</td>
 			   	  <td>${allaccount.customerJoinDate}</td>
 			   	  <td>${allaccount.territoryId}</td>

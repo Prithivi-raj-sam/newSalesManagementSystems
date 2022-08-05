@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Get Employee By Id</title>
+<title>List All Sales Of Employee</title>
 </head>
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
-			<form:form action="" method="post" modelAttribute="employee">
+			<form:form action="" method="post" modelAttribute="getEmployee">
 				<div>
 					<label for="employeeId">Employee id</label>
 					<div>
@@ -70,13 +71,34 @@
 					<div>
 						<form:input path="profile" readonly="true" type="image"/>
 					</div>
-					<div>
-					<img src="data:image/jpg;base64,${employee.profile}" width="240" height="300"/>
-					</div>
 				</div>
 			</form:form>
 		</div>
 	</div>
-
+	<div id="table root">
+		<table>
+			<thead>
+				<tr style="width:100% , height:100%">
+					<th>Sales Id</th>
+					<th>Seller Id</th>
+					<th>Lead Id</th>
+					<th>Sales Date</th>
+					<th>Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+			<c:forEach var="allsales" items="${getSales}">
+			   <tr>
+			   	  <td>${allsales.salesId}</td>
+			   	  <td>${allsales.employeeId}</td>
+			   	  <td>${allsales.leadId}</td>
+			   	  <td>${allsales.salesDate}</td>
+			   	  <td>${allsales.amount}</td>
+			   </tr>
+			</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	
 </body>
 </html>

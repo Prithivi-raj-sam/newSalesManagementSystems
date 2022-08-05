@@ -11,4 +11,5 @@ public interface TargetRepository extends CrudRepository<Target,Integer>{
 	void deleteById(int id);
 	Target findById(int id);
 	List<Target> findAll();
+	List<Target> findByEmployeeId(int id);
 }

@@ -24,10 +24,6 @@ public class TerritoryController {
 	@Autowired
 	private TerritoryService territoryService;
 	
-	@Autowired
-	private AccountService accountService;
-	@Autowired
-	private EmployeeRepository employeeRepository;
 	
 	@GetMapping("/addterritoryform")
 	public String addTerritoryForm(Model model) {

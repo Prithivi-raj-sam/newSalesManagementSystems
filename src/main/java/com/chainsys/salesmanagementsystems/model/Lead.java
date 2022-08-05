@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +23,6 @@ public class Lead {
 	private String status;
 	@Column(name="saller_id")
 	private int employeeId;
-	
 	@Column(name="lead_date")
 	private Date leadDate;
 	@Column(name="stages")
@@ -38,6 +38,15 @@ public class Lead {
 	@JoinColumn(name="saller_id",insertable=false, updatable=false,nullable=false)
 	private Employee employee;
 	
+	@OneToOne(mappedBy="lead",fetch=FetchType.LAZY)
+	private Sales sales;
+	
+	public Sales getSales() {
+		return sales;
+	}
+	public void setSales(Sales sales) {
+		this.sales = sales;
+	}
 	public Account getAccount() {
 		return account;
 	}

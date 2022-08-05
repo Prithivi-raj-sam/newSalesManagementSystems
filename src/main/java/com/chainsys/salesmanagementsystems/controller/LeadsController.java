@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.service.LeadService;
 
@@ -58,5 +59,12 @@ public class LeadsController {
 	public String updateLead(@ModelAttribute("updateLead")Lead lead,Model model) {
 		leadservice.updateLead(lead);
 		return "update-leads-form";
+	}
+	@GetMapping("/getleadsandsales")
+	public String getLeadsAndSales(@RequestParam("id")int id,Model model) {
+		SalesLeadsDTO dto=leadservice.getSalesAndLeads(id);
+		model.addAttribute("getLeads", dto.getLead());
+		model.addAttribute("getSales", dto.getSales());
+		return "list-leads-sales";
 	}
 }
