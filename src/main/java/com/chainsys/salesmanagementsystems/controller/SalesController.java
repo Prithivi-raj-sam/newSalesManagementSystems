@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.service.SalesService;
 
@@ -19,6 +20,32 @@ import com.chainsys.salesmanagementsystems.service.SalesService;
 public class SalesController {
 	@Autowired
 	private SalesService salesService;
+	
+	
+	@GetMapping("/getId")
+	public String getSalesId(Model model) {
+		model.addAttribute("redirect", "getSales");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/updateId")
+	public String updateSalesId(Model model) {
+		model.addAttribute("redirect", "updatesalesform");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/deleteId")
+	public String deleteSalesById(Model model) {
+		model.addAttribute("redirect", "deletesales");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	
+	
+	
 	
 	@GetMapping("/addsalesform")
 	public String addSalesServiceForm(Model model) {
@@ -37,20 +64,20 @@ public class SalesController {
 		model.addAttribute("allSales", allSales);
 		return "all-sales";
 	}
-	@GetMapping("/getSales")
-	public String getSalesByID(@RequestParam("id")int id, Model model) {
-		Sales sales=salesService.getSalesById(id);
+	@PostMapping("/getSales")
+	public String getSalesByID(@ModelAttribute("getIdd")GetId id, Model model) {
+		Sales sales=salesService.getSalesById(id.getId());
 		model.addAttribute("sales", sales);
 		return "get-sales-id";
 	}
-	@GetMapping("/deletesales")
-	public String deleteSales(@RequestParam("id")int id, Model model) {
-		salesService.deleteSales(id);
+	@PostMapping("/deletesales")
+	public String deleteSales(@ModelAttribute("getIdd")GetId id, Model model) {
+		salesService.deleteSales(id.getId());
 		return "all-sales";
 	}
-	@GetMapping("/updatesalesform")
-	public String updateSalesServiceForm(@RequestParam("id")int id,Model model) {
-		Sales sales =salesService.getSalesById(id);
+	@PostMapping("/updatesalesform")
+	public String updateSalesServiceForm(@ModelAttribute("getIdd")GetId id,Model model) {
+		Sales sales =salesService.getSalesById(id.getId());
 		model.addAttribute("updatesales", sales);
 		return "update-sales-form";
 	}

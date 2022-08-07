@@ -7,8 +7,11 @@ import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
 import com.chainsys.salesmanagementsystems.model.Account;
+import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.LeadRepository;
+import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
+import com.chainsys.salesmanagementsystems.validation.Validator;
 
 @Service
 public class AccountService {
@@ -16,8 +19,19 @@ public class AccountService {
 	private AccountRepository accountRepository;
 	@Autowired
 	private LeadRepository leadRepository;
+	@Autowired
+	private TerritoryService territoryService;
 	
 	public void insertAccount(Account account) {
+		 Territory ter=null;
+		 ter=territoryService.getTerritoryById(account.getTerritoryId());
+		 ter.setNoOfCustomer(ter.getNoOfCustomer()+1);
+		 try {
+			Validator.nullValueErrorCheck(ter);
+		} catch (InvalidInputDataException e) {
+			System.out.println("territory value is null");
+		}
+		 territoryService.updateTerritory(ter);
 		 accountRepository.save(account);
 	}
 	public List<Account> allAccount(){

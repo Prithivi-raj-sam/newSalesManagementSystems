@@ -11,4 +11,5 @@ public interface TerritoryRepository extends CrudRepository<Territory,Integer>{
 	void deleteById(int id);
 	Territory findById(int id);
 	List<Territory> findAll();
+	Territory findByTerritoryName(String territoryName);
 }

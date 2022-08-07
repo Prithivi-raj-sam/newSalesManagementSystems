@@ -36,6 +36,9 @@ public class TerritoryService {
 	public Territory getTerritoryById(int id) {
 		return territoryRepository.findById(id);
 	}
+	public Territory getTerritoryByName(String territoryName) {
+		return territoryRepository.findByTerritoryName(territoryName);
+	}
 	public AccountsTerritoryDTO getAccountandTerritory(int id) {
 		AccountsTerritoryDTO dto=new AccountsTerritoryDTO();
 		dto.setTerritory(getTerritoryById(id));

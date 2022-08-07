@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.service.TargetService;
 
@@ -20,6 +21,33 @@ import com.chainsys.salesmanagementsystems.service.TargetService;
 public class TargetController {
 	@Autowired
 	private TargetService targetService;
+	
+	
+	@GetMapping("/getId")
+	public String getTargetId(Model model) {
+		model.addAttribute("redirect", "gettarget");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/updateId")
+	public String updateTargetId(Model model) {
+		model.addAttribute("redirect", "updatetargetform");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/deleteId")
+	public String deleteTargetById(Model model) {
+		model.addAttribute("redirect", "deleteTarget");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	
+	
+	
+	
 	
 	@GetMapping("/alltargets")
 	public String allTargets(Model model) {
@@ -38,20 +66,20 @@ public class TargetController {
 		targetService.insertTarget(target);
 		return "add-target-form";
 	}
-	@GetMapping("/gettarget")
-	public String getTargetById(@RequestParam("id")int id,Model model) {
-		Target target=targetService.getTargetById(id);
+	@PostMapping("/gettarget")
+	public String getTargetById(@ModelAttribute("getId")GetId id,Model model) {
+		Target target=targetService.getTargetById(id.getId());
 		model.addAttribute("target", target);
 		return "get-target-id";
 	}
-	@GetMapping("/deleteTarget")
-	public String deleteTarget(@RequestParam("id")int id, Model model) {
-		targetService.deleteTarget(id);
+	@PostMapping("/deleteTarget")
+	public String deleteTarget(@ModelAttribute("getId")GetId id, Model model) {
+		targetService.deleteTarget(id.getId());
 		return "redirect:/target/alltargets";
 	}
-	@GetMapping("/updatetargetform")
-	public String updateTargetForm(@RequestParam("id")int id,Model model) {
-		Target target=targetService.getTargetById(id);
+	@PostMapping("/updatetargetform")
+	public String updateTargetForm(@ModelAttribute("getId")GetId id,Model model) {
+		Target target=targetService.getTargetById(id.getId());
 		model.addAttribute("updatetarget", target);
 		return "update-target-form";
 	}

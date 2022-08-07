@@ -6,18 +6,23 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="accounts")
 public class Account {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "account_id")
+    @SequenceGenerator(name = "account_id", sequenceName = "account_id",  allocationSize = 1)
 	@Column(name="account_id")
-	private int accountId;
+	private int accountId;  
 	@Column(name="company_name")
 	private String companyName;
 	@Column(name="contact_person")

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
+import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.service.LeadService;
 
@@ -21,9 +22,35 @@ public class LeadsController {
 	@Autowired
 	private LeadService leadservice;
 	
-	@GetMapping("/getlead")
-	public String getleadsById(@RequestParam("id")int id,Model model) {
-		Lead leads=leadservice.getLeadById(id);
+	@GetMapping("/getId")
+	public String getLeadId(Model model) {
+		model.addAttribute("redirect", "getlead");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/updateId")
+	public String deleteLeadId(Model model) {
+		model.addAttribute("redirect", "updateleadfrom");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/deleteId")
+	public String deleteLeadById(Model model) {
+		model.addAttribute("redirect", "deletelead");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	
+	
+	
+	
+	
+	@PostMapping("/getlead")
+	public String getleadsById(@ModelAttribute("getId")GetId id,Model model) {
+		Lead leads=leadservice.getLeadById(id.getId());
 		model.addAttribute("leads", leads);
 		return "get-leads-id";
 	}
@@ -38,9 +65,9 @@ public class LeadsController {
 		leadservice.insertLead(lead);
 		return "add-leads-form";
 	}
-	@GetMapping("/deletelead")
-	public String deleteLeadsById(@RequestParam("id")int id,Model model) {
-		leadservice.deleteLead(id);
+	@PostMapping("/deletelead")
+	public String deleteLeadsById(@ModelAttribute("getId")GetId id,Model model) {
+		leadservice.deleteLead(id.getId());
 		return "redirect:/leads/allleads";
 	}
 	@GetMapping("/allleads")
@@ -49,9 +76,9 @@ public class LeadsController {
 		model.addAttribute("allLeads", allLeads);
 		return "all-leads";
 	}
-	@GetMapping("/updateleadfrom")
-	public String updateLeadForm(@RequestParam("id")int id,Model model) {
-		Lead lead=leadservice.getLeadById(id);
+	@PostMapping("/updateleadfrom")
+	public String updateLeadForm(@ModelAttribute("getId")GetId id,Model model) {
+		Lead lead=leadservice.getLeadById(id.getId());
 		model.addAttribute("updateLead", lead);
 		return "update-leads-form";
 	}

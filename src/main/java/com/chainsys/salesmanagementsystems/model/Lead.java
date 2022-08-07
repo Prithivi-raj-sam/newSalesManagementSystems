@@ -5,16 +5,21 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="leads")
 public class Lead {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "lead_id_seq")
+    @SequenceGenerator(name = "lead_id_seq", sequenceName = "lead_id_seq",  allocationSize = 1)
 	@Column(name="lead_id")
 	private int leadId;
 	@Column(name="account_id")
@@ -23,7 +28,7 @@ public class Lead {
 	private String status;
 	@Column(name="saller_id")
 	private int employeeId;
-	@Column(name="lead_date")
+	@Column(name="lead_date") // todo
 	private Date leadDate;
 	@Column(name="stages")
 	private String stages;

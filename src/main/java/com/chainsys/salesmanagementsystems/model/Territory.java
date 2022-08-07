@@ -5,14 +5,19 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "territories")
 public class Territory {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "territory_id_seq")
+    @SequenceGenerator(name = "territory_id_seq", sequenceName = "territory_id_seq",  allocationSize = 1)
 	@Column(name = "territory_id")
 	private int territoryId;
 	@Column(name = "territory_name")

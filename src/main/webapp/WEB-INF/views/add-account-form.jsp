@@ -1,12 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Account</title>
 </head>
+<script>
+  document.getElementById("territoryform").style.display = "none";
+  var x = document.getElementById("territoryId");
+  var i = x.selectedIndex;
+  if(x.options[i].text == "others"){
+	  document.getElementById("territoryform").style.display = "block";
+  }
+</script>
+
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
@@ -77,19 +87,33 @@
 						<form:input path="customerJoinDate" />
 					</div>
 				</div>
-				<div>
-					<label for="territoryId">Territory Id</label>
+				
+				<label for="territoryId">Territory Name : </label> <form:select
+                                path="territoryId" id="territoryId">
+                                <form:option value="">--select territory--</form:option>
+                                <c:forEach var="allTerritory" items="${allTerritory}">
+                                    <form:option value="${allTerritory.territoryId}"
+                                        label="${allTerritory.territoryName}" />
+                                </c:forEach>
+                            </form:select>
+       <div id="territoryform">
+	       <form:form modelAttribute="territory">
+	            <div>
+					<label for="territoryName">Territory Name</label>
 					<div>
-						<form:input path="territoryId" />
+						<form:input path="territoryName" />
 					</div>
 				</div>
+					</form:form>
+	  </div>
 				<div>
 					<form:button id="button">Add New</form:button>
 				</div>
 			</form:form>
 		</div>
 	</div>
-	<div>${result}</div>
+	
+		<div>${result}</div>		
 	
 </body>
 </html>

@@ -5,16 +5,21 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="sales")
 public class Sales {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "sales_id_seq")
+    @SequenceGenerator(name = "sales_id_seq", sequenceName = "sales_id_seq",  allocationSize = 1)
 	@Column(name="sale_id")
 	private int salesId;
 	@Column(name="seller_id")

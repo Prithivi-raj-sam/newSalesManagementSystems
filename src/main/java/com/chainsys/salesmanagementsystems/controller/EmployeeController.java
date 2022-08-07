@@ -16,6 +16,7 @@ import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.TargetEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
+import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 
 @Controller
@@ -24,6 +25,30 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeservice;
+	
+	@GetMapping("/getemployeeId")
+	public String getemployeeId(Model model) {
+		model.addAttribute("redirect", "getemployee");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/updateId")
+	public String updateId(Model model) {
+		model.addAttribute("redirect", "updateemployeeform");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/deleteId")
+	public String deleteId(Model model) {
+		model.addAttribute("redirect", "deleteemployee");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	
+	
 	
 	@GetMapping("/addemployeeform")
 	public String addEmployeeForm(Model model) {
@@ -36,9 +61,10 @@ public class EmployeeController {
 		employeeservice.insertEmployee(employee);
 		return "add-employee-form";
 	}
-	@GetMapping("/getemployee")
-	public String getEmployeeById(@RequestParam("id")int id,Model model) {
-		Employee employee=employeeservice.getEmployeeById(id);
+	
+	@PostMapping("/getemployee")
+	public String getEmployeeById(@ModelAttribute("getId")GetId id,Model model) {
+		Employee employee=employeeservice.getEmployeeById(id.getId());
 		model.addAttribute("employee", employee);
 		return "get-employee-id";
 	}
@@ -48,14 +74,14 @@ public class EmployeeController {
 		model.addAttribute("allEmployee", allEmployee);
 		return "all-employees";
 	}
-	@GetMapping("/deleteemployee")
-	public String deleteEmployeeById(@RequestParam("id")int id,Model model) {
-		employeeservice.deleteEmployee(id);
+	@PostMapping("/deleteemployee")
+	public String deleteEmployeeById(@ModelAttribute("getId")GetId id,Model model) {
+		employeeservice.deleteEmployee(id.getId());
 		return "redirect:/employee/allemployee";
 	}
-	@GetMapping("/updateemployeeform")
-	public String updateEmployeeForm(@RequestParam("id")int id,Model model) {
-		Employee employee=employeeservice.getEmployeeById(id);
+	@PostMapping("/updateemployeeform")
+	public String updateEmployeeForm(@ModelAttribute("getId")GetId id,Model model) {
+		Employee employee=employeeservice.getEmployeeById(id.getId());
 		model.addAttribute("updateEmployee", employee);
 		return "update-employee-form";
 	}

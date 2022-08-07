@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.dto.AccountsTerritoryDTO;
 import com.chainsys.salesmanagementsystems.dto.EmployeeTerritoryDTO;
+import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.repository.EmployeeRepository;
 import com.chainsys.salesmanagementsystems.service.AccountService;
@@ -23,6 +24,31 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 public class TerritoryController {
 	@Autowired
 	private TerritoryService territoryService;
+	
+	
+	@GetMapping("/getId")
+	public String getTerritoryId(Model model) {
+		model.addAttribute("redirect", "getterritory");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/updateId")
+	public String updateTerritoryId(Model model) {
+		model.addAttribute("redirect", "updateterritoryform");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	@GetMapping("/deleteId")
+	public String deleteTerritoryById(Model model) {
+		model.addAttribute("redirect", "deleteterritory");
+		GetId getId=new GetId();
+		model.addAttribute("getId", getId);
+		return "get-id";
+	}
+	
+	
 	
 	
 	@GetMapping("/addterritoryform")
@@ -36,15 +62,15 @@ public class TerritoryController {
 		territoryService.insertTerritory(ter);
 		return "add-territory-form";
 	}
-	@GetMapping("/getterritory")
-	public String getTerritory(@RequestParam("id")int id,Model model) {
-		Territory territory=territoryService.getTerritoryById(id);
+	@PostMapping("/getterritory")
+	public String getTerritory(@ModelAttribute("getId")GetId id,Model model) {
+		Territory territory=territoryService.getTerritoryById(id.getId());
 		model.addAttribute("territory", territory);
 		return "get-territory-id";
 	}
-	@GetMapping("/deleteterritory")
-	public String deleteTerritory(@RequestParam("id")int id,Model model) {
-		territoryService.deleteTerritory(id);
+	@PostMapping("/deleteterritory")
+	public String deleteTerritory(@ModelAttribute("getId")GetId id,Model model) {
+		territoryService.deleteTerritory(id.getId());
 		return "redirect:/territories/allterritory";
 	}
 	@GetMapping("/allterritory")
@@ -53,9 +79,9 @@ public class TerritoryController {
 		model.addAttribute("allteritory", allterritory);
 		return "all-territory";
 	}
-	@GetMapping("/updateterritoryform")
-	public String updateTerritoryForm(@RequestParam("id")int id,Model model) {
-		Territory ter=territoryService.getTerritoryById(id);
+	@PostMapping("/updateterritoryform")
+	public String updateTerritoryForm(@ModelAttribute("getId")GetId id,Model model) {
+		Territory ter=territoryService.getTerritoryById(id.getId());
 		model.addAttribute("updateTerritory", ter);
 		return "update-territory-form";
 	}

@@ -12,4 +12,5 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	Employee findById(int id);
 	void deleteById(int id);
 	List<Employee> findByTerritoryTerritoryId(int id);
+	Employee findByEmployeeIdAndPassword(int employeeId,String passward);
 }
