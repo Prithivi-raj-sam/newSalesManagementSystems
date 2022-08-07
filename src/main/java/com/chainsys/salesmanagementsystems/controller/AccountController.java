@@ -63,7 +63,7 @@ public class AccountController {
 	@PostMapping("/addaccount")
 	public String addAccount(@ModelAttribute("addAccount")Account accout,@ModelAttribute("territory")Territory territory, Model model) {
 		territory.setNoOfCustomer(1);
-		territoryService.updateTerritory(null);
+		territoryService.updateTerritory(territory);
 		accountservice.insertAccount(accout);
 		model.addAttribute("result", "1 Record Added");
 		return "add-account-form";

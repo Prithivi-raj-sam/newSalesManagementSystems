@@ -30,7 +30,7 @@
 			   	  <td>${alltargets.closedTarget}</td>
 			   	  <td>${alltargets.employeeId}</td>
 			   	  <td>${alltargets.managerComment}</td>
-			   	  <td>${alltargets.targetMonth}</td>
+			   	  <td>${alltargets.targetSetDate}</td>
 			   </tr>
 			</c:forEach>
 			</tbody>

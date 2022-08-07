@@ -1,5 +1,6 @@
 package com.chainsys.salesmanagementsystems.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -12,4 +13,5 @@ public interface TargetRepository extends CrudRepository<Target,Integer>{
 	Target findById(int id);
 	List<Target> findAll();
 	List<Target> findByEmployeeId(int id);
+	List<Target> findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(Date startDate,Date endDate);
 }

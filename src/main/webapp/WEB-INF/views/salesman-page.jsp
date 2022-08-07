@@ -6,7 +6,7 @@
 <meta charset="ISO-8859-1">
 <title>Sales man Page</title>
 </head>
-<body style="background-color:#3d403d; color:white;">
+<body>
 	<div>
 	<div>
 	<a href="addleads">sales</a>

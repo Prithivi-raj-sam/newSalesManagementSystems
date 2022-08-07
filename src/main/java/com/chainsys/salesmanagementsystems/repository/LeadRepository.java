@@ -1,5 +1,6 @@
 package com.chainsys.salesmanagementsystems.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -13,4 +14,5 @@ public interface LeadRepository extends CrudRepository<Lead,Integer>{
 	void deleteById(int id);
 	List<Lead> findByAccountAccountId(int id);
 	List<Lead> findByEmployeeEmployeeId(int id);
+	List<Lead> findByLeadDateGreaterThanEqualAndLeadDateLessThanEqual(Date startDate,Date endDate);
 }

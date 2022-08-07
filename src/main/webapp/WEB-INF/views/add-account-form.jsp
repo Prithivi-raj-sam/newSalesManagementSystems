@@ -8,25 +8,13 @@
 <meta charset="ISO-8859-1">
 <title>Add Account</title>
 </head>
-<script>
-  document.getElementById("territoryform").style.display = "none";
-  var x = document.getElementById("territoryId");
-  var i = x.selectedIndex;
-  if(x.options[i].text == "others"){
-	  document.getElementById("territoryform").style.display = "block";
-  }
-</script>
+
 
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
 			<form:form action="addaccount" method="post" modelAttribute="addAccount">
-				<div>
-					<label for="accountId"> Account id</label>
-					<div>
-						<form:input path="accountId" />
-					</div>
-				</div>
+				
 				<div>
 					<label for="companyName">Company Name</label>
 					<div>
@@ -96,16 +84,7 @@
                                         label="${allTerritory.territoryName}" />
                                 </c:forEach>
                             </form:select>
-       <div id="territoryform">
-	       <form:form modelAttribute="territory">
-	            <div>
-					<label for="territoryName">Territory Name</label>
-					<div>
-						<form:input path="territoryName" />
-					</div>
-				</div>
-					</form:form>
-	  </div>
+       
 				<div>
 					<form:button id="button">Add New</form:button>
 				</div>

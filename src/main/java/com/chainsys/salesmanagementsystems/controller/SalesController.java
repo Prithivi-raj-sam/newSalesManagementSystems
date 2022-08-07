@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Sales;
+import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.SalesService;
 
 @Controller
@@ -86,5 +87,15 @@ public class SalesController {
 		salesService.updateSales(sales);
 		return "update-sales-form";
 	}
-	
+	@GetMapping("/salesincome")
+	public String salesIncome(Model model) {
+		SalesInCome salesIncome=new SalesInCome();
+		model.addAttribute("salesIncome", salesIncome);
+		return "sales-income";
+	}
+	@PostMapping("/salesTotalAmount")
+	public String salesTotalAmount(@ModelAttribute("salesIncome")SalesInCome salesIncome, Model model) {
+		salesService.getSalesBetweenTwoDates(salesIncome);
+		return "sales-income-result";
+	}
 }

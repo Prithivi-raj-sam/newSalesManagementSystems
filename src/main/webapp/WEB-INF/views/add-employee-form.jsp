@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+      <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +12,6 @@
 	<div id="root">
 		<div id="form">
 			<form:form action="addemployee" method="post" modelAttribute="addEmployee">
-				<div>
-					<label for="employeeId">Employee id</label>
-					<div>
-						<form:input path="employeeId" />
-					</div>
-				</div>
 				<div>
 					<label for="employeeName">Employee Name</label>
 					<div>
@@ -42,11 +37,15 @@
 					</div>
 				</div>
 				<div>
-					<label for="territoryId">Territory Id</label>
-					<div>
-						<form:input path="territoryId" />
-					</div>
-				</div>
+				<label for="territoryId">Territory Name : </label> <form:select
+                                path="territoryId" id="territoryId">
+                                <form:option value="">--select territory--</form:option>
+                                <c:forEach var="allTerritory" items="${allTerritory}">
+                                    <form:option value="${allTerritory.territoryId}"
+                                        label="${allTerritory.territoryName}" />
+                                </c:forEach>
+                            </form:select>
+                </div>
 				<div>
 					<label for="password">Password</label>
 					<div>

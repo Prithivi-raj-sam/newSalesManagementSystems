@@ -12,7 +12,7 @@
 		<div id="form">
 			<form:form  action="${redirect}" method="post" modelAttribute="getId">
 				<div>
-					<label for="id">Lead Id</label>
+					<label for="id">Enter Id</label>
 					<div>
 						<form:input path="id" />
 					</div>

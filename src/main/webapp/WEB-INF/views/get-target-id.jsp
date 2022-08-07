@@ -48,9 +48,9 @@
 					</div>
 				</div>
 				<div>
-					<label for="targetMonth">Target Month</label>
+					<label for="targetSetDate">Target Month</label>
 					<div>
-						<form:input path="targetMonth" readonly="true"/>
+						<form:input path="targetSetDate" readonly="true"/>
 					</div>
 				</div>
 			</form:form>

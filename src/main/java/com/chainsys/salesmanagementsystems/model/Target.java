@@ -31,9 +31,15 @@ public class Target {
 	private int employeeId;
 	@Column(name = "manager_comment")
 	private String managerComment;
-	@Column(name = "target_month")
-	private String targetMonth;
+	@Column(name = "target_set_Date")
+	private Date targetSetDate;
 	
+	public Date getTargetSetDate() {
+		return targetSetDate;
+	}
+	public void setTargetSetDate(Date targetSetDate) {
+		this.targetSetDate = targetSetDate;
+	}
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="employee_id",insertable=false,updatable=false,nullable=false)
 	private Employee employee;
@@ -80,12 +86,7 @@ public class Target {
 	public void setManagerComment(String managerComment) {
 		this.managerComment = managerComment;
 	}
-	public String getTargetMonth() {
-		return targetMonth;
-	}
-	public void setTargetMonth(String targetMonth) {
-		this.targetMonth = targetMonth;
-	}
+	
 	
 
 }

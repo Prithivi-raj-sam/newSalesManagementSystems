@@ -14,6 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="accounts")
@@ -23,21 +29,39 @@ public class Account {
     @SequenceGenerator(name = "account_id", sequenceName = "account_id",  allocationSize = 1)
 	@Column(name="account_id")
 	private int accountId;  
+	
+	@Size(max = 20, min = 3, message = "Name length should be 3 to 20")
+	@NotBlank(message = "Company Name can't be Empty")
+	@Pattern(regexp = "^[A-Za-z]\\w{3,20}$", message = "Enter valid Company name ")
 	@Column(name="company_name")
 	private String companyName;
+	
 	@Column(name="contact_person")
+	@NotBlank(message = "Company Name can't be Empty")
+	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Contact Person ")
 	private String contactPerson; 
+	
+	@NotBlank(message = "Company Name can't be Empty")
+	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Company name ")
 	@Column(name="contact_person_role")
 	private String contactPersonRole;
+	
 	@Column(name="email")
+	@Email(message = "Email is not valid")
+	@NotEmpty(message = "Please enter email")
 	private String email;
+	
+	@Digits(message = "Invalid number", integer = 10, fraction = 0)
 	@Column(name="contact_person_phone")
 	private long contactPersonPhone;
+	
 	@Column(name="address")
+	@NotEmpty(message = "*Please enter Address")
 	private String address;
 	@Column(name="account_type")
 	private String accountType;
 	@Column(name="marketer_id")
+	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Company name ")
 	private int employeeId;
 	@Column(name="lead_through_channel")
 	private String leadThroughChannel;

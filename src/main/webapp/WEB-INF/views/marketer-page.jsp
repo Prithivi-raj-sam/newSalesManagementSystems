@@ -6,46 +6,46 @@
 <meta charset="ISO-8859-1">
 <title>Marketing Man Page</title>
 </head>
-<body style="background-color:#3d403d; color:white;">
+<body>
 	<div align="center" >
 	<div>
 		<a href="addaccountfrom">Add Account</a>
 	</div>
 	<div>
-		<a href="getallaccount">Add Account</a>
+		<a href="getallaccount">All Account</a>
 		</div>
 		<div>
-		<a href="deleteaccount">Add Account</a>
+		<a href="deleteaccount">Delete Account</a>
 		</div>
 		<div>
-		<a href="updateaccount">Add Account</a>
+		<a href="updateaccount">Update Account</a>
 		</div>
 		<div>
-		<a href="getaccount">Add Account</a>
+		<a href="getaccount">Get Account</a>
 		</div>
 		<div>
-		<a href="addterritory">Add Account</a>
+		<a href="addterritory">Add Territory</a>
 		</div>
 		<div>
-		<a href="updateterritory">Add Account</a>
+		<a href="updateterritory">Update Territory</a>
 		</div>
 		<div>
-		<a href="deleteterritory">Add Account</a>
+		<a href="deleteterritory">Delete Territory</a>
 		</div>
 		<div>
-		<a href="getterritory">Add Account</a>
+		<a href="getterritory">get Territory</a>
 		</div>
 		<div>
-		<a href="getallterritory">Add Account</a>
+		<a href="getallterritory">All Territory</a>
 		</div>
 		<div>
-		<a href="getalltarget">Add Account</a>
+		<a href="getalltarget">All target</a>
 		</div>
 		<div>
-		<a href="gettarget">Add Account</a>
+		<a href="gettarget">get Target</a>
 		</div>
 		<div>
-		<a href="updatetarget">Add Account</a>
+		<a href="updatetarget">update Target</a>
 		</div>
 	</div>
 </body>
