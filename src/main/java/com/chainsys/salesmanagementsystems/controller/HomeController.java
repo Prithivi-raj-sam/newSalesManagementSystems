@@ -175,5 +175,20 @@ public class HomeController {
 	public String redirectToDeletetarget(Model model) {
 		return "redirect:/target/deleteId";
 	}
-	
+	@GetMapping("/employees")
+	public String redirectToEmployee(Model model) {
+		return"employee";
+	}
+	@GetMapping("/targets")
+	public String redirectToTarget(Model model) {
+		return"target";
+	}
+	@GetMapping("/lead")
+	public String redirectToLeads(Model model) {
+		return"leads";
+	}
+	@GetMapping("/territorys")
+	public String redirectToTerritory(Model model) {
+		return"territory";
+	}
 }

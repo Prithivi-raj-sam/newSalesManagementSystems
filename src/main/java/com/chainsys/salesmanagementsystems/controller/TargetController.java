@@ -3,9 +3,12 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,7 +65,10 @@ public class TargetController {
 		return "add-target-form";
 	}
 	@PostMapping("/addtarget")
-	public String addTarget(@ModelAttribute("addtarget")Target target,Model model) {
+	public String addTarget(@Valid@ModelAttribute("addtarget")Target target,Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "add-target-form";
+		}
 		targetService.insertTarget(target);
 		return "add-target-form";
 	}
@@ -84,7 +90,10 @@ public class TargetController {
 		return "update-target-form";
 	}
 	@PostMapping("/updatetarget")
-	public String updatetarget(@ModelAttribute("updatetarget")Target target,Model model) {
+	public String updatetarget(@Valid@ModelAttribute("updatetarget")Target target, Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "update-target-form";
+		}
 		targetService.updateTarget(target);
 		return "update-target-form";
 	}

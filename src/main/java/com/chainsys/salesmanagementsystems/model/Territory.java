@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "territories")
@@ -20,8 +23,13 @@ public class Territory {
     @SequenceGenerator(name = "territory_id_seq", sequenceName = "territory_id_seq",  allocationSize = 1)
 	@Column(name = "territory_id")
 	private int territoryId;
+	
+	@NotBlank(message = "Territory Name can't be Empty")
+	@Pattern(regexp = "^[A-Za-z]\\w{3,40}$", message = "Enter valid Territory name ")
 	@Column(name = "territory_name")
 	private String territoryName;
+	
+	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid No Of Customer")
 	@Column(name = "no_of_customers")
 	private int noOfCustomer;
 

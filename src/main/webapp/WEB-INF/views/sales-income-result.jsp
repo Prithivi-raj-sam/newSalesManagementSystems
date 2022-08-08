@@ -9,47 +9,47 @@
 </head>
 <body>
 <div>
-			<form:form action="addlead" method="post" modelAttribute="addLead">
+			<form:form action="" method="post" modelAttribute="salesIncome">
 	           <div>
-					<label for="fromDate">Lead Date</label>
+					<label for="fromDate">From Date</label>
 					<div>
-						<form:input path="fromDate" />
+						<form:input path="fromDate" readonly="true"/>
 					</div>
 				</div>
 				<div>
-					<label for="toDate">Lead Date</label>
+					<label for="toDate">To Date</label>
 					<div>
-						<form:input path="toDate" />
+						<form:input path="toDate" readonly="true"/>
 					</div>
 				</div>
 				<div>
-					<label for="plannedLeads">Lead Date</label>
+					<label for="plannedLeads">Planned Lead</label>
 					<div>
-						<form:input path="plannedLeads" />
+						<form:input path="plannedLeads" readonly="true"/>
 					</div>
 				</div>
 				<div>
-					<label for="commitedLeads">Lead Date</label>
+					<label for="commitedLeads">Committed Leads</label>
 					<div>
-						<form:input path="commitedLeads" />
+						<form:input path="commitedLeads" readonly="true"/>
 					</div>
 				</div>
 				<div>
-					<label for="plannedSales">Lead Date</label>
+					<label for="plannedSales">Planned Sales</label>
 					<div>
-						<form:input path="plannedSales" />
+						<form:input path="plannedSales" readonly="true"/>
 					</div>
 				</div>
 				<div>
-					<label for="closedSales">Lead Date</label>
+					<label for="closedSales">Closed Sales</label>
 					<div>
-						<form:input path="closedSales" />
+						<form:input path="closedSales" readonly="true"/>
 					</div>
 				</div>
 				<div>
-					<label for="totalSalesAmount">Lead Date</label>
+					<label for="totalSalesAmount">Total Sales Amount</label>
 					<div>
-						<form:input path="totalSalesAmount" />
+						<form:input path="totalSalesAmount" readonly="true"/>
 					</div>
 				</div>
 				

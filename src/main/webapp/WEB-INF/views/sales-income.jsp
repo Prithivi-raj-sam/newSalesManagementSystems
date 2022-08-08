@@ -9,17 +9,17 @@
 </head>
 <body>
 <div>
-		<form:form action="addlead" method="post" modelAttribute="addLead">
+		<form:form action="salesTotalAmount" method="post" modelAttribute="salesIncome">
 	           <div>
-					<label for="fromDate">Lead Date</label>
+					<label for="fromDate">From Date</label>
 					<div>
-						<form:input path="fromDate" />
+						<form:input path="fromDate" type="date"/>
 					</div>
 				</div>
 				<div>
-					<label for="toDate">Lead Date</label>
+					<label for="toDate">To Date</label>
 					<div>
-						<form:input path="toDate" />
+						<form:input path="toDate" type="date"/>
 					</div>
 				</div>
 				<div>

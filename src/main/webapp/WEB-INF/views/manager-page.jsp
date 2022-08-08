@@ -68,10 +68,10 @@ color: #ff7200;
 <body>
 	<div class="menu">
 		<ul>
-			<li><a href="">Employee</a></li>
-			<li><a href="">Target</a></li>
-			<li><a href="">Leads</a></li>
-			<li><a href="">Territory</a></li>
+			<li><a href="/home/employees">Employee</a></li>
+			<li><a href="/home/targets">Target</a></li>
+			<li><a href="/home/lead">Leads</a></li>
+			<li><a href="/home/territorys">Territory</a></li>
 		</ul>
 		<div>
 			<a href="addemployeeform">Add Employee</a>

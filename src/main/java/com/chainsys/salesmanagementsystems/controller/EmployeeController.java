@@ -2,9 +2,12 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,7 +60,10 @@ public class EmployeeController {
 		return "add-employee-form";
 	}
 	@PostMapping("/addemployee")
-	public String addEmployee(@ModelAttribute("addEmployee")Employee employee, Model model) {
+	public String addEmployee(@Valid@ModelAttribute("addEmployee")Employee employee, Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "add-employee-form";
+		}
 		employeeservice.insertEmployee(employee);
 		return "add-employee-form";
 	}
@@ -86,7 +92,10 @@ public class EmployeeController {
 		return "update-employee-form";
 	}
 	@PostMapping("/updateemployee")
-	public String updateEmployee(@ModelAttribute("updateEmployee")Employee employee, Model model) {
+	public String updateEmployee(@Valid@ModelAttribute("updateEmployee")Employee employee, Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "update-employee-form";
+		}
 		employeeservice.updateEmployee(employee);
 		return "update-employee-form";
 	}

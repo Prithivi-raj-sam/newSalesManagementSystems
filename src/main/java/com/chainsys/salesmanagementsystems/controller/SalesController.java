@@ -2,9 +2,12 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +58,10 @@ public class SalesController {
 		return "add-sales-form";
 	}
 	@PostMapping("/addsales")
-	public String addSales(@ModelAttribute("addsales")Sales sales,Model model) {
+	public String addSales(@Valid@ModelAttribute("addsales")Sales sales,Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "add-sales-form";
+		}
 		salesService.insertSales(sales);
 		return "add-sales-form";
 	}
@@ -83,7 +89,10 @@ public class SalesController {
 		return "update-sales-form";
 	}
 	@PostMapping("/updatesales")
-	public String updateSales(@ModelAttribute("updatesales")Sales sales,Model model) {
+	public String updateSales(@Valid@ModelAttribute("updatesales")Sales sales,Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "update-sales-form";
+		}
 		salesService.updateSales(sales);
 		return "update-sales-form";
 	}
@@ -95,7 +104,8 @@ public class SalesController {
 	}
 	@PostMapping("/salesTotalAmount")
 	public String salesTotalAmount(@ModelAttribute("salesIncome")SalesInCome salesIncome, Model model) {
-		salesService.getSalesBetweenTwoDates(salesIncome);
+		salesIncome=salesService.getTotalSalesBetweenTwoDates(salesIncome);
+		model.addAttribute("salesIncome", salesIncome);
 		return "sales-income-result";
 	}
 }

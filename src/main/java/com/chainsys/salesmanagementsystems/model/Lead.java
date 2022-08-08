@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="leads")
@@ -22,16 +24,33 @@ public class Lead {
     @SequenceGenerator(name = "lead_id_seq", sequenceName = "lead_id_seq",  allocationSize = 1)
 	@Column(name="lead_id")
 	private int leadId;
+	
+	@NotEmpty(message = "*Please enter Account Id")
+	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Account Id ")
 	@Column(name="account_id")
 	private int accountId;
+	
+	@NotEmpty(message = "*Please enter Status")
+	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Status")
 	@Column(name="status")
 	private String status;
+	
+	@NotEmpty(message = "*Please enter Seller Id")
+	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Seller Id ")
 	@Column(name="saller_id")
 	private int employeeId;
-	@Column(name="lead_date") // todo
+	
+	@NotEmpty(message = "*Please enter Date")
+	@Column(name="lead_date") 
 	private Date leadDate;
+	
+	@NotEmpty(message = "*Please enter Stages")
+	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Stages")
 	@Column(name="stages")
 	private String stages;
+	
+	@NotEmpty(message = "*Please enter Probabilty")
+	@Pattern(regexp = "^[0-9]+(.[0-9]*)?$", message = "Enter valid probability")
 	@Column(name="propability")
 	private float propability;
 	

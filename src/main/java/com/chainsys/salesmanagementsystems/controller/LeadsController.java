@@ -2,9 +2,12 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,7 +64,10 @@ public class LeadsController {
 		return "add-leads-form";
 	}
 	@PostMapping("/addlead")
-	public String addLead(@ModelAttribute("addLead")Lead lead,Model model) {
+	public String addLead(@Valid@ModelAttribute("addLead")Lead lead,Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "add-leads-form";
+		}
 		leadservice.insertLead(lead);
 		return "add-leads-form";
 	}
@@ -83,7 +89,10 @@ public class LeadsController {
 		return "update-leads-form";
 	}
 	@PostMapping("/updatelead")
-	public String updateLead(@ModelAttribute("updateLead")Lead lead,Model model) {
+	public String updateLead(@Valid@ModelAttribute("updateLead")Lead lead,Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "update-leads-form";
+		}
 		leadservice.updateLead(lead);
 		return "update-leads-form";
 	}

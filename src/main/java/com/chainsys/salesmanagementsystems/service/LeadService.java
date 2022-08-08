@@ -1,5 +1,6 @@
 package com.chainsys.salesmanagementsystems.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,9 @@ public class LeadService {
 		System.out.println(getLeadById(id).getLeadId());
 		System.out.println(salesRepository.findByLeadId(id).getLeadId());
 		return dto; 
+	}
+	public List<Lead> getLeadsForSalesInCome(Date startDate, Date endDate){
+		return leadRepository.findByLeadDateGreaterThanEqualAndLeadDateLessThanEqual(startDate, endDate);   
 	}
 	
 }

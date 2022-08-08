@@ -2,9 +2,12 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,7 +61,10 @@ public class TerritoryController {
 		return "add-territory-form";
 	}
 	@PostMapping("/addterritory")
-	public String addTerritory(@ModelAttribute("addterritory")Territory ter,Model model) {
+	public String addTerritory(@Valid@ModelAttribute("addterritory")Territory ter,Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "add-territory-form";
+		}
 		territoryService.insertTerritory(ter);
 		return "add-territory-form";
 	}
@@ -86,7 +92,11 @@ public class TerritoryController {
 		return "update-territory-form";
 	}
 	@PostMapping("/updateterritory")
-	public String updateTerritory(@ModelAttribute("updateTerritory")Territory ter,Model model) {
+	public String updateTerritory(@Valid@ModelAttribute("updateTerritory")Territory ter,Model model,Errors error) {
+		if(error.hasErrors()) {
+			return "update-territory-form";
+		}
+		model.addAttribute("result", "1 Record updated");
 		territoryService.updateTerritory(ter);
 		return "update-territory-form";
 	}

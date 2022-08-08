@@ -9,7 +9,7 @@ public class SalesInCome {
 	private int commitedLeads;
 	private int plannedSales;
 	private int closedSales;
-	private float totalSalesAmount;
+	private double totalSalesAmount;
 	
 	
 	public int getPlannedLeads() {
@@ -36,10 +36,10 @@ public class SalesInCome {
 	public void setClosedSales(int closedSales) {
 		this.closedSales = closedSales;
 	}
-	public float getTotalSalesAmount() {
+	public double getTotalSalesAmount() {
 		return totalSalesAmount;
 	}
-	public void setTotalSalesAmount(float totalSalesAmount) {
+	public void setTotalSalesAmount(double totalSalesAmount) {
 		this.totalSalesAmount = totalSalesAmount;
 	}
 	public Date getFromDate() {
