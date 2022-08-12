@@ -49,41 +49,44 @@ function validate(){
 	    return false;
 	  }
 
-	   if(companyResult == false)
+	  else  if(companyResult == false)
 	  {
 	    alert('Please enter only character in CompanyName');
 	    return false;
 	  } 
-	   if(roleResult == false)
+	  else if(roleResult == false)
 		  {
 		    alert('Please enter  only character in PersonRole');
 		    return false;
 		  } 
-	   if(personResult == false)
+	  else if(personResult == false)
 		  {
 		    alert('Please enter only character in PersonName');
 		    return false;
 		  } 
-	   if(accountTypeResult == false)
+	  else if(accountTypeResult == false)
 		  {
 		    alert('Please enter only character in AccountType');
 		    return false;
 		  } 
-	   if(channelResult == false)
+	  else if(channelResult == false)
 		  {
 		    alert('Please enter  only character in Channel');
 		    return false;
 		  }
-	   if(idResult == false)
+	  else if(idResult == false)
 		  {
 		    alert('Please enter only number in territoryId');
 		    return false;
 		  }
-	   if(emailResult == false)
+	  else if(emailResult == false)
 		  {
 		    alert('Please enter a valid Email');
 		    return false;
 		  }
+	  else{
+		  
+	  }
 	  return true;
 	}
     </script>

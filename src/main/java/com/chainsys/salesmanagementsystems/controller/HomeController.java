@@ -215,11 +215,16 @@ public class HomeController {
 		return "salesman-target";
 	}
 	@GetMapping("/salesmanSales")
-	public String redirectToSalesmanSales(Model model) {
+	public String redirectToSalesmanSales(@RequestParam("empId") int empId,Model model) {
+		model.addAttribute("empId", empId);
 		return "salesman-sales";
 	}
 	@GetMapping("/salesmanLeads")
 	public String redirectToSalesmanLeads(Model model) {
 		return "salesman-leads";
+	}
+	@GetMapping("/test")
+	public String testSession(Model model) {
+		return "test";
 	}
 }

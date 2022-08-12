@@ -53,19 +53,19 @@ public class SalesController {
 	
 	
 	
-	@GetMapping("/addsalesform")
+	@GetMapping("/addsalesform")//need
 	public String addSalesServiceForm(Model model) {
 		Sales sales =new Sales();
 		model.addAttribute("addsales", sales);
 		return "add-sales-form";
 	}
-	@PostMapping("/addsales")
+	@PostMapping("/addsales")//need
 	public String addSales(@ModelAttribute("addsales")Sales sales,Model model) {
 		
 		salesService.insertSales(sales);
 		return "add-sales-form";
 	}
-	@GetMapping("/allsales")
+	@GetMapping("/allsales")//need
 	public String allSales(@RequestParam("empId") int empId, Model model) {
 		List<Sales>allSales=salesService.allSales();
 		model.addAttribute("allSales", allSales);
@@ -82,18 +82,24 @@ public class SalesController {
 		
 		else return "get-sales-manager";
 	}
-	@PostMapping("/deletesales")//need
-	public String deleteSales(@ModelAttribute("getIdd")GetId id, Model model) {
-		salesService.deleteSales(id.getId());
+	@GetMapping("/getsalesbyemployeeid")//need
+	public String getSalesByEmployeeId(@RequestParam("empId")int empId,Model model) {
+		List<Sales> salesList=salesService.getSalesByEmployeeId(empId);
+		model.addAttribute("salesList", salesList);
+		return "get-sales-employeeid";
+	}
+	@GetMapping("/deletesales")//need
+	public String deleteSales(@RequestParam("id")int id, Model model) {
+		salesService.deleteSales(id);
 		return "all-sales";
 	}
-	@PostMapping("/updatesalesform")//need
+	@GetMapping("/updatesalesform")//need
 	public String updateSalesServiceForm(@RequestParam("id")int id,Model model) {
 		Sales sales =salesService.getSalesById(id);
 		model.addAttribute("updatesales", sales);
 		return "update-sales-form";
 	}
-	@PostMapping("/updatesales")
+	@PostMapping("/updatesales")//need
 	public String updateSales(@ModelAttribute("updatesales")Sales sales,Model model) {
 		salesService.updateSales(sales);
 		return "update-sales-form";

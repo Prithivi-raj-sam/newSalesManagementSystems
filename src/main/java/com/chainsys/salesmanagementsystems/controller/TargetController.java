@@ -59,6 +59,12 @@ public class TargetController {
 		model.addAttribute("alltargets", allTarget);
 		return "all-targets";
 	}
+	@GetMapping("/alltargetbyEmployeeid")
+	public String getAlltargetsByEmployeeId(@RequestParam("empId") int empId,Model model) {
+		List<Target> targetList=targetService.getTargetByEMployeeId(empId);
+		model.addAttribute("targetList", targetList);
+		return "employees-target";
+	}
 	@GetMapping("/addtargetform")//need
 	public String addTargetForm(Model model) {
 		Target target=new Target();

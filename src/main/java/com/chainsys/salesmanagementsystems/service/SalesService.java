@@ -40,6 +40,9 @@ public class SalesService {
 	public List<Sales> getSalesBetweenTwoDates(Date startDate,Date endDate){
 		return salesRepository.findBySalesDateGreaterThanEqualAndSalesDateLessThanEqual(startDate, endDate); 
 	}
+	public List<Sales> getSalesByEmployeeId(int id){
+		return salesRepository.findByEmployeeEmployeeId(id);
+	}
 	public SalesInCome getTotalSalesBetweenTwoDates(SalesInCome salesIncome){
 		List<Target> targetList=targetService.getSalesInCome(salesIncome);
 		List<Sales> salesList= getSalesBetweenTwoDates(salesIncome.getFromDate(),salesIncome.getToDate());

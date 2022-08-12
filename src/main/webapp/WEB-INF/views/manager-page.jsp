@@ -18,7 +18,7 @@
 			<li><a href="/home/employees">Employee</a></li>
 			<li><a href="/home/targets">Target</a></li>
 			<li><a href="/home/lead?empId=${empId}">Leads and Sales</a></li>
-			<li><a href="/home/territorys?empId=${empId}">Territory</a></li>
+			<li><a href="/territory/allterritory?empId=${empId}">Territory</a></li>
 		</ul>
 </div>
 </body>

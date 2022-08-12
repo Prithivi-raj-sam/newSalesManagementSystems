@@ -76,10 +76,11 @@ public class TerritoryController {
 		territoryService.deleteTerritory(id.getId());
 		return "redirect:/territories/allterritory";
 	}
-	@GetMapping("/allterritory")
-	public String allTerritory(Model model) {
+	@GetMapping("/allterritory")//need
+	public String allTerritory(@RequestParam("empId")int empId,Model model) {
 		List<Territory>allterritory =territoryService.allTerritory();
 		model.addAttribute("allteritory", allterritory);
+		model.addAttribute("empId", empId);
 		return "all-territory";
 	}
 	@PostMapping("/updateterritoryform")
@@ -95,15 +96,15 @@ public class TerritoryController {
 		territoryService.updateTerritory(ter);
 		return "update-territory-form";
 	}
-	@GetMapping("/getaccountsandterritory")
-	public String getAccountAndTerritory(@RequestParam("id")int id,Model model) {
+	@GetMapping("/getaccountsandterritory")//need
+	public String getAccountAndTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
 		AccountsTerritoryDTO dto=territoryService.getAccountandTerritory(id);
 		model.addAttribute("getTerritory", dto.getTerritory());
 		model.addAttribute("getAccounts", dto.getAccountList());
 		return "list-accounts-territory";
 }
 	 @GetMapping("/getemployeeandterritory")
-	 public String getEmployeesAndTerritory(@RequestParam("id")int id,Model model) {
+	 public String getEmployeesAndTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
 		 EmployeeTerritoryDTO dto=territoryService.getTErritoryAndEmployee(id);
 		 model.addAttribute("getTerritory", dto.getTerritory());
 		 model.addAttribute("getEmployee", dto.getEmployeeList());

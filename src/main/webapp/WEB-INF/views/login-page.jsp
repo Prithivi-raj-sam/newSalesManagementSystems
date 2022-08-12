@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +47,7 @@
 		<div style="color:red;">${error}</div>
 		<div style="color:white;">${message}</div>
 	</div>
+	
 </body>
 </html>
 

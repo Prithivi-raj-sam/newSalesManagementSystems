@@ -44,8 +44,8 @@
 			</form:form>
 		</div>
 	</div>
-			<div><a href="sales/updatesalesform?id=${sales.salesId}"><button></button></a>
-			<a href="sales/deletesales?id=${sales.salesId}"><button></button></a></div>
+			<div><a href="/sales/updatesalesform?id=${sales.salesId}"><button>update</button></a>
+			<a href="/sales/deletesales?id=${sales.salesId}"><button>delete</button></a></div>
 	
 </body>
 </html>

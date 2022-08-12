@@ -23,6 +23,8 @@
 			   	  <td>${allteritory.territoryId}</td>
 			   	  <td>${allteritory.territoryName}</td>
 			   	  <td>${allteritory.noOfCustomer}</td>
+			   	  <td><a href="/territory/getaccountsandterritory?id=${allteritory.territoryId}&empId=${empId}"><button>view Account</button></a></td>
+			   	  <td><a href="/territory/getemployeeandterritory?id=${allteritory.territoryId}&empId=${empId}"><button>view Employee</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

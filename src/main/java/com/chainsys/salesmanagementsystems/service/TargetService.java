@@ -19,6 +19,9 @@ public class TargetService {
 	public void insertTarget(Target target) {
 		targetRepository.save(target);
 	}
+	public List<Target> getTargetByEMployeeId(int id){
+		return targetRepository.findByEmployeeId(id);
+	}
 	public List<Target> allTarget(){
 		return targetRepository.findAll();
 	}

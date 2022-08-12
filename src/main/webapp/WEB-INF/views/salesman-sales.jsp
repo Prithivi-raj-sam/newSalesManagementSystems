@@ -7,6 +7,18 @@
 <title>Salesman Sales</title>
 <style type="text/css">
 	<%@include file="/WEB-INF/css/employee.css"%>
+
+.iframe {
+    position: absolute;
+ 	top:65%;
+    right: 0%;
+    width: 1000px;
+    height: 500px;
+    margin-top: -400px;
+    margin-right: 20px;
+    z-index: 999;
+    border-radius:20px;
+} 
 </style>
 </head>
 <body>
@@ -17,6 +29,10 @@
 			<li><a href="/home/getSales">Get Sales</a></li>
 			<li><a href="/home/deleteSales">delete Sales</a></li>
 		</ul>
+		<div></div>
+		 <div id="sale1"><iframe id="salesman" class="iframe" title='All Sales' src='/sales/getsalesbyemployeeid?empId=${empId}' 
+	   style='border:10px solid #25195c' ></iframe></div>
+	  
 </div>
 </body>
 </html>

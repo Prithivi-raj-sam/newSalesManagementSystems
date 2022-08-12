@@ -155,7 +155,7 @@ public class EmployeeController {
 		model.addAttribute("getSales", dto.getSalesList());
 		return "list-employee-sales";
 	}
-	@GetMapping("/getemployeeandtarget")
+	@GetMapping("/getemployeeandtarget")//need
 	public String getEmployeeAndTarget(@RequestParam("id")int id,Model model) {
 		TargetEmployeeDTO dto=employeeservice.getTargetsAndEmployee(id);
 		model.addAttribute("getEmployee", dto.getEmployee());
