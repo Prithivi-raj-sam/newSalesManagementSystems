@@ -66,15 +66,18 @@
 					</div>
 				</div>
 				<div>
-					<label for="profile">Profile</label>
+					<%-- <label for="profile">Profile</label>
 					<div>
 						<form:input path="profile" readonly="true" type="image"/>
 					</div>
 					<div>
 					<img src="data:image/jpg;base64,${employee.profile}" width="240" height="300"/>
-					</div>
+					</div> --%>
 				</div>
 			</form:form>
+			<a href="/employee/updateemployeeform?id=${employee.employeeId}"><button>update</button></a>
+			<a href="/employee/employeeachievment?id=${employee.employeeId}"><button>Achievement</button></a>
+			<a href="/employee/deleteemployee?id=${employee.employeeId}"><button>Delete</button></a>
 		</div>
 	</div>
 

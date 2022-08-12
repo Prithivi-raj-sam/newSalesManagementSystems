@@ -1,6 +1,7 @@
 package com.chainsys.salesmanagementsystems.controller;
 
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -52,49 +53,49 @@ public class TargetController {
 	
 	
 	
-	@GetMapping("/alltargets")
+	@GetMapping("/alltargets")//need
 	public String allTargets(Model model) {
 		List<Target>allTarget = targetService.allTarget();
-		model.addAttribute("alltarget", allTarget);
+		model.addAttribute("alltargets", allTarget);
 		return "all-targets";
 	}
-	@GetMapping("/addtargetform")
+	@GetMapping("/addtargetform")//need
 	public String addTargetForm(Model model) {
 		Target target=new Target();
 		model.addAttribute("addtarget", target);
 		return "add-target-form";
 	}
-	@PostMapping("/addtarget")
-	public String addTarget(@Valid@ModelAttribute("addtarget")Target target,Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "add-target-form";
-		}
+	@PostMapping("/addtarget")//need
+	public String addTarget(@ModelAttribute("addtarget")Target target,Model model) {
 		targetService.insertTarget(target);
 		return "add-target-form";
 	}
-	@PostMapping("/gettarget")
-	public String getTargetById(@ModelAttribute("getId")GetId id,Model model) {
-		Target target=targetService.getTargetById(id.getId());
+	@GetMapping("/gettarget")//need
+	public String getTargetById(@RequestParam("targetId")int targetId,Model model) {
+		Target target=targetService.getTargetById(targetId);
 		model.addAttribute("target", target);
 		return "get-target-id";
 	}
-	@PostMapping("/deleteTarget")
-	public String deleteTarget(@ModelAttribute("getId")GetId id, Model model) {
-		targetService.deleteTarget(id.getId());
+	@GetMapping("/deleteTarget")//need
+	public String deleteTarget(@RequestParam("targetId")int targetId, Model model) {
+		targetService.deleteTarget(targetId);
 		return "redirect:/target/alltargets";
 	}
-	@PostMapping("/updatetargetform")
-	public String updateTargetForm(@ModelAttribute("getId")GetId id,Model model) {
-		Target target=targetService.getTargetById(id.getId());
+	@GetMapping("/updatetargetform")
+	public String updateTargetForm(@RequestParam("targetId")int targetId,Model model) {
+		Target target=targetService.getTargetById(targetId);
 		model.addAttribute("updatetarget", target);
 		return "update-target-form";
 	}
 	@PostMapping("/updatetarget")
-	public String updatetarget(@Valid@ModelAttribute("updatetarget")Target target, Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "update-target-form";
-		}
+	public String updatetarget(@ModelAttribute("updatetarget")Target target, Model model) {
 		targetService.updateTarget(target);
 		return "update-target-form";
+	}
+	@PostMapping("/gettargetbydate")
+	public String getTaretByTargetDateAndTargetSetdate(@ModelAttribute("target")Target target,Model model) {
+		List<Target> targetList=targetService.getTargetByTwoDate(target);
+		model.addAttribute("targetList", targetList);
+		return "all-targets";
 	}
 }

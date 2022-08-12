@@ -14,43 +14,43 @@
 				<div>
 					<label for="leadId">Lead Id</label>
 					<div>
-						<form:input path="leadId" />
+						<form:input placeholder="Enter Lead Id" path="leadId" />
 					</div>
 				</div>
 				<div>
 					<label for="accountId">Account Id</label>
 					<div>
-						<form:input path="accountId" />
+						<form:input placeholder="Enter Your Account Id" path="accountId" />
 					</div>
 				</div>
 				<div>
 					<label for="status">Status</label>
 					<div>
-						<form:input path="status" />
+						<form:input placeholder="Enter Your Status" path="status" />
 					</div>
 				</div>
 				<div>
 					<label for="employeeId">SellerId</label>
 					<div>
-						<form:input path="employeeId" />
+						<form:input placeholder="Enter Your Seller Id" path="employeeId" />
 					</div>
 				</div>
 				<div>
 					<label for="leadDate">Lead Date</label>
 					<div>
-						<form:input path="leadDate" />
+						<form:input type="date" placeholder="Enter Lead Date" path="leadDate" />
 					</div>
 				</div>
 				<div>
 					<label for="stages">Stage</label>
 					<div>
-						<form:input path="stages" />
+						<form:input placeholder="Enter Your Stage" path="stages" />
 					</div>
 				</div>
 				<div>
 					<label for="propability">Probability</label>
 					<div>
-						<form:input path="propability" />
+						<form:input placeholder="Enter Probability" path="propability" />
 					</div>
 				</div>
 				<div>

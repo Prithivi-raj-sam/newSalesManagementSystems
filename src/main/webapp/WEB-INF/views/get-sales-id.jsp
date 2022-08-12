@@ -41,11 +41,11 @@
 						<form:input path="amount" readonly="true"/>
 					</div>
 				</div>
-				
 			</form:form>
 		</div>
 	</div>
-
+			<div><a href="sales/updatesalesform?id=${sales.salesId}"><button></button></a>
+			<a href="sales/deletesales?id=${sales.salesId}"><button></button></a></div>
 	
 </body>
 </html>

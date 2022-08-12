@@ -12,43 +12,31 @@
 		<div id="form">
 			<form:form action="addtarget" method="post" modelAttribute="addtarget">
 				<div>
-					<label for="targetId">Target Id</label>
-					<div>
-						<form:input path="targetId" />
-					</div>
-				</div>
-				<div>
 					<label for="targetDate">Target Date</label>
 					<div>
-						<form:input path="targetDate" />
+						<form:input type="date" placeholder="Enter Target Date" path="targetDate" />
 					</div>
 				</div>
 				<div>
 					<label for="plannedTarget">Planned Target</label>
 					<div>
-						<form:input path="plannedTarget" />
-					</div>
-				</div>
-				<div>
-					<label for="closedTarget">Closed Target</label>
-					<div>
-						<form:input path="closedTarget" />
+						<form:input placeholder="Enter Planned Target" path="plannedTarget" />
 					</div>
 				</div>
 				<div>
 					<label for="employeeId">Employee Id</label>
 					<div>
-						<form:input path="employeeId" />
+						<form:input placeholder="Enter Seller Id" path="employeeId" />
 					</div>
 				</div>
 				<div>
 					<label for="managerComment">Manager Comment</label>
 					<div>
-						<form:input path="managerComment" />
+						<form:input placeholder="Enter Manager Comment" path="managerComment" />
 					</div>
 				</div>
 				<div>
-					<label for="targetSetDate">Target Month</label>
+					<label for="targetSetDate">Target set Date</label>
 					<div>
 						<form:input path="targetSetDate" />
 					</div>

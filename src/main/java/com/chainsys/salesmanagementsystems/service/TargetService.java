@@ -34,4 +34,7 @@ public class TargetService {
 	public List<Target> getSalesInCome(SalesInCome salesIncome) {
 		return  targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(salesIncome.getFromDate(), salesIncome.getToDate());   
 	}
+	public List<Target> getTargetByTwoDate(Target target){
+		return targetRepository.findByTargetSetDateGreaterThanEqualAndTargetDateLessThanEqual(target.getTargetSetDate(), target.getTargetDate());
+	}
 }

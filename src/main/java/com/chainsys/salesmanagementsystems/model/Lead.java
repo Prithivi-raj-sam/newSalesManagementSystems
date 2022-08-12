@@ -1,6 +1,6 @@
 package com.chainsys.salesmanagementsystems.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,32 +25,32 @@ public class Lead {
 	@Column(name="lead_id")
 	private int leadId;
 	
-	@NotEmpty(message = "*Please enter Account Id")
-	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Account Id ")
+//	@NotEmpty(message = "*Please enter Account Id")
+//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Account Id ")
 	@Column(name="account_id")
 	private int accountId;
 	
-	@NotEmpty(message = "*Please enter Status")
-	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Status")
+//	@NotEmpty(message = "*Please enter Status")
+//	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Status")
 	@Column(name="status")
 	private String status;
 	
-	@NotEmpty(message = "*Please enter Seller Id")
-	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Seller Id ")
+//	@NotEmpty(message = "*Please enter Seller Id")
+//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Seller Id ")
 	@Column(name="saller_id")
 	private int employeeId;
 	
-	@NotEmpty(message = "*Please enter Date")
+//	@NotEmpty(message = "*Please enter Date")
 	@Column(name="lead_date") 
 	private Date leadDate;
 	
-	@NotEmpty(message = "*Please enter Stages")
-	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Stages")
+//	@NotEmpty(message = "*Please enter Stages")
+//	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Stages")
 	@Column(name="stages")
 	private String stages;
 	
-	@NotEmpty(message = "*Please enter Probabilty")
-	@Pattern(regexp = "^[0-9]+(.[0-9]*)?$", message = "Enter valid probability")
+//	@NotEmpty(message = "*Please enter Probabilty")
+//	@Pattern(regexp = "^[0-9]+(.[0-9]*)?$", message = "Enter valid probability")
 	@Column(name="propability")
 	private float propability;
 	

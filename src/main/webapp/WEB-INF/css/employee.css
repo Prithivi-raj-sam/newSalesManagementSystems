@@ -1,0 +1,58 @@
+@charset "ISO-8859-1";
+*{
+margin: 0;
+padding: 0;
+}
+body
+ {
+    background-image:
+        url("https://www.phpcrmsystem.com/wp-content/uploads/crm_customer_management.jpg");
+    height: 768px;
+    width: 1366px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+#welcome{color:white;
+text-align: center;
+font-size: 40px;
+font-family: Times;
+}
+#admin{color:orange;
+text-align: center;
+font-size: 30px;
+font-family: Times;
+}
+#customer{color:orange;
+text-align: center;
+font-size: 30px;
+font-family:Times;
+}
+.menu{
+width: 400px;
+float: right;
+height: 70px;
+}
+ul{
+float: right;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+ul li{
+list-style: none;
+margin-right: 62px;
+margin-top: 27px;
+font-size: 20px; 
+}
+ul li a{
+text-decoration: none;
+color: #fff;
+font-family: Arial;
+font-weight: bold;
+transition: 0.4s ease-in-out;
+}
+ul li a:hover{
+color: #ff7200;
+}

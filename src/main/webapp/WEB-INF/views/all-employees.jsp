@@ -7,7 +7,7 @@
 <meta charset="ISO-8859-1">
 <title>All Employees</title>
 </head>
-<body style="background-color:#3d403d; color:white;">
+<body style="background-color:#c4f4f5; color:#0e5a5c;">
 	<div id="table root">
 		<table>
 			<thead>
@@ -26,6 +26,7 @@
 			</thead>
 			<tbody>
 			<c:forEach var="allEmployee" items="${allEmployee}">
+			
 			   <tr>
 			   	  <td>${allEmployee.employeeId}</td>
 			   	  <td>${allEmployee.employeeName}</td>
@@ -37,7 +38,9 @@
 			   	  <td>${allEmployee.passwordLastChangeDate}</td>
 			   	  <td>${allEmployee.role}</td>
 			   	  <td>${allEmployee.profile}</td>
+			   	  <td><a href="/employee/getemployee?getId=${allEmployee.employeeId}"><button>view</button></a></td>
 			   </tr>
+			   
 			</c:forEach>
 			</tbody>
 		</table>

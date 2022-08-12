@@ -14,73 +14,73 @@
 				<div>
 					<label for="accountId"> Account id</label>
 					<div>
-						<form:input path="accountId" readonl="true"/>
+						<form:input path="accountId" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="companyName">Company Name</label>
 					<div>
-						<form:input path="companyName" readonl="true"/>
+						<form:input path="companyName" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="contactPerson">Contact Person</label>
 					<div>
-						<form:input path="contactPerson" readonl="true"/>
+						<form:input path="contactPerson" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="contactPersonRole">COntact Person Role</label>
 					<div>
-						<form:input path="contactPersonRole" readonl="true"/>
+						<form:input path="contactPersonRole" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="email">Email</label>
 					<div>
-						<form:input path="email" readonl="true"/>
+						<form:input path="email" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="contactPersonPhone">Contact Person Phone</label>
 					<div>
-						<form:input path="contactPersonPhone" readonl="true"/>
+						<form:input path="contactPersonPhone" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="address">Address</label>
 					<div>
-						<form:input path="address" readonl="true"/>
+						<form:input path="address" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="accountType">Account Type</label>
 					<div>
-						<form:input path="accountType" readonl="true"/>
+						<form:input path="accountType" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="employeeId">Market Id</label>
 					<div>
-						<form:input path=""employeeId"" readonl="true"/>
+						<form:input path="employeeId" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="leadThroughChannel">Lead Though Channel</label>
 					<div>
-						<form:input path="leadThroughChannel" readonl="true"/>
+						<form:input path="leadThroughChannel" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="customerJoinDate">Customer Join Date</label>
 					<div>
-						<form:input path="customerJoinDate" readonl="true"/>
+						<form:input path="customerJoinDate" readonly="true"/>
 					</div>
 				</div>
 				<div>
 					<label for="territoryId">Territory Id</label>
 					<div>
-						<form:input path="territoryId" readonl="true"/>
+						<form:input path="territoryId" readonly="true"/>
 					</div>
 				</div>
 			</form:form>

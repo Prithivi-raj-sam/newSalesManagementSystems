@@ -1,6 +1,6 @@
 package com.chainsys.salesmanagementsystems.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,34 +24,34 @@ public class Target {
 	@Column(name = "target_id")
 	private int targetId;
 	
-	@NotEmpty(message = "*Please enter Lead Id")
+//	@NotEmpty(message = "*Please enter Lead Id")
 	@Column(name = "target_date")
 	private Date targetDate;
 	
-	@NotEmpty(message = "*Please enter Planned Target")
+//	@NotEmpty(message = "*Please enter Planned Target")
 	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Planned Targe ")
 	@Column(name = "planned_target")
 	private int plannedTarget;
 	
-	@NotEmpty(message = "*Please enter Closed Target")
-	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Closed Target")
+//	@NotEmpty(message = "*Please enter Closed Target")
+//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Closed Target")
 	@Column(name = "closed_target")
 	private int closedTarget;
 	
-	@NotEmpty(message = "*Please enter Employee Id")
-	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Employee Id")
+//	@NotEmpty(message = "*Please enter Employee Id")
+//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Employee Id")
 	@Column(name = "employee_id")
 	private int employeeId;
 	
 	@Column(name = "manager_comment")
 	private String managerComment;
 	
-	@NotEmpty(message = "*Please enter Target Set date")
+//	@NotEmpty(message = "*Please enter Target Set date")
 	@Column(name = "target_set_Date")
 	private Date targetSetDate;
 	
-	@NotEmpty(message = "*Please enter Target Category")
-	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Target Category")
+//	@NotEmpty(message = "*Please enter Target Category")
+//	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Target Category")
 	@Column(name="target_type")
 	private String targetCategory;
 	

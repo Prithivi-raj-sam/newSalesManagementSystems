@@ -1,79 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee</title>
 <style>
-*{
-margin: 0;
-padding: 0;
+<%@include file="/WEB-INF/css/employee.css"%>
+#emp1{
+float:right
 }
-body
- {
-    background-image:
-        url("https://images.hdqwalls.com/download/jeep-extreme-mudder-aw-1366x768.jpg");
-    height: 768px;
-    width: 1366px;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-#welcome{color:white;
-text-align: center;
-font-size: 40px;
-font-family: Times;
-}
-#admin{color:orange;
-text-align: center;
-font-size: 30px;
-font-family: Times;
-}
-#customer{color:orange;
-text-align: center;
-font-size: 30px;
-font-family:Times;
-}
-.menu{
-width: 400px;
-float: left;
-height: 70px;
-}
-ul{
-float: left;
-display: flex;
-justify-content: center;
-align-items: center;
-}
-ul li{
-list-style: none;
-margin-left: 62px;
-margin-top: 27px;
-font-size: 20px; 
-}
-ul li a{
-text-decoration: none;
-color: #fff;
-font-family: Arial;
-font-weight: bold;
-transition: 0.4s ease-in-out;
-}
-ul li a:hover{
-color: #ff7200;
-}
+ 
+.iframe {
+    position: absolute;
+ 	top:65%;
+    right: 0%;
+    width: 1000px;
+    height: 500px;
+    margin-top: -400px;
+    margin-right: 20px;
+    z-index: 999;
+    border-radius:20px;
+} 
 </style>
 </head>
 <body>
 <div class="menu">
+	<form:form action="/employee/getemployeebyname" method="post" modelAttribute="employee">
 		<ul>
-			<li><a href="addemployeeform">Add Employee</a></li>
-			<li><a href="updateemployee">update Employee</a></li>
-			<li><a href="deleteemplyee">Delete Employee</a></li>
-			<li><a href="getemployee">Get Employee</a></li>
-			<li><a href="getallemplyee">All Employees</a></li>
+			<li><a href="/home/addemployeeform">Add Employee</a></li>
+			<li><form:input path="employeeName" placeholder="enter Employee Name" /></li>
+			<li><form:button>search</form:button></li>
 		</ul>
+		</form:form>
 		</div>
+		<div>
+	  <div id="emp1"><iframe id="allemployee" class="iframe" title='All Employee' src='/home/getallemplyee' 
+	   style='border:10px solid #25195c' ></iframe></div>
+	  </div>
+		
 </body>
 </html>

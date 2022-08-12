@@ -5,48 +5,36 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Sales man Page</title>
+<style>
+<%@include file="/WEB-INF/css/employee.css"%>
+#emp1{
+float:right
+}
+
+.iframe {
+    position: absolute;
+ 	top:65%;
+    right: 0%;
+    width: 1000px;
+    height: 500px;
+    margin-top: -400px;
+    margin-right: 20px;
+    z-index: 999;
+    border-radius:20px;
+} 
+</style>
 </head>
 <body>
-	<div>
-	<div>
-	<a href="addleads">sales</a>
-	</div>
-	<div>
-	<a href="updateleads">sales</a>
-	</div>
-	<div>
-	<a href="getleads">sales</a>
-	</div>
-	<div>
-	<a href="deleteleads">sales</a>
-	</div>
-	<div>
-	<a href="getallleads">sales</a>
-	</div>
-	<div>
-	<a href="addsales">sales</a>
-	</div>
-	<div>
-	<a href="updatesales">sales</a>
-	</div>
-	<div>
-	<a href="getSales">sales</a>
-	</div>
-	<div>
-	<a href="getallSales">sales</a>
-	</div>
-	<div>
-	<a href="deleteSales">sales</a>
-	</div>
-	<div>
-	<a href="getalltarget">sales</a>
-	</div>
-	<div>
-	<a href="gettarget">sales</a>
-	</div>
-	<div>
-	<a href="updatetarget">sales</a>
-	</div>
-	</div>
+	<div class="menu">
+		<ul>
+			<li><a href="/home/salesmanTarget">Target</a></li>
+			<li><a href="/home/salesmanSales">Sales</a></li>
+			<li><a href="/home/salesmanLeads">Leads</a></li>
+		</ul>
+		<div>
+</div>
+	  <div id="sale1"><iframe id="salesman" class="iframe" title='All Sales' src='/home/getallSales' 
+	   style='border:10px solid #25195c' ></iframe></div>
+	  </div>
 </body>
 </html>

@@ -37,6 +37,9 @@ public class EmployeeService {
 	public List<Employee> allEmployee(){
 		return employeeRepository.findAll();
 	}
+	public List<Employee> getEmployeeByName(String name){
+		return employeeRepository.findByEmployeeName(name);
+	}
 	public void updateEmployee(Employee employee) {
 		employeeRepository.save(employee);
 	}
@@ -45,6 +48,9 @@ public class EmployeeService {
 	}
 	public Employee getEmployeeById(int id) {
 		return employeeRepository.findById(id);
+	}
+	public Employee getEmployeeByEmployeeIdAndPassrd(int id,String password) {
+		return employeeRepository.findByEmployeeIdAndPassword(id, password);
 	}
 	public AccountsEmployeeDTO getAccountsandEmployee(int id) {
 		AccountsEmployeeDTO dto=new AccountsEmployeeDTO();

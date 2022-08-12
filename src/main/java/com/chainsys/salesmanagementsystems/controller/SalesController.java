@@ -7,24 +7,26 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.SalesService;
+import com.chainsys.salesmanagementsystems.service.EmployeeService;
 
 @Controller
 @RequestMapping("/sales")
 public class SalesController {
 	@Autowired
 	private SalesService salesService;
-	
+	@Autowired
+	private EmployeeService employeeservice;
 	
 	@GetMapping("/getId")
 	public String getSalesId(Model model) {
@@ -58,41 +60,41 @@ public class SalesController {
 		return "add-sales-form";
 	}
 	@PostMapping("/addsales")
-	public String addSales(@Valid@ModelAttribute("addsales")Sales sales,Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "add-sales-form";
-		}
+	public String addSales(@ModelAttribute("addsales")Sales sales,Model model) {
+		
 		salesService.insertSales(sales);
 		return "add-sales-form";
 	}
 	@GetMapping("/allsales")
-	public String allSales(Model model) {
+	public String allSales(@RequestParam("empId") int empId, Model model) {
 		List<Sales>allSales=salesService.allSales();
 		model.addAttribute("allSales", allSales);
+		model.addAttribute("empId", empId);
 		return "all-sales";
 	}
-	@PostMapping("/getSales")
-	public String getSalesByID(@ModelAttribute("getIdd")GetId id, Model model) {
-		Sales sales=salesService.getSalesById(id.getId());
+	@GetMapping("/getSales")//need
+	public String getSalesByID(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
+		Sales sales=salesService.getSalesById(id);
+		Employee employee=employeeservice.getEmployeeById(empId);
 		model.addAttribute("sales", sales);
-		return "get-sales-id";
+		if(employee.getRole().equals("salesman"))
+			return "get-sales-id";
+		
+		else return "get-sales-manager";
 	}
-	@PostMapping("/deletesales")
+	@PostMapping("/deletesales")//need
 	public String deleteSales(@ModelAttribute("getIdd")GetId id, Model model) {
 		salesService.deleteSales(id.getId());
 		return "all-sales";
 	}
-	@PostMapping("/updatesalesform")
-	public String updateSalesServiceForm(@ModelAttribute("getIdd")GetId id,Model model) {
-		Sales sales =salesService.getSalesById(id.getId());
+	@PostMapping("/updatesalesform")//need
+	public String updateSalesServiceForm(@RequestParam("id")int id,Model model) {
+		Sales sales =salesService.getSalesById(id);
 		model.addAttribute("updatesales", sales);
 		return "update-sales-form";
 	}
 	@PostMapping("/updatesales")
-	public String updateSales(@Valid@ModelAttribute("updatesales")Sales sales,Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "update-sales-form";
-		}
+	public String updateSales(@ModelAttribute("updatesales")Sales sales,Model model) {
 		salesService.updateSales(sales);
 		return "update-sales-form";
 	}

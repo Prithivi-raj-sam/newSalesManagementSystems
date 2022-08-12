@@ -59,33 +59,27 @@ public class AccountController {
 		Account account =new Account();
 		model.addAttribute("addAccount", account);
 		model.addAttribute("allTerritory", territoryService.allTerritory());
-		Territory territory=new Territory();
-		model.addAttribute("territory", territory);
 		return "add-account-form";
 	}
 	@PostMapping("/addaccount")
-	public String addAccount(@Valid@ModelAttribute("addAccount")Account accout,@ModelAttribute("territory")Territory territory, Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "add-account-form";
-		}
-		territory.setNoOfCustomer(1);
-		territoryService.updateTerritory(territory);
+	public String addAccount(@ModelAttribute("addAccount")Account accout, Model model) {
 		accountservice.insertAccount(accout);
 		model.addAttribute("result", "1 Record Added");
 		return "add-account-form";
 	}
-	@PostMapping("/getaccount")
-	public String getAccountById(@ModelAttribute("getId") GetId id,Model model) {
-		Account account =accountservice.getAccountById(id.getId());
+	@GetMapping("/getaccount")//need
+	public String getAccountById(@RequestParam("id") int id,@RequestParam("empId") int empId,Model model) {
+		Account account =accountservice.getAccountById(id);
 		model.addAttribute("account", account);
 		return "get-account-id";
 	}
 	
-	@GetMapping("/allaccount")
-	public String getAllAccount(Model model) {
+	@GetMapping("/allaccount")//need
+	public String getAllAccount(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.allAccount();
 		model.addAttribute("allaccount", allAccount);
-		return "all-account";
+		model.addAttribute("empId", empId);
+		return "all-accounts";
 	}
 	@PostMapping("/deleteaccount")
 	public String deleteAccount(@ModelAttribute("getId")GetId id,Model model) {
@@ -99,14 +93,12 @@ public class AccountController {
 		return "update-account-form";
 	}
 	@PostMapping("/updateaccount")
-	public String updateAccount(@Valid@ModelAttribute("updateAccount")Account account, Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "update-account-form";
-		}
+	public String updateAccount(@ModelAttribute("updateAccount")Account account, Model model) {
+		
 		accountservice.insertAccount(account);
 		return "update-account-form";
 	}
-	@GetMapping("/getacountandleads")
+	@GetMapping("/getacountandleads")//need
 	public String getAcountAndLeads(@RequestParam("id")int id, Model model) {
 		LeadsAccountsDTO dto=accountservice.getAcountsAndLeads(id);
 		model.addAttribute("getaccount", dto.getAccount());

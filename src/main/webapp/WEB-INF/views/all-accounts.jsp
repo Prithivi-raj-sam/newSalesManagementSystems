@@ -6,6 +6,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>All Account</title>
+<style type="text/css">
+	table, th, td {
+  border: 2px solid white;
+}
+a{
+text-decoration:none;
+color:white;
+}
+</style>
 </head>
 <body style="background-color:#3d403d; color:white;">
 	<div id="table root">
@@ -37,10 +46,11 @@
 			   	  <td>${allaccount.contactPersonPhone}</td>
 			   	  <td>${allaccount.address}</td>
 			   	  <td>${allaccount.accountType}</td>
-			   	  <td>${allaccount.employeeId}</td>
+			   	  <td><a href="/employee/getaccountsemployee?id=${allaccount.employeeId}">${allaccount.employeeId}</a></td>
 			   	  <td>${allaccount.leadThroughChannel}</td>
 			   	  <td>${allaccount.customerJoinDate}</td>
 			   	  <td>${allaccount.territoryId}</td>
+			   	  <td><a href="/account/getaccount?id=${allaccount.accountId}&empId=${empId}"><button>view</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

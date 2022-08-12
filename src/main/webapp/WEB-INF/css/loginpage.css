@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+body {
+	background-image:
+		url("https://previews.123rf.com/images/nexusplexus/nexusplexus1601/nexusplexus160101888/50267785-modern-office-window-view-with-virtual-market-infographs.jpg");
+	background-width: 1366 px;
+	background-height: 768 px;
+}
+
+#all {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	background: #fcebc2;
+	border-radius: 25px;
+	border: 7px solid #150a36;
+	padding: 30px;
+	width: 300px;
+	height: 200px;
+}
+
+h1 {
+	color: white;
+	font-size: 40px;
+	font-family: "Audiowide", sans-serif;
+	font-style: italic;
+}
+#employeeId,#password,#button{
+	size:30px;
+}

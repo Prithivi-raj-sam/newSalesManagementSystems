@@ -61,10 +61,7 @@ public class TerritoryController {
 		return "add-territory-form";
 	}
 	@PostMapping("/addterritory")
-	public String addTerritory(@Valid@ModelAttribute("addterritory")Territory ter,Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "add-territory-form";
-		}
+	public String addTerritory(@ModelAttribute("addterritory")Territory ter,Model model) {
 		territoryService.insertTerritory(ter);
 		return "add-territory-form";
 	}
@@ -92,10 +89,8 @@ public class TerritoryController {
 		return "update-territory-form";
 	}
 	@PostMapping("/updateterritory")
-	public String updateTerritory(@Valid@ModelAttribute("updateTerritory")Territory ter,Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "update-territory-form";
-		}
+	public String updateTerritory(@ModelAttribute("updateTerritory")Territory ter,Model model) {
+		
 		model.addAttribute("result", "1 Record updated");
 		territoryService.updateTerritory(ter);
 		return "update-territory-form";

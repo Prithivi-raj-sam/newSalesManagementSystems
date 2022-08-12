@@ -31,6 +31,7 @@
 			   	  <td>${alltargets.employeeId}</td>
 			   	  <td>${alltargets.managerComment}</td>
 			   	  <td>${alltargets.targetSetDate}</td>
+			   	  <td><a href="/target/gettarget?targetId=${alltargets.targetId}"><button>view</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

@@ -12,12 +12,6 @@
 		<div id="form">
 			<form:form action="addterritory" method="post" modelAttribute="addterritory">
 				<div>
-					<label for="territoryId">Territory id</label>
-					<div>
-						<form:input path="territoryId" />
-					</div>
-				</div>
-				<div>
 					<label for="territoryName">Territory Name</label>
 					<div>
 						<form:input path="territoryName" />
@@ -26,7 +20,7 @@
 				<div>
 					<label for="noOfCustomer">No Of Customer</label>
 					<div>
-						<form:input path="noOfCustomer" />
+						<form:input path="noOfCustomer"/>
 					</div>
 				</div>
 				<div>

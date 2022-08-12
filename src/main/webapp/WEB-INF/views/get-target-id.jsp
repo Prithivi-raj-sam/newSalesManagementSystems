@@ -12,12 +12,6 @@
 		<div id="form">
 			<form:form action="" method="post" modelAttribute="target">
 				<div>
-					<label for="targetId">Target Id</label>
-					<div>
-						<form:input path="targetId" readonly="true"/>
-					</div>
-				</div>
-				<div>
 					<label for="targetDate">Target Date</label>
 					<div>
 						<form:input path="targetDate" readonly="true"/>
@@ -57,7 +51,9 @@
 		</div>
 	</div>
 	<div>${result}</div>
-	
+	<div>
+	<a href="/target/updatetargetform?targetId=${target.targetId}"><button>update</button></a>
+	<a href="/target/deleteTarget?targetId=${target.targetId}"><button></button>delete</a></div>
 </body>
 
 </html>

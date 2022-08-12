@@ -1,6 +1,6 @@
 package com.chainsys.salesmanagementsystems.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,22 +25,22 @@ public class Sales {
 	@Column(name="sale_id")
 	private int salesId;
 	
-	@NotEmpty(message = "*Please enter Seller Id")
-	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Seller Id ")
+//	@NotEmpty(message = "*Please enter Seller Id")
+//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Seller Id ")
 	@Column(name="seller_id")
 	private int employeeId;
 	
-	@NotEmpty(message = "*Please enter Lead Id")
-	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Lead Id ")
+//	@NotEmpty(message = "*Please enter Lead Id")
+//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Lead Id ")
 	@Column(name="lead_id")
 	private int leadId;
 	
-	@NotEmpty(message = "*Please enter Lead Id")
+//	@NotEmpty(message = "*Please enter Lead Id")
 	@Column(name="sales_date")
 	private Date salesDate;
 	
-	@NotEmpty(message = "*Please enter Amount")
-	@Pattern(regexp = "^[0-9]+(.[0-9]*)?$", message = "Enter valid Amount")
+//	@NotEmpty(message = "*Please enter Amount")
+//	@Pattern(regexp = "^[0-9]+(.[0-9]*)?$", message = "Enter valid Amount")
 	@Column(name="amount")
 	private float amount;
 	

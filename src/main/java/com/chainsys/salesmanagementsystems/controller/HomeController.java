@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Login;
+import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
 import com.chainsys.salesmanagementsystems.validation.Validator;
@@ -29,30 +31,27 @@ public class HomeController {
 
 	@PostMapping("employeepage")
 	public String redirectToEmployeesPage(@ModelAttribute("login") Login login, Model model) {
-		Employee employee = employeeService.getEmployeeById(login.getEmployeeId());
+		Employee employee = employeeService.getEmployeeByEmployeeIdAndPassrd(login.getEmployeeId(),login.getPassword());
 		try {
 			Validator.nullValueErrorCheck(employee);
 		} catch (InvalidInputDataException exp) {
 			model.addAttribute("error", "Error Name:" + exp.getMessage());
-			model.addAttribute("message", "There is no Such Employee Id");
+			model.addAttribute("message", "Employee Id or password Mismatch");
 			return "login-page";
 		}
-		if (employee.getPassword().equals(login.getPassword())) {
+			model.addAttribute("empId", employee.getEmployeeId());
 			if (employee.getRole().equalsIgnoreCase("manager")) {
 				return "manager-page";
 			} else if (employee.getRole().equalsIgnoreCase("marketer")) {
+				
 				return "marketer-page";
 			} else if (employee.getRole().equalsIgnoreCase("salesman")) {
 				return "salesman-page";
 			} else {
 				model.addAttribute("message", "Somthing Wrong Please Ask Manager");
 				return "login-page";
-			}
 		}
-		else {
-			model.addAttribute("message", "password miss match");
-			return "login-page";
-		}
+		
 	}
 
 	@GetMapping("/addemployeeform")
@@ -108,8 +107,11 @@ public class HomeController {
 		return "redirect:/sales/getId";
 	}
 	@GetMapping("/getallSales")
-	public String redirectToGetAllSales(Model model) {
-		return "redirect:/sales/allsales";
+	public String redirectToGetAllSales(@RequestParam("empId")int empId,Model model) {
+		Employee employee =employeeService.getEmployeeById(empId);
+		if(employee.getRole().equals("salesman"))
+			return "redirect:/sales/allsales";
+		else return "redirect:/sales/";
 	}
 	@GetMapping("/deleteSales")
 	public String redirectToDeleteSales(Model model) {
@@ -177,18 +179,47 @@ public class HomeController {
 	}
 	@GetMapping("/employees")
 	public String redirectToEmployee(Model model) {
+		Employee employee=new Employee();
+		model.addAttribute("employee", employee);
 		return"employee";
 	}
 	@GetMapping("/targets")
 	public String redirectToTarget(Model model) {
+		Target target=new Target();
+		model.addAttribute("target", target);
 		return"target";
 	}
 	@GetMapping("/lead")
-	public String redirectToLeads(Model model) {
+	public String redirectToLeads(@RequestParam("empId")int empId,Model model) {
+		model.addAttribute("empId", empId);
 		return"leads";
 	}
 	@GetMapping("/territorys")
 	public String redirectToTerritory(Model model) {
 		return"territory";
+	}
+	@GetMapping("/marketeraccount")
+	public String redirectToMarketerAccount(Model model) {
+		return "marketer-account";
+	}
+	@GetMapping("/marketerterritory")
+	public String redirectTomarketerTerrotory(Model model) {
+		return "marketer-territory";
+	}
+	@GetMapping("/marketerTarget")
+	public String redirectToMarketerTarget(Model model) {
+		return "marketer-target";
+	}
+	@GetMapping("/salesmanTarget")
+	public String redirectToSalesTarget(Model model) {
+		return "salesman-target";
+	}
+	@GetMapping("/salesmanSales")
+	public String redirectToSalesmanSales(Model model) {
+		return "salesman-sales";
+	}
+	@GetMapping("/salesmanLeads")
+	public String redirectToSalesmanLeads(Model model) {
+		return "salesman-leads";
 	}
 }

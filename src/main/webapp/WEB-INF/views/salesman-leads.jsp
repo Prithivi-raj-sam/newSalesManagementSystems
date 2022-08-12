@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Marketing Man Page</title>
+<title>Salesman Leads</title>
 <style type="text/css">
 	<%@include file="/WEB-INF/css/employee.css"%>
 </style>
@@ -12,12 +12,12 @@
 <body>
 	<div class="menu">
 		<ul>
-			<li><a href="/home/marketeraccount">Account</a></li>
-			<li><a href="/home/marketerTerritory">Territory</a></li>
-			<li><a href="/home/marketertarget">Target</a></li>
-			<li><a href="/home/marketeremployee">Employee</a></li>
+			<li><a href="/home/addleads">Add Leads</a></li>
+			<li><a href="/home/updateleads">Update Leads</a></li>
+			<li><a href="/home/getleads">Get Leads</a></li>
+			<li><a href="/home/deleteleads">Delete leads</a></li>
+			<li><a href="/home/getallleads">Get All Leads</a></li>
 		</ul>
 </div>
-	
 </body>
 </html>

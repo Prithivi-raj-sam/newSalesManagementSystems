@@ -7,35 +7,9 @@
 <meta charset="ISO-8859-1">
 <title>login Page</title>
 <style>
-body {
-	background-image:
-		url("https://previews.123rf.com/images/nexusplexus/nexusplexus1601/nexusplexus160101888/50267785-modern-office-window-view-with-virtual-market-infographs.jpg");
-	background-width: 1366 px;
-	background-height: 768 px;
-}
-
-#all {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	background: #fcebc2;
-	border-radius: 25px;
-	border: 7px solid #150a36;
-	padding: 30px;
-	width: 300px;
-	height: 200px;
-}
-
-h1 {
-	color: white;
-	font-size: 40px;
-	font-family: "Audiowide", sans-serif;
-	font-style: italic;
-}
-#employeeId,#password,#button{
-	size:30px;
-}
+	<%@include file="/WEB-INF/css/loginpage.css"%>
 </style>
+
 </head>
 <body>
 	<h1 align="center">Sales Management System</h1>
@@ -46,13 +20,15 @@ h1 {
 				<div>
 					<label for="employeeId"> Employee Id</label>
 					<div>
-						<form:input path="employeeId" id="employeeId"/>
+						<form:input path="employeeId" id="employeeId" pattern="^[0-9]{1,10}$"
+						title="please enter Number in employee Id"/>
 					</div>
 				</div>
 				<div>
 					<label for="password">Password</label>
 					<div>
-						<form:input path="password" id="password"/>
+						<form:input path="password" id="password" pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$"
+						title="please enter password correctly"/>
 					</div>
 				</div>
 				<div>
@@ -63,8 +39,17 @@ h1 {
 	</div>
 	<div align="center">
 		<div>${head}</div>
-		<div>${title}</div>
-		<div>${message}</div>
+		<div style="color:red;">${error}</div>
+		<div style="color:white;">${message}</div>
 	</div>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

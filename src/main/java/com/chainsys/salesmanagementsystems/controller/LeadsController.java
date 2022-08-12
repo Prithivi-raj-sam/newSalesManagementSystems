@@ -51,9 +51,9 @@ public class LeadsController {
 	
 	
 	
-	@PostMapping("/getlead")
-	public String getleadsById(@ModelAttribute("getId")GetId id,Model model) {
-		Lead leads=leadservice.getLeadById(id.getId());
+	@GetMapping("/getlead")
+	public String getleadsById(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
+		Lead leads=leadservice.getLeadById(id);
 		model.addAttribute("leads", leads);
 		return "get-leads-id";
 	}
@@ -64,10 +64,8 @@ public class LeadsController {
 		return "add-leads-form";
 	}
 	@PostMapping("/addlead")
-	public String addLead(@Valid@ModelAttribute("addLead")Lead lead,Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "add-leads-form";
-		}
+	public String addLead(@ModelAttribute("addLead")Lead lead,Model model) {
+		
 		leadservice.insertLead(lead);
 		return "add-leads-form";
 	}
@@ -76,10 +74,11 @@ public class LeadsController {
 		leadservice.deleteLead(id.getId());
 		return "redirect:/leads/allleads";
 	}
-	@GetMapping("/allleads")
-	public String getAllLeads(Model model) {
+	@GetMapping("/allleads")//need
+	public String getAllLeads(@RequestParam("empId") int empId,Model model) {
 		List<Lead>allLeads=leadservice.allLead();
 		model.addAttribute("allLeads", allLeads);
+		model.addAttribute("empId", empId);
 		return "all-leads";
 	}
 	@PostMapping("/updateleadfrom")
@@ -89,10 +88,8 @@ public class LeadsController {
 		return "update-leads-form";
 	}
 	@PostMapping("/updatelead")
-	public String updateLead(@Valid@ModelAttribute("updateLead")Lead lead,Model model,Errors error) {
-		if(error.hasErrors()) {
-			return "update-leads-form";
-		}
+	public String updateLead(@ModelAttribute("updateLead")Lead lead,Model model) {
+		
 		leadservice.updateLead(lead);
 		return "update-leads-form";
 	}

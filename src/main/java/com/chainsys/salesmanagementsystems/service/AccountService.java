@@ -25,12 +25,11 @@ public class AccountService {
 	public void insertAccount(Account account) {
 		 Territory ter=null;
 		 ter=territoryService.getTerritoryById(account.getTerritoryId());
-		 ter.setNoOfCustomer(ter.getNoOfCustomer()+1);
 		 try {
-			Validator.nullValueErrorCheck(ter);
-		} catch (InvalidInputDataException e) {
-			System.out.println("territory value is null");
-		}
+				Validator.nullValueErrorCheck(ter);
+			} catch (InvalidInputDataException e) { 
+			}
+		 ter.setNoOfCustomer(ter.getNoOfCustomer()+1);
 		 territoryService.updateTerritory(ter);
 		 accountRepository.save(account);
 	}
@@ -42,6 +41,9 @@ public class AccountService {
 	}
 	public void deleteAccount(int id) {
 		accountRepository.deleteById(id);
+		 Territory ter=null;
+		 ter=territoryService.getTerritoryById(getAccountById(id).getTerritoryId());
+		 ter.setNoOfCustomer(ter.getNoOfCustomer()-1);
 	}
 	public Account getAccountById(int id) {
 		return accountRepository.findById(id);
