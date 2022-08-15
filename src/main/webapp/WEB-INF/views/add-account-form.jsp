@@ -13,6 +13,18 @@ text-error {
     font-size: 0.9em;
 }
 </style>
+<script type="text/javascript">
+//  jsLessons/pageJ.html
+//  jsLessons/pageK.html
+function hide(elementID) {
+		var myElement = document.getElementById(elementID);
+		if (myElement) myElement.style.display = "none"; 
+	}
+	function show(elementID) {
+		var myElement = document.getElementById(elementID);
+		if (myElement) myElement.style.display = "block";
+	}
+	</script>
 </head>
 <script type="text/javascript">
 function validate(){
@@ -129,7 +141,7 @@ function validate(){
 					<label for="contactPersonPhone">Contact Person Phone</label>
 					<div>
 						<form:input placeholder="Enter Your Contact Person Phone Number" path="contactPersonPhone" 
-						onchange="validate()" pattern="/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/" 
+						onchange="validate()" pattern="^[0-9]+{10}$" 
 						title="Please Enter Phone Number"/>
 					</div>
 				</div>
@@ -137,7 +149,7 @@ function validate(){
 					<label for="address">Address</label>
 					<div>
 						<form:input placeholder="Enter Your Address" path="address" 
-					onchange="validate()"	pattern="\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\."
+					onchange="validate()"	
 					title="Please Enter valid Address"/>
 					</div>
 				</div>
@@ -152,7 +164,7 @@ function validate(){
 					<label for="employeeId">Market Id</label>
 					<div>
 						<form:input placeholder="Enter Your Market Id" path="employeeId" 
-					onchange="validate()"	pattern="^[0-9]+$" title="Please Enter Only Number In marketer Id"/>
+					onchange="validate()"	pattern="^[0-9]+$" title="Please Enter Only Number In marketer Id" readonly="true"/>
 					</div>
 				</div>
 				<div>
@@ -165,7 +177,7 @@ function validate(){
 				<div>
 					<label for="customerJoinDate">Customer Join Date</label>
 					<div>
-						<form:input type="date" placeholder="Enter Your Joining Date" path="customerJoinDate" />
+						<form:input type="date" placeholder="Enter Your Joining Date" path="customerJoinDate" readonly="true"/>
 					</div>
 				</div>
 				<div>

@@ -139,6 +139,12 @@ public class Lead {
 //	In the digital era, however, that responsibility is now shared between the Sales
 //	and Marketing team.
 	
+//	Stages:
+//  The Subscriber Stage
+//	The Lead/Nurturing Stage
+//	The Marketing Qualified Lead (MQL) Stage
+//	The Sales Qualified Lead (SQL) Stage
+//	The Opportunity Stage
 	
 	
 	

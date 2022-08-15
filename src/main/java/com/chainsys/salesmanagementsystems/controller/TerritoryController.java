@@ -16,10 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.dto.AccountsTerritoryDTO;
 import com.chainsys.salesmanagementsystems.dto.EmployeeTerritoryDTO;
+import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.repository.EmployeeRepository;
 import com.chainsys.salesmanagementsystems.service.AccountService;
+import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
 
 @Controller
@@ -27,51 +29,36 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 public class TerritoryController {
 	@Autowired
 	private TerritoryService territoryService;
+	@Autowired
+	private EmployeeService employeeService;
 	
-	
-	@GetMapping("/getId")
-	public String getTerritoryId(Model model) {
-		model.addAttribute("redirect", "getterritory");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/updateId")
-	public String updateTerritoryId(Model model) {
-		model.addAttribute("redirect", "updateterritoryform");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/deleteId")
-	public String deleteTerritoryById(Model model) {
-		model.addAttribute("redirect", "deleteterritory");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	
-	
-	
-	
-	@GetMapping("/addterritoryform")
+	@GetMapping("/addterritoryform")//need
 	public String addTerritoryForm(Model model) {
 		Territory territory=new Territory();
 		model.addAttribute("addterritory", territory);
 		return "add-territory-form";
 	}
-	@PostMapping("/addterritory")
+	@PostMapping("/addterritory")//need
 	public String addTerritory(@ModelAttribute("addterritory")Territory ter,Model model) {
 		territoryService.insertTerritory(ter);
 		return "add-territory-form";
 	}
-	@PostMapping("/getterritory")
-	public String getTerritory(@ModelAttribute("getId")GetId id,Model model) {
-		Territory territory=territoryService.getTerritoryById(id.getId());
+	@PostMapping("getTerritorybyname")//need
+	public String getTerritoryByName(@ModelAttribute("territory")Territory territory,Model model) {
+		List<Territory> territoryList=territoryService.gettargetByStartingTerritoryName(territory.getTerritoryName());
+		model.addAttribute("territoryList", territoryList);
+		return "all-territory";
+	}
+	@GetMapping("/getterritory")
+	public String getTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
+		Territory territory=territoryService.getTerritoryById(id);
 		model.addAttribute("territory", territory);
+		Employee employee=employeeService.getEmployeeById(empId);
+		if(employee.getRole().equals("salesman"))
+			return "get-territory-sales";
 		return "get-territory-id";
 	}
-	@PostMapping("/deleteterritory")
+	@GetMapping("/deleteterritory")
 	public String deleteTerritory(@ModelAttribute("getId")GetId id,Model model) {
 		territoryService.deleteTerritory(id.getId());
 		return "redirect:/territories/allterritory";
@@ -83,15 +70,14 @@ public class TerritoryController {
 		model.addAttribute("empId", empId);
 		return "all-territory";
 	}
-	@PostMapping("/updateterritoryform")
-	public String updateTerritoryForm(@ModelAttribute("getId")GetId id,Model model) {
-		Territory ter=territoryService.getTerritoryById(id.getId());
+	@GetMapping("/updateterritoryform")
+	public String updateTerritoryForm(@RequestParam("id")int id,Model model) {
+		Territory ter=territoryService.getTerritoryById(id);
 		model.addAttribute("updateTerritory", ter);
 		return "update-territory-form";
 	}
 	@PostMapping("/updateterritory")
 	public String updateTerritory(@ModelAttribute("updateTerritory")Territory ter,Model model) {
-		
 		model.addAttribute("result", "1 Record updated");
 		territoryService.updateTerritory(ter);
 		return "update-territory-form";

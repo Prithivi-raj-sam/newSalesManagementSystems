@@ -14,5 +14,5 @@ public interface SalesRepository extends CrudRepository<Sales,Integer>{
 	void deleteById(int id);
 	List<Sales> findByEmployeeEmployeeId(int id);
 	Sales findByLeadId(int id);
-	List<Sales> findBySalesDateGreaterThanEqualAndSalesDateLessThanEqual(Date startDate,Date endDate);
+	List<Sales> findBySalesDateGreaterThanEqualAndSalesDateLessThanEqualOrderBySalesDateDesc(Date startDate,Date endDate);
 }

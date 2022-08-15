@@ -13,4 +13,5 @@ public interface AccountRepository extends CrudRepository<Account,Integer>{
 	Account findById(int id);
 	List<Account> findByEmployeeEmployeeId(int id);
 	List<Account> findByTerritoryTerritoryId(int id);
+	List<Account> findByCompanyName(String companyName);
 }

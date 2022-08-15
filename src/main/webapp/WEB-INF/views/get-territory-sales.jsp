@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Get Territory By Id</title>
+<title>Insert title here</title>
 </head>
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
@@ -34,9 +34,5 @@
 		</div>
 	</div>
 	<div>${result}</div>
-	<div>
-		<a href="/territory/updateterritoryform?id=${territory.territoryId}"><button></button></a>
-		<a href="/territory/deleteterritory?id=${territory.territoryId}"><button></button></a>
-	</div>
 </body>
 </html>

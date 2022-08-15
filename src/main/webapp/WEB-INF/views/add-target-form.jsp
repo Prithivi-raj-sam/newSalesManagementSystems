@@ -42,6 +42,16 @@
 					</div>
 				</div>
 				<div>
+					<label for="targetCategory">Target set Date</label>
+					<div>
+						<form:select path="targetCategory" >
+						<form:option value="lead"  label="Leads"></form:option>
+						<form:option value="sales"  label="Sale"></form:option>
+						<form:option value="account"  label="Account"></form:option>
+						</form:select>
+					</div>
+				</div>
+				<div>
 					<form:button id="button">Add new</form:button>
 				</div>
 			</form:form>

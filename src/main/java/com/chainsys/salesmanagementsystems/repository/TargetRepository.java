@@ -15,4 +15,5 @@ public interface TargetRepository extends CrudRepository<Target,Integer>{
 	List<Target> findByEmployeeId(int id);
 	List<Target> findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(Date startDate,Date endDate);
 	List<Target> findByTargetSetDateGreaterThanEqualAndTargetDateLessThanEqual(Date startdate, Date enddate);
+	List<Target> findByEmployeeIdOrderByTargetDateDesc(int id);
 }

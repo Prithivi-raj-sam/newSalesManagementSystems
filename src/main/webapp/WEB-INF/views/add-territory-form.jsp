@@ -18,12 +18,6 @@
 					</div>
 				</div>
 				<div>
-					<label for="noOfCustomer">No Of Customer</label>
-					<div>
-						<form:input path="noOfCustomer"/>
-					</div>
-				</div>
-				<div>
 					<form:button id="button">Add New</form:button>
 				</div>
 			</form:form>

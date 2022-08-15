@@ -12,10 +12,9 @@
 <body>
 	<div class="menu">
 		<ul>
-			<li><a href="/home/marketeraccount">Account</a></li>
-			<li><a href="/home/marketerTerritory">Territory</a></li>
-			<li><a href="/home/marketertarget">Target</a></li>
-			<li><a href="/home/marketeremployee">Employee</a></li>
+			<li><a href="/home/marketeraccount?empId=${empId}">Account</a></li>
+			<li><a href="/home/marketerterritory?empId=${empId}">Territory</a></li>
+			<li><a href="/home/employeeTarget?empId=${empId}">Target</a></li>
 		</ul>
 </div>
 	

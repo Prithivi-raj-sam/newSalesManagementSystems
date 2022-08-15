@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+        <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Get Account By Id</title>
+<title>Get Marketer For Marketer</title>
 </head>
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
@@ -86,7 +86,9 @@
 			</form:form>
 		</div>
 	</div>
-	
-	
+	<div></div>
+	<div><a href="/account/updateaccountform?id=${account.accountId}"><button>update</button></a>
+		<a href="/account/deleteaccount?id=${account.accountId}&empId=${empId}"><button>delete</button></a>
+	</div>
 </body>
 </html>

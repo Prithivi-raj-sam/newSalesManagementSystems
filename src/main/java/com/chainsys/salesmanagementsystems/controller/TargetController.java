@@ -3,6 +3,7 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.model.GetId;
+import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.service.TargetService;
 
@@ -27,47 +30,33 @@ public class TargetController {
 	private TargetService targetService;
 	
 	
-	@GetMapping("/getId")
-	public String getTargetId(Model model) {
-		model.addAttribute("redirect", "gettarget");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/updateId")
-	public String updateTargetId(Model model) {
-		model.addAttribute("redirect", "updatetargetform");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/deleteId")
-	public String deleteTargetById(Model model) {
-		model.addAttribute("redirect", "deleteTarget");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	
-	
-	
-	
-	
 	@GetMapping("/alltargets")//need
 	public String allTargets(Model model) {
 		List<Target>allTarget = targetService.allTarget();
 		model.addAttribute("alltargets", allTarget);
 		return "all-targets";
 	}
-	@GetMapping("/alltargetbyEmployeeid")
+	@GetMapping("/alltargetbyEmployeeid")//need
 	public String getAlltargetsByEmployeeId(@RequestParam("empId") int empId,Model model) {
 		List<Target> targetList=targetService.getTargetByEMployeeId(empId);
 		model.addAttribute("targetList", targetList);
 		return "employees-target";
 	}
+	@PostMapping("/alltargetfortwodates")//need
+	public String getTargetBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
+		List<Target>targetList =targetService.getSalesInCome(salesInCome);
+		List<Target>employeetargetList= targetList.stream()
+		  .filter(target-> target.getEmployeeId()==salesInCome.getCommitedLeads())
+		  .collect(Collectors.toList());
+		model.addAttribute("targetList", employeetargetList);
+		model.addAttribute("empId", salesInCome.getCommitedLeads());
+		return "employees-target";
+	}
 	@GetMapping("/addtargetform")//need
-	public String addTargetForm(Model model) {
+	public String addTargetForm(@RequestParam("id")int id,Model model) {
 		Target target=new Target();
+		target.setTargetSetDate(BusinessLogic.getInstanceDate());
+		target.setEmployeeId(id);
 		model.addAttribute("addtarget", target);
 		return "add-target-form";
 	}
@@ -103,5 +92,12 @@ public class TargetController {
 		List<Target> targetList=targetService.getTargetByTwoDate(target);
 		model.addAttribute("targetList", targetList);
 		return "all-targets";
+	}
+	@GetMapping("goingtarget")
+	public String getCurrentTarget(@RequestParam("empId") int empId,Model model) {
+		List<Target> targetList=targetService.getTargetByDescendingOrder(empId);
+		Target target=targetList.get(0);
+		model.addAttribute("target", target);
+		return "current-target";
 	}
 }

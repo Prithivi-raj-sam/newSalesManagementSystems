@@ -2,20 +2,20 @@
 body {
 	background-image:
 		url("https://previews.123rf.com/images/nexusplexus/nexusplexus1601/nexusplexus160101888/50267785-modern-office-window-view-with-virtual-market-infographs.jpg");
-	background-width: 1366 px;
-	background-height: 768 px;
+	background-size: 1366px 768px;
+	text-align: center;
 }
 
-#all {
+.form {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	background: #fcebc2;
 	border-radius: 25px;
-	border: 7px solid #150a36;
+	border: 7px solid #413ef7;
 	padding: 30px;
-	width: 300px;
-	height: 200px;
+	width: 350px;
+	height: 235px;
 }
 
 h1 {
@@ -24,6 +24,34 @@ h1 {
 	font-family: "Audiowide", sans-serif;
 	font-style: italic;
 }
-#employeeId,#password,#button{
-	size:30px;
+
+label {
+	display: block;
+	margin-top: 10px;
+	font-size: 30px;
+	font-weight: 500;
+}
+
+input {
+	align: center;
+	display: block;
+	height: 35px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.07);
+	border-radius: 10px;
+	margin-top: 8px;
+	font-size: 14px;
+	font-weight: 300;
+}
+
+button {
+	margin-top: 50px;
+	width : 50%;
+	background-color:#413ef7;
+	color: white;
+	padding: 15px 0;
+	font-size: 25px;
+	font-weight: 600;
+	border-radius: 5px;
+	cursor: pointer;
 }

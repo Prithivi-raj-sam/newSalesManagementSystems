@@ -80,14 +80,9 @@ public class EmployeeController {
 	}
 	@PostMapping("/addemployee")//need
 	public String addEmployee(@ModelAttribute("addEmployee")Employee employee, Model model) {
-		if(employee.getTerritoryId()==0) {
-			return "redirect:/territory/addterritoryform";
-		}
-		else {
 		employeeservice.insertEmployee(employee);
 		model.addAttribute("result", "1 row inserted");
 		return "add-employee-form";
-		}
 	}
 	@GetMapping("/allemployee")
 	public String getAllEmployee(Model model) {

@@ -6,9 +6,17 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>All Employees</title>
+<style>
+table,th,td{
+text-align:center;
+border:3px solid black;
+ border-collapse: collapse;
+}
+
+</style>
 </head>
 <body style="background-color:#c4f4f5; color:#0e5a5c;">
-	<div id="table root">
+	<div class="table">
 		<table>
 			<thead>
 				<tr style="width:100% , height:100%">
@@ -22,6 +30,7 @@
 					<th>Password Last Change Date</th>
 					<th>Role</th>
 					<th>Profile</th>
+					<th>View</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -38,7 +47,7 @@
 			   	  <td>${allEmployee.passwordLastChangeDate}</td>
 			   	  <td>${allEmployee.role}</td>
 			   	  <td>${allEmployee.profile}</td>
-			   	  <td><a href="/employee/getemployee?getId=${allEmployee.employeeId}"><button>view</button></a></td>
+			   	  <td><a href="/employee/getemployee?getId=${allEmployee.employeeId}"><button>View</button></a></td>
 			   </tr>
 			   
 			</c:forEach>

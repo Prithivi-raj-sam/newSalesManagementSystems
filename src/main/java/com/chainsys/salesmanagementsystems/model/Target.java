@@ -29,7 +29,7 @@ public class Target {
 	private Date targetDate;
 	
 //	@NotEmpty(message = "*Please enter Planned Target")
-	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Planned Targe ")
+//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Planned Targe ")
 	@Column(name = "planned_target")
 	private int plannedTarget;
 	

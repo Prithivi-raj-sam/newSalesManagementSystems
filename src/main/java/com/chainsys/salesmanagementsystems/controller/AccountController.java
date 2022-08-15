@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
 import com.chainsys.salesmanagementsystems.model.Account;
+import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.service.AccountService;
+import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
 
 @Controller
@@ -28,50 +31,34 @@ public class AccountController {
 	private AccountService accountservice;
 	@Autowired
 	private TerritoryService territoryService;
+	@Autowired
+	private EmployeeService employeeService;
 	
-	@GetMapping("/getId")
-	public String getAccountId(Model model) {
-		model.addAttribute("redirect", "getaccount");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/updateId")
-	public String updateAccountId(Model model) {
-		model.addAttribute("redirect", "updateaccountform");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/deleteId")
-	public String deleteAccountById(Model model) {
-		model.addAttribute("redirect", "deleteaccount");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	
-	
-	
-	
-	@GetMapping("/addaccountform")
-	public String addAccountForm(Model model) {
+	@GetMapping("/addaccountform")//need
+	public String addAccountForm(@RequestParam("empId")int empId,Model model) {
 		Account account =new Account();
+		account.setEmployeeId(empId);
+		account.setCustomerJoinDate(BusinessLogic.getInstanceDate());
 		model.addAttribute("addAccount", account);
 		model.addAttribute("allTerritory", territoryService.allTerritory());
 		return "add-account-form";
 	}
-	@PostMapping("/addaccount")
-	public String addAccount(@ModelAttribute("addAccount")Account accout, Model model) {
-		accountservice.insertAccount(accout);
+	@PostMapping("/addaccount")//need
+	public String addAccount(@ModelAttribute("addAccount")Account account, Model model) {
+		accountservice.insertAccount(account);
 		model.addAttribute("result", "1 Record Added");
 		return "add-account-form";
 	}
+
 	@GetMapping("/getaccount")//need
 	public String getAccountById(@RequestParam("id") int id,@RequestParam("empId") int empId,Model model) {
 		Account account =accountservice.getAccountById(id);
+		Employee employee=employeeService.getEmployeeById(empId);
 		model.addAttribute("account", account);
-		return "get-account-id";
+		model.addAttribute("empId", empId);
+		if(employee.getRole().equals("marketer"))
+			return "get-account-marketer";
+		else return "get-account-id";
 	}
 	
 	@GetMapping("/allaccount")//need
@@ -81,21 +68,35 @@ public class AccountController {
 		model.addAttribute("empId", empId);
 		return "all-accounts";
 	}
-	@PostMapping("/deleteaccount")
-	public String deleteAccount(@ModelAttribute("getId")GetId id,Model model) {
-		accountservice.deleteAccount(id.getId());
-		return "redirect:/account/allaccount";
+	@GetMapping("/allaccountbyemployee")//need
+	public String getAllAccountByEmployeeId(@RequestParam("empId")int empId,Model model) {
+		List<Account>allAccount=accountservice.getAccountByEmployeeId(empId);
+		model.addAttribute("allaccount", allAccount);
+		model.addAttribute("empId", empId);
+		return "all-accounts";
 	}
-	@PostMapping("/updateaccountform")
-	public String updateAccountForm(@RequestParam("id")GetId id,Model model) {
-		Account account =accountservice.getAccountById(id.getId());
+	@PostMapping("/getaccountbycompanyname")
+	public String getAccountByCompanyName(@ModelAttribute("account")Account account,Model model) {
+		List<Account>allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
+		model.addAttribute("allaccount", allAccount);
+		model.addAttribute("empId", account.getEmployeeId());
+		return "all-accounts";
+	}
+	@GetMapping("/deleteaccount")//need
+	public String deleteAccount(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
+		accountservice.deleteAccount(id);
+		return "redirect:/account/allaccountbyemployee?empId="+empId;
+	}
+	@GetMapping("/updateaccountform")//need
+	public String updateAccountForm(@RequestParam("id")int id,Model model) {
+		Account account =accountservice.getAccountById(id);
 		model.addAttribute("updateAccount", account);
 		return "update-account-form";
 	}
-	@PostMapping("/updateaccount")
+	@PostMapping("/updateaccount")//need
 	public String updateAccount(@ModelAttribute("updateAccount")Account account, Model model) {
-		
-		accountservice.insertAccount(account);
+		accountservice.updateAccount(account);
+		model.addAttribute("result", "1 record updated");
 		return "update-account-form";
 	}
 	@GetMapping("/getacountandleads")//need

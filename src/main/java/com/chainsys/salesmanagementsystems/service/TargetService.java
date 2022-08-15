@@ -28,6 +28,9 @@ public class TargetService {
 	public void updateTarget(Target target) {
 		targetRepository.save(target);
 	}
+	public List<Target> getTargetByDescendingOrder(int id){
+		return targetRepository.findByEmployeeIdOrderByTargetDateDesc(id);
+	}
 	public void deleteTarget(int id) {
 		targetRepository.deleteById(id);
 	}

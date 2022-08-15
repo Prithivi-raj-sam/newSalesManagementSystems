@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Sales;
@@ -28,41 +29,21 @@ public class SalesController {
 	@Autowired
 	private EmployeeService employeeservice;
 	
-	@GetMapping("/getId")
-	public String getSalesId(Model model) {
-		model.addAttribute("redirect", "getSales");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/updateId")
-	public String updateSalesId(Model model) {
-		model.addAttribute("redirect", "updatesalesform");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/deleteId")
-	public String deleteSalesById(Model model) {
-		model.addAttribute("redirect", "deletesales");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	
-	
 	
 	
 	@GetMapping("/addsalesform")//need
-	public String addSalesServiceForm(Model model) {
+	public String addSalesServiceForm(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
 		Sales sales =new Sales();
+		sales.setLeadId(id);
+		sales.setEmployeeId(empId);
+		sales.setSalesDate(BusinessLogic.getInstanceDate());
 		model.addAttribute("addsales", sales);
 		return "add-sales-form";
 	}
 	@PostMapping("/addsales")//need
 	public String addSales(@ModelAttribute("addsales")Sales sales,Model model) {
-		
 		salesService.insertSales(sales);
+		model.addAttribute("result", "1 sale added");
 		return "add-sales-form";
 	}
 	@GetMapping("/allsales")//need
@@ -70,6 +51,13 @@ public class SalesController {
 		List<Sales>allSales=salesService.allSales();
 		model.addAttribute("allSales", allSales);
 		model.addAttribute("empId", empId);
+		return "all-sales";
+	}
+	@PostMapping("/getsalesfortwodates")
+	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
+		List<Sales>allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
+		model.addAttribute("empId", salesInCome.getPlannedSales());
+		model.addAttribute("allSales", allSales);
 		return "all-sales";
 	}
 	@GetMapping("/getSales")//need
@@ -89,7 +77,7 @@ public class SalesController {
 		return "get-sales-employeeid";
 	}
 	@GetMapping("/deletesales")//need
-	public String deleteSales(@RequestParam("id")int id, Model model) {
+	public String deleteSales(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
 		salesService.deleteSales(id);
 		return "all-sales";
 	}
@@ -115,5 +103,10 @@ public class SalesController {
 		salesIncome=salesService.getTotalSalesBetweenTwoDates(salesIncome);
 		model.addAttribute("salesIncome", salesIncome);
 		return "sales-income-result";
+	}
+	@PostMapping("/monthlysales")
+	public String getMonthlySales(@ModelAttribute("salesIncome")SalesInCome salesIncome, Model model) {
+		
+		return "monthly-report";
 	}
 }

@@ -6,9 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Lead;
+import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.LeadRepository;
 import com.chainsys.salesmanagementsystems.repository.SalesRepository;
@@ -20,9 +22,13 @@ public class LeadService {
 	private LeadRepository leadRepository;
 	@Autowired
 	private SalesRepository salesRepository;
-	
+	@Autowired
+	private TargetService targetService;
 	public void insertLead(Lead lead) {
 		leadRepository.save(lead);
+		List<Target>targetList=targetService.getTargetByDescendingOrder(lead.getEmployeeId());
+		Target target= BusinessLogic.updateClosedTarget(targetList, "lead");
+		targetService.updateTarget(target);
 	}
 	public List<Lead> allLead(){
 		return leadRepository.findAll();
@@ -35,6 +41,9 @@ public class LeadService {
 	}
 	public Lead getLeadById(int id) {
 		return leadRepository.findById(id);
+	}
+	public List<Lead> getLeadsByEmployeeId(int id){
+		return leadRepository.findByEmployeeEmployeeId(id);
 	}
 	public SalesLeadsDTO getSalesAndLeads(int id) {
 		SalesLeadsDTO dto=new SalesLeadsDTO();

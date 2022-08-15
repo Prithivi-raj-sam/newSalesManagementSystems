@@ -24,6 +24,12 @@ public class SalesService {
 	
 	public void insertSales(Sales sales) {
 		salesRepository.save(sales);
+		Lead lead=leadService.getLeadById(sales.getLeadId());
+		lead.setStatus("closed leads(won)");
+		leadService.updateLead(lead);
+		List<Target>targetList=targetService.getTargetByDescendingOrder(sales.getEmployeeId());
+		Target target= BusinessLogic.updateClosedTarget(targetList, "sales");
+		targetService.updateTarget(target);
 	}
 	public List<Sales> allSales(){
 		return salesRepository.findAll();
@@ -38,7 +44,7 @@ public class SalesService {
 		return salesRepository.findById(id);
 	}
 	public List<Sales> getSalesBetweenTwoDates(Date startDate,Date endDate){
-		return salesRepository.findBySalesDateGreaterThanEqualAndSalesDateLessThanEqual(startDate, endDate); 
+		return salesRepository.findBySalesDateGreaterThanEqualAndSalesDateLessThanEqualOrderBySalesDateDesc(startDate, endDate); 
 	}
 	public List<Sales> getSalesByEmployeeId(int id){
 		return salesRepository.findByEmployeeEmployeeId(id);
@@ -54,4 +60,12 @@ public class SalesService {
 		salesIncome.setTotalSalesAmount(BusinessLogic.getTotalSalesAmount(salesList));
 		return salesIncome;
 	}
+//	public SalesInCome getMonthlySales(SalesInCome salesIncome) {
+//		Date fromDate=BusinessLogic.fromDateCalculation(salesIncome.getFromDate());
+//		Date toDate=BusinessLogic.toDateCalculation(salesIncome.getToDate());
+//		
+//		List<Sales> salesList= getSalesBetweenTwoDates(fromDate,toDate);
+//		
+//	}
+	
 }

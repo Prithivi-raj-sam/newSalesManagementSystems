@@ -39,10 +39,13 @@ public class TerritoryService {
 	public Territory getTerritoryByName(String territoryName) {
 		return territoryRepository.findByTerritoryName(territoryName);
 	}
+	public List<Territory> gettargetByStartingTerritoryName(String TerritoryName){
+		return territoryRepository.findByTerritoryNameStartingWith(TerritoryName);
+	}
 	public AccountsTerritoryDTO getAccountandTerritory(int id) {
 		AccountsTerritoryDTO dto=new AccountsTerritoryDTO();
 		dto.setTerritory(getTerritoryById(id));
-		dto.setAccountList(accountsRepository.findByEmployeeEmployeeId(id));
+		dto.setAccountList(accountsRepository.findByTerritoryTerritoryId(id));
 		return dto;
 	}
 	public EmployeeTerritoryDTO getTErritoryAndEmployee(int id) {

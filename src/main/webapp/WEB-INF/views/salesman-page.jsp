@@ -13,9 +13,9 @@
 <body>
 	<div class="menu">
 		<ul>
-			<li><a href="/target/alltargetbyEmployeeid?empId=${empId}">Target</a></li>
+			<li><a href="/home/employeeTarget?empId=${empId}">Target</a></li>
 			<li><a href="/home/salesmanSales?empId=${empId}">Sales</a></li>
-			<li><a href="/home/salesmanLeads">Leads</a></li>
+			<li><a href="/home/salesmanLeads?empId=${empId}">Leads</a></li>
 		</ul>
 	
 	 </div>

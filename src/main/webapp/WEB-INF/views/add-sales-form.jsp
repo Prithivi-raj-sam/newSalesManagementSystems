@@ -12,12 +12,6 @@
 		<div id="form">
 			<form:form action="addsales" method="post" modelAttribute="addsales">
 				<div>
-					<label for="salesId"> Sales id</label>
-					<div>
-						<form:input placeholder="Enter Sales Id" path="salesId" />
-					</div>
-				</div>
-				<div>
 					<label for="employeeId">Seller Id</label>
 					<div>
 						<form:input placeholder="Enter Seller Id" path="employeeId" />

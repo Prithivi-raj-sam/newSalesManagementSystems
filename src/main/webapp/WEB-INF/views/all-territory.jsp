@@ -21,7 +21,7 @@
 			<c:forEach var="allteritory" items="${allteritory}">
 			   <tr>
 			   	  <td>${allteritory.territoryId}</td>
-			   	  <td>${allteritory.territoryName}</td>
+			   	  <td><a href="/territory/getterritory?id=${allteritory.territoryId}&empId=${empId}">${allteritory.territoryName}</a></td>
 			   	  <td>${allteritory.noOfCustomer}</td>
 			   	  <td><a href="/territory/getaccountsandterritory?id=${allteritory.territoryId}&empId=${empId}"><button>view Account</button></a></td>
 			   	  <td><a href="/territory/getemployeeandterritory?id=${allteritory.territoryId}&empId=${empId}"><button>view Employee</button></a></td>
