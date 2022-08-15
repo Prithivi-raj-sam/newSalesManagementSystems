@@ -60,12 +60,12 @@ public class SalesService {
 		salesIncome.setTotalSalesAmount(BusinessLogic.getTotalSalesAmount(salesList));
 		return salesIncome;
 	}
-//	public SalesInCome getMonthlySales(SalesInCome salesIncome) {
-//		Date fromDate=BusinessLogic.fromDateCalculation(salesIncome.getFromDate());
-//		Date toDate=BusinessLogic.toDateCalculation(salesIncome.getToDate());
-//		
-//		List<Sales> salesList= getSalesBetweenTwoDates(fromDate,toDate);
-//		
-//	}
+	public List<SalesInCome> getMonthlySales(SalesInCome salesIncome) {
+		Date[] fromAndToDate=BusinessLogic.getFirstAndLastdayOfMonth(salesIncome.getFromDate(),salesIncome.getToDate());
+		List<Sales> salesList= getSalesBetweenTwoDates(fromAndToDate[0],fromAndToDate[1]);
+		List<SalesInCome> salesIncomeList=BusinessLogic.getMonthlySaleIncome(salesList,salesIncome);
+		salesIncomeList=BusinessLogic.getMonthlyTarget(targetService, salesIncomeList);
+		return salesIncomeList;
+	}
 	
 }

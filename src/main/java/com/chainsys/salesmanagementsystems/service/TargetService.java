@@ -1,5 +1,6 @@
 package com.chainsys.salesmanagementsystems.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class TargetService {
 		return  targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(salesIncome.getFromDate(), salesIncome.getToDate());   
 	}
 	public List<Target> getTargetByTwoDate(Target target){
-		return targetRepository.findByTargetSetDateGreaterThanEqualAndTargetDateLessThanEqual(target.getTargetSetDate(), target.getTargetDate());
+		return targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(target.getTargetSetDate(), target.getTargetDate());
+	}
+	public List<Target> getTargetByTwoDate(Date startdate,Date endDate){
+		return targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(startdate,endDate);
 	}
 }
