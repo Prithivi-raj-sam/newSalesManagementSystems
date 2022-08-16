@@ -13,38 +13,48 @@ text-error {
 	font-size: 0.9em;
 }
 </style>
+<script type="text/javascript">
+<%@include file="/WEB-INF/script/employeeValidation.js"%>
+</script>
 </head>
 <body style="background-color: #3d403d; color: white;">
 	<div id="root">
 		<div id="form">
 			<form:form action="/employee/addemployee" method="post"
-				modelAttribute="addEmployee">
+				modelAttribute="addEmployee" name="form">
 
 				<div>
 					<label for="employeeName">Employee Name</label>
 					<div>
-						<form:input placeholder="Enter Your Name" path="employeeName" />
+						<form:input placeholder="Enter Your Name" path="employeeName" onblur="employeeNameCheck()"
+						required="true" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
+						title="Please enter only character in employeeName" name="employeeName"/>
 
 					</div>
 				</div>
 				<div>
 					<label for="employeePhone">Employee Phone</label>
 					<div>
-						<form:input placeholder="Enter Your Phone Number" path="employeePhone" />
+						<form:input placeholder="Enter Your Phone Number" path="employeePhone" onblur="employeePhoneCheck()"
+						required="true" pattern="^[0-9]{10}$" title="Please Enter valid Phone Number" name="employeePhone"/>
 					</div>
 				</div>
 
 				<div>
 					<label for="email">Email</label>
 					<div>
-						<form:input type="email" placeholder="Enter Your Email" path="email" />
+						<form:input type="email" placeholder="Enter Your Email" path="email" onblur="emailCheck()"
+						required="true" title="Please Enter Valid Email"
+						pattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\d.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
+						name="email"/>
 					</div>
 				</div>
 
 				<div>
 					<label for="address">Address</label>
 					<div>
-						<form:input placeholder="Enter Your Address" path="address" />
+						<form:input placeholder="Enter Your Address" path="address" onblur="addressCheck()"
+						required="true" title="Please Enter valid Address" name="address"/>
 					</div>
 				</div>
 
@@ -61,7 +71,9 @@ text-error {
 				<div>
 					<label for="password">Password</label>
 					<div>
-						<form:input type="password" placeholder="Enter Password" path="password" />
+						<form:input type="password" placeholder="Enter Password" path="password" onblur="passwordCheck()"
+						required="true" title="Password doesnot reach reqired length or pattern it should contain min 1 number,simbal"
+						pattern="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$" name="password"/>
 					</div>
 				</div>
 
@@ -69,7 +81,8 @@ text-error {
 					<label for="passwordLastChangeDate">Password Last Change
 						Date</label>
 					<div>
-						<form:input type="date" placeholder="Enter Your Last Password Change Date" path="passwordLastChangeDate" />
+						<form:input type="date" placeholder="Enter Your Last Password Change Date" path="passwordLastChangeDate" 
+						required="true" />
 					</div>
 				</div>
 
@@ -86,7 +99,8 @@ text-error {
 				<div>
 					<label for="profile">Profile</label>
 					<div>
-						<form:input path="profile" type="file" accept=".png" />
+						<form:input path="profile" type="file" accept=".png" 
+						/>
 					</div>
 				</div>
 

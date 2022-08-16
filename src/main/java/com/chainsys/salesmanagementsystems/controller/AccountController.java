@@ -91,6 +91,7 @@ public class AccountController {
 	public String updateAccountForm(@RequestParam("id")int id,Model model) {
 		Account account =accountservice.getAccountById(id);
 		model.addAttribute("updateAccount", account);
+		model.addAttribute("allTerritory", territoryService.allTerritory());
 		return "update-account-form";
 	}
 	@PostMapping("/updateaccount")//need

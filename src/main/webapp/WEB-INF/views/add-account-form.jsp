@@ -13,141 +13,8 @@ text-error {
 	font-size: 0.9em;
 }
 </style>
-<script type="text/javascript">
-	//  jsLessons/pageJ.html
-	//  jsLessons/pageK.html
-	var companyNameCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
-		if (!document.form.companyName.value.match(nameRegex)) {
-			if (alert("Company Name can't be empty and must contain only alphabets")) {
-				document.form.companyName.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-	var contactPersonCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
-		if (!document.form.contactPerson.value.match(nameRegex)) {
-			if (alert("Contact Person can't be empty and must contain only alphabets")) {
-				document.form.contactPerson.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-	var contactPersonRoleCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
-		if (!document.form.contactPersonRole.value.match(nameRegex)) {
-			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
-				document.form.contactPersonRole.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-	var contactPersonPhoneCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
-		if (!document.form.contactPersonPhone.value.match(nameRegex)) {
-			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
-				document.form.contactPersonPhone.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-	var accountTypeCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
-		if (!document.form.accountType.value.match(nameRegex)) {
-			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
-				document.form.accountType.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-	var addressCheck1 = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
-		if (!document.form.address.value.match(nameRegex)) {
-			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
-				document.form.address.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-	var leadThroughChannelCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
-		if (!document.form.leadThroughChannel.value.match(nameRegex)) {
-			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
-				document.form.leadThroughChannel.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-
-	var emailCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
-		if (!document.form.email.value.match(nameRegex)) {
-			if (alert("Email not in the correct format")) {
-				document.form.email.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-
-	var passwordCheck = function() {
-		var nameRegex = new RegExp(
-				"^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
-		if (!document.form.password.value.match(nameRegex)) {
-			if (alert("Password must begin with letter and contain atleast one number and must have atleast 8 characters")) {
-				document.form.password.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-
-	}
-	var contactPersonPhoneCheck = function() {
-		var nameRegex = new RegExp("[0-9]{10}");
-		if (!document.form.contactPersonPhone.value.match(nameRegex)) {
-			if (alert("Phone number must have 10 digits")) {
-				document.form.contactPersonPhone.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-	}
-	var addressCheck = function() {
-		if (document.form.address.value == "") {
-			if (alert("Address cannot be blank")) {
-				document.form.address.focus();
-			} else
-				document.activeElement.blur();
-		} else {
-			return false;
-		}
-	}
+<script>
+<%@include file="/WEB-INF/script/accountValidation.js"%>
 </script>
 <body style="background-color: #3d403d; color: white;">
 	<div id="root">
@@ -248,7 +115,7 @@ text-error {
 					<div>
 						<form:input type="date" placeholder="Enter Your Joining Date"
 							path="customerJoinDate" readonly="true" required="true"
-							name="customerJoinDate" onblur="companyNameCheck()" />
+							name="customerJoinDate" />
 					</div>
 				</div>
 				<div>

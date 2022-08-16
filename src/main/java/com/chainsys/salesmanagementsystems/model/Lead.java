@@ -128,26 +128,4 @@ public class Lead {
 		this.propability = propability;
 	}
 	
-//	A sales lead is identified via marketing, referrals, social media, 
-//	networking, product trials, or consultations. A lead does not become
-//	a prospect until they've been qualified to determine their level of 
-//	interest and fit as a potential customer.
-//	From generating to converting, you're probably well aware that leads
-//	are an important part of marketing and the overall customer life cycle.
-	
-//	Traditionally Lead Generation has been a responsibility of the Sales team.
-//	In the digital era, however, that responsibility is now shared between the Sales
-//	and Marketing team.
-	
-//	Stages:
-//  The Subscriber Stage
-//	The Lead/Nurturing Stage
-//	The Marketing Qualified Lead (MQL) Stage
-//	The Sales Qualified Lead (SQL) Stage
-//	The Opportunity Stage
-	
-	
-	
-	
-	
 }

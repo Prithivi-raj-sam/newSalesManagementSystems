@@ -99,6 +99,7 @@ public class EmployeeController {
 	public String updateEmployeeForm(@RequestParam("id")int id,Model model) {
 		Employee employee=employeeservice.getEmployeeById(id);
 		model.addAttribute("updateEmployee", employee);
+		model.addAttribute("allTerritory", territoryService.allTerritory());
 		return "update-employee-form";
 	}
 	@PostMapping("/updateemployee")//need

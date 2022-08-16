@@ -9,15 +9,28 @@
 </head>
 <body>
 <script>
-function passwordCheck(){
-	var password=document.getElementById("password").value;
+var passwordMatch= function(){
+	var password=document.form.password.value;
 	var confirmPassword=document.getElementById("confirmpassword").value;
 	if(password==confirmPassword){
 		alert('password missmatch');
 	}
 }
+var passwordCheck = function() {
+	var nameRegex = new RegExp(
+			"^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+	if (!document.form.password.value.match(nameRegex)) {
+		if (alert("Password must begin with letter and contain atleast one number and must have atleast 8 characters")) {
+			document.form.password.focus();
+		} else
+			document.activeElement.blur();
+	} else {
+		return false;
+	}
+
+}
 </script>
-	<form:form action="updatepassword" method="post" modelAttribute="emp">
+	<form:form action="updatepassword" method="post" modelAttribute="emp" name="form">
 	<div>
 				<div>
 					<div>
@@ -26,13 +39,15 @@ function passwordCheck(){
 				</div>
 				<label for="password">Password</label>
 					<div>
-						<form:input type="password" placeholder="Enter Password" path="password" onchange="passwordCheck()"/>
+						<form:input type="password" placeholder="Enter Password" path="password" onblur="passwordCheck()"
+						name="password" pattern="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$" 
+						title="Password does not meat its required length or strength" required="true" />
 					</div>
 				</div>
 				<label for="confirmpassword"></label>
-				<div><input type="password" id="confirmpassword" placeholder="Confirm Password" onchange="passwordCheck(this.form)"></div>
+				<div><input type="password" id="confirmpassword" placeholder="Confirm Password" onblur="passwordMatch()"></div>
 				<div>
-					<form:button id="button">Add New</form:button>
+					<form:button id="button" onclick="passwordMatch()">Add New</form:button>
 				</div>
 </form:form>
 </body>

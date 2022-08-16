@@ -53,7 +53,9 @@ public class SalesController {
 		model.addAttribute("empId", empId);
 		return "all-sales";
 	}
-	@PostMapping("/getsalesfortwodates")
+	@PostMapping("/getsalesfortwodates")//need
+	
+	
 	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
 		List<Sales>allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
 		model.addAttribute("empId", salesInCome.getPlannedSales());
@@ -104,7 +106,7 @@ public class SalesController {
 		model.addAttribute("salesIncome", salesIncome);
 		return "sales-income-result";
 	}
-	@GetMapping("/monthlincomeform")
+	@GetMapping("/monthlyncomeform")
 	public String monthlyIncomeForm(Model model) {
 		SalesInCome salesIncome=new SalesInCome();
 		model.addAttribute("salesIncome", salesIncome);
