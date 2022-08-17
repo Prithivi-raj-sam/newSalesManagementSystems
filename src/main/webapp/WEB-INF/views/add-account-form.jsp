@@ -8,10 +8,7 @@
 <meta charset="ISO-8859-1">
 <title>Add Account</title>
 <style>
-text-error {
-	color: #e80c4d;
-	font-size: 0.9em;
-}
+<%@include file="/WEB-INF/css/getemployeebyid.css"%>
 </style>
 <script>
 <%@include file="/WEB-INF/script/accountValidation.js"%>
@@ -21,114 +18,107 @@ text-error {
 		<div id="form">
 			<form:form action="addaccount" method="post"
 				modelAttribute="addAccount" name="form">
+				<div class="form">
+					<table>
+						<tbody>
+							<tr>
+								<td><label for="companyName">Company Name</label></td>
 
-				<div>
-					<label for="companyName">Company Name</label>
-					<div>
-						<form:input placeholder="Enter Comapany Name" path="companyName"
-							name="companyName" onchange="validate()"
-							pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
-							title="Please enter only character in CompanyName"
-							required="true" onblur="companyNameCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="contactPerson">Contact Person</label>
-					<div>
-						<form:input placeholder="Enter Your Contact Person"
-							path="contactPerson" name="contactPerson" onchange="validate()"
-							pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
-							title="Please enter only character in Contactperson"
-							required="true" onblur="contactPersonCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="contactPersonRole">Contact Person Role</label>
-					<div>
-						<form:input placeholder="Enter Your Contact Person Role"
-							path="contactPersonRole" name="contactPersonRole"
-							onchange="validate()" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
-							title="Please enter only character in Contact Person Role"
-							required="true" onblur="contactPersonRoleCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="email">Email</label>
-					<div>
-						<form:input path="email" placeholder="Enter Your Email"
-							onchange="validate()" name="email"
-							pattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\d.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
-							title="Please Enter Valid Email" required="true"
-							onblur="emailCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="contactPersonPhone">Contact Person Phone</label>
-					<div>
-						<form:input placeholder="Enter Your Contact Person Phone Number"
-							path="contactPersonPhone" onchange="validate()"
-							pattern="^[0-9]+{10}$" name="contactPersonPhone"
-							title="Please Enter Phone Number" required="true"
-							onblur="contactPersonPhoneCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="address">Address</label>
-					<div>
-						<form:input placeholder="Enter Your Address" path="address"
-							name="address" onchange="validate()"
-							title="Please Enter valid Address" required="true"
-							onblur="addressCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="accountType">Account Type</label>
-					<div>
-						<form:input placeholder="Enter Your Account Type"
-							path="accountType" name="accountType" onchange="validate()"
-							pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
-							title="Please enter only character in Account Type"
-							required="true" onblur="accountTypeCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="employeeId">Market Id</label>
-					<div>
-						<form:input placeholder="Enter Your Market Id" path="employeeId"
-							name="employeeId" onchange="validate()" pattern="^[0-9]+$"
-							title="Please Enter Only Number In marketer Id" required="true"
-							readonly="true" />
-					</div>
-				</div>
-				<div>
-					<label for="leadThroughChannel">Lead Though Channel</label>
-					<div>
-						<form:input placeholder="Enter Your Lead Though Channel"
-							path="leadThroughChannel" onchange="validate()"
-							name="leadThroughChannel" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
-							title="Please enter only character in Channel"
-							onblur="leadThroughChannelCheck()" />
-					</div>
-				</div>
-				<div>
-					<label for="customerJoinDate">Customer Join Date</label>
-					<div>
-						<form:input type="date" placeholder="Enter Your Joining Date"
-							path="customerJoinDate" readonly="true" required="true"
-							name="customerJoinDate" />
-					</div>
-				</div>
-				<div>
-					<label for="territoryId">Territory Name : </label>
-					<form:select path="territoryId">
-						<c:forEach var="allTerritory" items="${allTerritory}">
-							<form:option value="${allTerritory.territoryId}"
-								label="${allTerritory.territoryName}" />
-						</c:forEach>
-					</form:select>
-				</div>
-				<div>
-					<form:button id="button">Add New</form:button>
+								<td><form:input placeholder="Enter Comapany Name"
+										path="companyName" name="companyName" onchange="validate()"
+										pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
+										title="Please enter only character in CompanyName"
+										required="true" onblur="companyNameCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="contactPerson">Contact Person</label>
+								</td>
+								<td><form:input placeholder="Enter Your Contact Person"
+										path="contactPerson" name="contactPerson"
+										onchange="validate()" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
+										title="Please enter only character in Contactperson"
+										required="true" onblur="contactPersonCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="contactPersonRole">Contact Person
+										Role</label></td>
+								<td><form:input
+										placeholder="Enter Your Contact Person Role"
+										path="contactPersonRole" name="contactPersonRole"
+										onchange="validate()" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
+										title="Please enter only character in Contact Person Role"
+										required="true" onblur="contactPersonRoleCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="email">Email</label></td>
+								<td><form:input path="email" placeholder="Enter Your Email"
+										onchange="validate()" name="email"
+										pattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\d.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
+										title="Please Enter Valid Email" required="true"
+										onblur="emailCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="contactPersonPhone">Contact Person
+										Phone</label></td>
+								<td><form:input
+										placeholder="Enter Your Contact Person Phone Number"
+										path="contactPersonPhone" onchange="validate()"
+										pattern="^[0-9]+{10}$" name="contactPersonPhone"
+										title="Please Enter Phone Number" required="true"
+										onblur="contactPersonPhoneCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="address">Address</label></td>
+								<td><form:input placeholder="Enter Your Address"
+										path="address" name="address" onchange="validate()"
+										title="Please Enter valid Address" required="true"
+										onblur="addressCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="accountType">Account Type</label></td>
+								<td><form:input placeholder="Enter Your Account Type"
+										path="accountType" name="accountType" onchange="validate()"
+										pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
+										title="Please enter only character in Account Type"
+										required="true" onblur="accountTypeCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="employeeId">Market Id</label></td>
+								<td><form:input placeholder="Enter Your Market Id"
+										path="employeeId" name="employeeId" onchange="validate()"
+										pattern="^[0-9]+$"
+										title="Please Enter Only Number In marketer Id"
+										required="true" readonly="true" /></td>
+							</tr>
+							<tr>
+								<td><label for="leadThroughChannel">Lead Though
+										Channel</label></td>
+								<td><form:input
+										placeholder="Enter Your Lead Though Channel"
+										path="leadThroughChannel" onchange="validate()"
+										name="leadThroughChannel" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
+										title="Please enter only character in Channel"
+										onblur="leadThroughChannelCheck()" /></td>
+							</tr>
+							<tr>
+								<td><label for="customerJoinDate">Customer Join
+										Date</label></td>
+								<td><form:input type="date"
+										placeholder="Enter Your Joining Date" path="customerJoinDate"
+										readonly="true" required="true" name="customerJoinDate" /></td>
+							</tr>
+							<tr>
+								<td><label for="territoryId">Territory Name : </label></td>
+								<td><form:select path="territoryId">
+										<c:forEach var="allTerritory" items="${allTerritory}">
+											<form:option value="${allTerritory.territoryId}"
+												label="${allTerritory.territoryName}" />
+										</c:forEach>
+									</form:select></td>
+							</tr>
+							<form:button id="button">Add New</form:button>
+						</tbody>
+					</table>
 				</div>
 			</form:form>
 		</div>

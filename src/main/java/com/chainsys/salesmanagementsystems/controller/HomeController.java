@@ -53,6 +53,8 @@ public class HomeController {
 		}
 			model.addAttribute("empId", employee.getEmployeeId());
 			if (employee.getRole().equalsIgnoreCase("manager")) {
+				SalesInCome salesInCome=new SalesInCome();
+				model.addAttribute("salesIncome", salesInCome);
 				return "manager-page";
 			} else if (employee.getRole().equalsIgnoreCase("marketer")) {
 				
@@ -65,7 +67,13 @@ public class HomeController {
 		}
 		
 	}
-
+	@GetMapping("/managerpage")
+	public String getManagerPage(@RequestParam("empId")int empId,Model model) {
+		model.addAttribute("empId", empId);
+		SalesInCome salesInCome=new SalesInCome();
+		model.addAttribute("salesIncome", salesInCome);
+		return "manager-page";
+	}
 	@GetMapping("/addemployeeform")
 	public String redirectToAddEMployee(Model model) {
 		return "redirect:/employee/addemployeeform";
@@ -256,15 +264,22 @@ public class HomeController {
 		model.addAttribute("empId", empId);
 		return "salesman-sales";
 	}
-	@GetMapping("/salesmanLeads")//need
+	@GetMapping("/salesmanLeads")
 	public String redirectToSalesmanLeads(@RequestParam("empId") int empId,Model model) {
 		SalesInCome salesInCome=new SalesInCome();
 		model.addAttribute("salesInCome", salesInCome);
 		model.addAttribute("empId", empId);
 		return "salesman-leads";
 	}
+	@GetMapping("/salesIncome")
+	public String redirectToSalesIncome(Model model) {
+		SalesInCome salesIncome=new SalesInCome();
+		model.addAttribute("salesIncome", salesIncome);
+		return "income-reports";
+	}
 	@GetMapping("/test")
 	public String testSession(Model model) {
 		return "test";
 	}
+	
 }

@@ -46,11 +46,11 @@ color:white;
 			   	  <td>${allaccount.contactPersonPhone}</td>
 			   	  <td>${allaccount.address}</td>
 			   	  <td>${allaccount.accountType}</td>
-			   	  <td><a href="/employee/getaccountsemployee?id=${allaccount.employeeId}">${allaccount.employeeId}</a></td>
+			   	  <td id="get"><a href="/employee/getaccountsemployee?id=${allaccount.employeeId}">${allaccount.employeeId}</a></td>
 			   	  <td>${allaccount.leadThroughChannel}</td>
 			   	  <td>${allaccount.customerJoinDate}</td>
 			   	  <td>${allaccount.territoryId}</td>
-			   	  <td><a href="/account/getaccount?id=${allaccount.accountId}&empId=${empId}"><button>view</button></a></td>
+			   	  <td id="view"><a href="/account/getaccount?id=${allaccount.accountId}&empId=${empId}"><button>view</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

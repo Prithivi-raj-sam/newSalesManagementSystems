@@ -1,81 +1,49 @@
 @charset "ISO-8859-1";
-*{
-margin: 0;
-padding: 0;
+body {
+background-image:url(https://previews.123rf.com/images/ipopba/ipopba1810/ipopba181000090/109473096-digital-marketing-concept-blue-tone-modern-laptop-screen-with-icon-marketing-success-and-goals-targe.jpg);
+	background-size: 1366px 768px;
 }
-body
- {
-    background-image:
-        url("https://www.phpcrmsystem.com/wp-content/uploads/crm_customer_management.jpg");
-    height: 768px;
-    width: 1366px;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+.navbar {
+	overflow: hidden;
+	background-color: #333;
 }
-#welcome{color:white;
-text-align: center;
-font-size: 40px;
-font-family: Times;
+
+.navbar a{
+	float: left;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
-#admin{color:orange;
-text-align: center;
-font-size: 30px;
-font-family: Times;
-}
-#customer{color:orange;
-text-align: center;
-font-size: 30px;
-font-family:Times;
-}
-.menu{
-width: 400px;
-float: right;
-height: 70px;
-}
-ul{
-float: right;
-display: flex;
-justify-content: center;
-align-items: center;
-}
-ul li{
-list-style: none;
-margin-right: 62px;
-margin-top: 27px;
-font-size: 20px; 
-}
-ul li a{
-text-decoration: none;
-color: #fff;
-font-family: Arial;
-font-weight: bold;
-transition: 0.4s ease-in-out;
-}
-ul li a:hover{
-color: #ff7200;
+
+.navbar input{
+width:200px;
+text-align:center;
+border:2px solid black;
+margin-top:11px;
+padding:14px 16px;
+height:5px;
+} 
+
+.navbar button{
+width:100px;
+height:30px;
+text-align:center;
+border:2px solid black;
 }
 
 .iframe {
-    position: absolute;
- 	top:65%;
-    right: 0%;
-    width: 1000px;
-    height: 500px;
-    margin-top: -400px;
-    margin-right: 20px;
-    z-index: 999;
-    border-radius:20px;
-} 
-.iframeleft {
-    position: absolute;
- 	top:65%;
-    left: 0%;
-    width: 300px;
-    height: 500px;
-    margin-top: -400px;
-    margin-left: 20px;
-    z-index: 999;
-    border-radius:20px;
-} 
+   position: absolute;
+   top:65%;
+   right: 0%;
+   width: 1000px;
+   height: 500px;
+    backdrop-filter:blur(20px);
+   margin-top:-320px;
+   margin-right:20px;
+   z-index: 999;
+   border-radius:25px;
+}
+
+

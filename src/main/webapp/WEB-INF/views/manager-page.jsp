@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,79 +10,24 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
-*{
-margin: 0;
-padding: 0;
-}
-body
- {
-    background-image:
-        url("https://www.phpcrmsystem.com/wp-content/uploads/crm_customer_management.jpg");
-    background-repeat: no-repeat;
-    background-size: 1366px 768px;
-}
-#welcome{color:white;
-text-align: center;
-font-size: 40px;
-font-family: Times;
-}
-#admin{color:orange;
-text-align: center;
-font-size: 30px;
-font-family: Times;
-}
-#customer{color:orange;
-text-align: center;
-font-size: 30px;
-font-family:Times;
-}
-.menu{
-width: 400px;
-float: right;
-height: 70px;
-}
-ul{
-float: right;
-display: flex;
-justify-content: center;
-align-items: center;
-}
-ul #home{
-	color:white;
-	float:left;
-	margin-left: 100px;
-	
-}
-ul li{
-list-style: none;
-margin-right: 62px;
-margin-top: 27px;
-font-size: 20px; 
-}
-ul li a{
-text-decoration: none;
-color: #fff;
-font-family: Arial;
-font-weight: bold;
-transition: 0.4s ease-in-out;
-}
-ul li a:hover{
-color: #ff7200;
-}
-
+<%@include file="/WEB-INF/css/managerpage.css" %>
 </style>
 </head>
 <body>
-	<div class="menu">
-		<ul>
-			<li id="home" class="w3-xxxlarge"><i class="fa fa-home"></i></li>
-			<li><a href="/home/employees">Employee</a></li>
-			<li><a href="/home/targets">Target</a></li>
-			<li><a href="/home/lead?empId=${empId}">Leads and Sales</a></li>
-			<li><a href="/home/territorys?empId=${empId}">Territory</a></li>
-			<li><a href="/sales/salesincome?">InCome</a></li>
-		</ul>
-	</div>
+	<form:form action="/sales/salesTotalAmount" method="post"
+		modelAttribute="salesIncome">
+		<div class="navbar">
+			<a href="/home/employees">Employee</a>
+			<a href="/home/targets">Target</a> 
+			<a
+				href="/home/lead?empId=${empId}">Leads/Sales</a> 
+				<a
+				href="/home/territorys?empId=${empId}">Territory</a>
+			<form:input path="fromDate" type="date" placeholder="Enter From Date" />
+			<form:input path="toDate" type="date" placeholder="Enter To Date" />
+			<form:button id="btn">Income</form:button>
+		</div>
+	</form:form>
 </body>
 </html>
 

@@ -2,56 +2,67 @@
     pageEncoding="ISO-8859-1"%>
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>get Leads For sales man</title>
+<style>
+<%@include file="/WEB-INF/css/getemployeebyid.css"%>
+</style>
 </head>
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
 			<form:form action="" method="post" modelAttribute="leads">
-				<div>
-					<label for="leadId">Lead Id</label>
-					<div>
+				<div class="form">
+				<table>
+				<tbody>
+				<tr><td>
+					<label for="leadId">Lead Id</label></td>
+					<td>
 						<form:input path="leadId" readonly="true"/>
-					</div>
-				</div>
-				<div>
+					</td>
+				</tr>
+				<tr><td>
 					<label for="accountId">Account Id</label>
-					<div>
+					</td>
+					<td>
 						<form:input path="accountId" readonly="true"/>
-					</div>
-				</div>
-				<div>
+						</td>
+				</tr>
+				<tr><td>
+				
 					<label for="status">Status</label>
-					<div>
+					</td><td>
 						<form:input path="status" readonly="true"/>
-					</div>
-				</div>
-				<div>
+					</td>
+				</tr>
+				<tr><td>
 					<label for="employeeId">SellerId</label>
-					<div>
+					</td><td>
 						<form:input path="employeeId" readonly="true"/>
-					</div>
-				</div>
-				<div>
+						</td>
+				</tr>
+				<tr><td>
 					<label for="leadDate">Lead Date</label>
-					<div>
+					</td><td>
 						<form:input path="leadDate" readonly="true"/>
-					</div>
-				</div>
-				<div>
-					<label for="stages">Stage</label>
-					<div>
+						</td>
+				</tr>
+				<tr><td>
+					<label for="stages">Stage</label></td>
+					<td>
 						<form:input path="stages" readonly="true"/>
-					</div>
-				</div>
-				<div>
+						</td>
+				</tr>
+				<tr><td>
 					<label for="propability">Probability</label>
-					<div>
+					</td><td>
 						<form:input path="propability" readonly="true"/>
-					</div>
+					</td>
+					</tr>
+					</tbody>
+					</table>
 				</div>
 			</form:form>
 		</div>
@@ -61,3 +72,5 @@
 	</div>
 </body>
 </html>
+					
+					

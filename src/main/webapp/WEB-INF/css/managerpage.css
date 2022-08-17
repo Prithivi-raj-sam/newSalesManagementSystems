@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image:
+		url("https://img.freepik.com/premium-photo/man-using-smart-phone-laptop-analyzing-graph-data-management-make-reportfinancial-technologylaptop-many-graphsinvestmentphoto-concept-data-analyst-financial_28974-342.jpg?w=2000");
+	background-repeat: no-repeat;
+	background-size: 1366px 768px;
+}
+.navbar{
+overflow:hidden;
+background-color:#333;
+}
+
+.navbar a{
+float:left;
+font-size:20px;
+color:white;
+text-align:center;
+padding:14px 16px;
+text-decoration:none;
+}
+
+.navbar input{
+margin-top:11px;
+padding:14px 16px;
+height:20px;
+}

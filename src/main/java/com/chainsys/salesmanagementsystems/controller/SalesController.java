@@ -100,13 +100,15 @@ public class SalesController {
 		model.addAttribute("salesIncome", salesIncome);
 		return "sales-income";
 	}
-	@PostMapping("/salesTotalAmount")
+	@PostMapping("/salesTotalAmount")//need
 	public String salesTotalAmount(@ModelAttribute("salesIncome")SalesInCome salesIncome, Model model) {
 		salesIncome=salesService.getTotalSalesBetweenTwoDates(salesIncome);
+		List<SalesInCome> salesIncomeList=salesService.getMonthlySales(salesIncome);
 		model.addAttribute("salesIncome", salesIncome);
+		model.addAttribute("salesIncomeList", salesIncomeList);
 		return "sales-income-result";
 	}
-	@GetMapping("/monthlyncomeform")
+	@GetMapping("/monthlyincomeform")
 	public String monthlyIncomeForm(Model model) {
 		SalesInCome salesIncome=new SalesInCome();
 		model.addAttribute("salesIncome", salesIncome);

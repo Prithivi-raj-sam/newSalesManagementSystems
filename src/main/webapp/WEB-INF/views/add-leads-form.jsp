@@ -2,10 +2,13 @@
     pageEncoding="ISO-8859-1"%>
      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Leads</title>
+<style>
+<%@include file="/WEB-INF/css/getemployeebyid.css"%>
+</style>
 <script>
 <%@include file="/WEB-INF/script/leadValidation.js"%>
 </script>
@@ -14,34 +17,41 @@
 	<div id="root">
 		<div id="form">
 			<form:form action="addlead" method="post" modelAttribute="addLead" name="form">
-				
-				<div>
-					<label for="accountId">Account Id</label>
-					<div>
+			
+				<div class="form">
+				<table>
+				<tbody>
+				<tr>
+					<td><label for="accountId">Account Id</label></td>
+				<td>
 						<form:input placeholder="Enter Your Account Id" path="accountId" readonly="true"/>
-					</div>
-				</div>
-				<div>
-					<label for="status">Status</label>
-					<div>
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<label for="status">Status</label></td>
+				<td>
 						<form:input placeholder="Enter Your Status" path="status" readonly="true"/>
-					</div>
-				</div>
-				<div>
-					<label for="employeeId">SellerId</label>
-					<div>
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<label for="employeeId">SellerId</label></td>
+				<td>
 						<form:input placeholder="Enter Your Seller Id" path="employeeId" readonly="true"/>
-					</div>
-				</div>
-				<div>
-					<label for="leadDate">Lead Date</label>
-					<div>
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<label for="leadDate">Lead Date</label></td>
+					<td>
 						<form:input type="date" placeholder="Enter Lead Date" path="leadDate" readonly="true"/>
-					</div>
-				</div>
-				<div>
-					<label for="stages">Stage</label>
-					<div>
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<label for="stages">Stage</label></td>
+					<td>
 						<form:select placeholder="Enter Your Stage" path="stages" >
 							<form:option value="Subscriber" label="Subscriber"></form:option>
 							<form:option value="Lead/Nurturing" label="Lead/Nurturing"></form:option>
@@ -49,17 +59,20 @@
 							<form:option value="SalesQualifiedLead" label="Sales Qualified Lead"></form:option>
 							<form:option value="Opportunity" label="Opportunity"></form:option>
 						</form:select>
-					</div>
-				</div>
-				<div>
-					<label for="propability">Probability</label>
-					<div>
+					</td>
+				</tr>
+				<tr>
+				<td>
+					<label for="propability">Probability</label></td>
+					<td>
 						<form:input placeholder="Enter Probability" path="propability" name="propability" onblur="probabilityCheck()"
 						pattern="^[0-9]+(.[0-9]*)?$" title="please Enter Valid Probabilty"/>
-					</div>
-				</div>
-				<div>
+					</td>
+				</tr>
 					<form:button id="button">Add New</form:button>
+				
+				</tbody>
+				</table>
 				</div>
 			</form:form>
 		</div>

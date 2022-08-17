@@ -9,7 +9,7 @@
 <title>Monthly Reports</title>
 </head>
 <body>
-<div>
+
 	<div id="table root">
 		<table>
 			<thead>

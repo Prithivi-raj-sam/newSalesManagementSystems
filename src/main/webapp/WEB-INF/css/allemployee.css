@@ -1,0 +1,34 @@
+@charset "ISO-8859-1";
+
+.table{
+text-align:center;
+border:3px solid black;
+ border-collapse: collapse;
+}
+
+tr:nth-child(even){
+background-color:pink;
+}
+
+tr:hover{
+background-color:white;
+}
+
+th{
+background-color:white;
+color:red;
+border:1px solid black;
+}
+
+td{
+color:black;
+border:1px solid black;
+}
+
+table #view{
+background-color:pink;
+}
+table a{
+text-decoration: none;
+color:black;
+}

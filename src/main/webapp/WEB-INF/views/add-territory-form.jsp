@@ -9,19 +9,26 @@
 <script>
 <%@include file="/WEB-INF/script/territoryValidation.js"%>
 </script>
+<style>
+<%@include file="/WEB-INF/css/getemployeebyid.css"%>
+</style>
 </head>
 <body style="background-color:#3d403d; color:white;">
 	<div id="root">
 		<div id="form">
 			<form:form action="addterritory" method="post" modelAttribute="addterritory" name="form">
-				<div>
-					<label for="territoryName">Territory Name</label>
-					<div>
+				<div class="form">
+				<table>
+				<tbody>
+				<tr><td>
+					<label for="territoryName">Territory Name</label></td>
+					<td>
 						<form:input path="territoryName" name="territoryName" onblur="territoryNameCheck()"
 						pattern="^[a-zA-z\s]+$" title="Please enter Valid Territory Name" required="true"/>
-					</div>
-				</div>
-				<div>
+				</td>
+				
+				</tbody>
+				</table>
 					<form:button id="button">Add New</form:button>
 				</div>
 			</form:form>

@@ -5,103 +5,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Trirong">
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <script type="text/javascript">
 <%@include file="/WEB-INF/script/employeeValidation.js"%>
 </script>
-
+<style type="text/css">
+<%@include file="/WEB-INF/css/getemployeebyid.css"%>
+</style>
 </head>
-<body style="background-color:#3d403d; color:white;">
-	<div id="root">
-		<div id="form">
+<body>
+		
 			<form:form action="updateemployee" method="post" modelAttribute="updateEmployee" name="form">
-				<div>
-					<label for="employeeName">Employee Name</label>
-					<div>
-						<form:input placeholder="Enter Your Name" path="employeeName" onblur="employeeNameCheck()"
+			<div class="form">
+			<table>
+			<tbody>
+			<tr>
+					<td><label for="employeeName">Employee Name</label></td>
+					<td><form:input placeholder="Enter Your Name" path="employeeName" onblur="employeeNameCheck()"
 						required="true" pattern="^[a-zA-Z]+(\s[a-zA-Z]+)?$"
-						title="Please enter only character in employeeName" name="employeeName"/>
+						title="Please enter only character in employeeName" name="employeeName" class="txt"/></td>
 
-					</div>
-				</div>
-				<div>
-					<label for="employeePhone">Employee Phone</label>
-					<div>
-						<form:input placeholder="Enter Your Phone Number" path="employeePhone" onblur="employeePhoneCheck()"
-						required="true" pattern="^[0-9]{10}$" title="Please Enter valid Phone Number" name="employeePhone"/>
-					</div>
-				</div>
+				</tr>
+				<tr>
+					<td><label for="employeePhone">Employee Phone</label></td>
+						<td><form:input placeholder="Enter Your Phone Number" path="employeePhone" onblur="employeePhoneCheck()"
+						required="true" pattern="^[0-9]{10}$" title="Please Enter valid Phone Number" name="employeePhone" class="txt"/></td>
+				</tr>
 
-				<div>
-					<label for="email">Email</label>
-					<div>
-						<form:input type="email" placeholder="Enter Your Email" path="email" onblur="emailCheck()"
+				<tr>
+					<td><label for="email">Email</label></td>
+						<td><form:input type="email" placeholder="Enter Your Email" path="email" onblur="emailCheck()"
 						required="true" title="Please Enter Valid Email"
 						pattern="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\d.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$"
-						name="email"/>
-					</div>
-				</div>
+						name="email" class="txt"/></td>
+				</tr>
 
-				<div>
-					<label for="address">Address</label>
-					<div>
-						<form:input placeholder="Enter Your Address" path="address" onblur="addressCheck()"
-						required="true" title="Please Enter valid Address" name="address"/>
-					</div>
-				</div>
+				<tr>
+					<td><label for="address">Address</label></td>
+						<td><form:input placeholder="Enter Your Address" path="address" onblur="addressCheck()"
+						required="true" title="Please Enter valid Address" name="address" class="txt"/></td>
+				</tr>
 
-				<div>
-					<label for="territoryId">Territory Name : </label>
-					<form:select path="territoryId" id="territoryId">
+				<tr>
+					<td><label for="territoryId">Territory Name : </label></td>
+					<td><form:select path="territoryId" id="territoryId">
 						<c:forEach var="allTerritory" items="${allTerritory}">
 							<form:option value="${allTerritory.territoryId}"
-								label="${allTerritory.territoryName}" />
+								label="${allTerritory.territoryName}" class="txt"/>
 						</c:forEach>
-					</form:select>
+					</form:select></td>
 
-				</div>
-				<div>
-					<label for="password">Password</label>
-					<div>
-						<form:input type="password" placeholder="Enter Password" path="password" onblur="passwordCheck()"
+				</tr>
+				<tr>
+					<td><label for="password">Password</label></td>
+						<td><form:input type="password" placeholder="Enter Password" path="password" onblur="passwordCheck()"
 						required="true" title="Password doesnot reach reqired length or pattern it should contain min 1 number,simbal"
-						pattern="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$" name="password"/>
-					</div>
-				</div>
+						pattern="^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$" name="password" class="txt"/></td>
+				</tr>
 
-				<div>
-					<label for="passwordLastChangeDate">Password Last Change
-						Date</label>
-					<div>
-						<form:input type="date" placeholder="Enter Your Last Password Change Date" path="passwordLastChangeDate" 
-						required="true" />
-					</div>
-				</div>
+				<tr>
+					<td><label for="passwordLastChangeDate">Password Last Change
+						Date</label></td>
+						<td><form:input type="date" placeholder="Enter Your Last Password Change Date" path="passwordLastChangeDate" 
+						required="true" class="txt"/></td>
+				</tr>
 
-				<div>
-					<label for="role">Role</label>
-					<div>
-						<form:select path="role">
+				<tr>
+					<td><label for="role">Role</label></td>
+						<td><form:select path="role" class="txt">
 							<form:option value="manager" label="Manager"></form:option>
 							<form:option value="marketer" label="Maketing Team"></form:option>
 							<form:option value="salesman" label="SalesMan"></form:option>
-						</form:select>
+						</form:select></td>
+				</tr>
+				<tr>
+					<td><label for="profile">Profile</label></td>
+						<td><form:input path="profile" type="file" accept=".png" /></td>
+				</tr>
+			</tbody>
+			</table>
+					<form:button id="button">Update</form:button>
 					</div>
-				</div>
-				<div>
-					<label for="profile">Profile</label>
-					<div>
-						<form:input path="profile" type="file" accept=".png" 
-						/>
-					</div>
-				</div>
-
-				<div>
-					<form:button id="button">update</form:button>
-				</div>
 			</form:form>
-		</div>
-	</div>
 	<div>${result}</div>
+	</body>
 </html>

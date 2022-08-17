@@ -7,15 +7,10 @@
 <meta charset="ISO-8859-1">
 <title>All Employees</title>
 <style>
-table,th,td{
-text-align:center;
-border:3px solid black;
- border-collapse: collapse;
-}
-
+<%@include file="/WEB-INF/css/allemployee.css" %>
 </style>
 </head>
-<body style="background-color:#c4f4f5; color:#0e5a5c;">
+<body>
 	<div class="table">
 		<table>
 			<thead>
@@ -47,7 +42,7 @@ border:3px solid black;
 			   	  <td>${allEmployee.passwordLastChangeDate}</td>
 			   	  <td>${allEmployee.role}</td>
 			   	  <td>${allEmployee.profile}</td>
-			   	  <td><a href="/employee/getemployee?getId=${allEmployee.employeeId}"><button>View</button></a></td>
+			   	  <td id="view"><a href="/employee/getemployee?getId=${allEmployee.employeeId}">View</a></td>
 			   </tr>
 			   
 			</c:forEach>
