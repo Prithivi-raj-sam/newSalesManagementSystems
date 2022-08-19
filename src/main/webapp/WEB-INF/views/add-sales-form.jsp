@@ -18,6 +18,9 @@
 			<h1>Add Sales Form</h1>
 				<div class="add-form">
 				<table>
+				<caption></caption>
+					<tr>
+					<th></th></tr>
 						<tbody>
 							<tr>
 					<td><label for="employeeId">Seller Id</label></td>

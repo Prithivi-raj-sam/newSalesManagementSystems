@@ -4,17 +4,12 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;

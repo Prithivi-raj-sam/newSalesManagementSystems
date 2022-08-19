@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Update Account</title>
@@ -18,6 +18,9 @@
 				modelAttribute="updateAccount" name="form">
 				<div class="form">
 					<table>
+					<caption></caption>
+					<tr>
+					<th></th></tr>
 						<tbody>
 							<tr>
 								<td><label for="companyName">Company Name</label></td>

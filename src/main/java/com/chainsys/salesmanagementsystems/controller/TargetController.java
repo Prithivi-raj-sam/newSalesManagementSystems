@@ -1,16 +1,13 @@
 package com.chainsys.salesmanagementsystems.controller;
 
 
-import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
-import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.service.TargetService;
@@ -26,6 +22,7 @@ import com.chainsys.salesmanagementsystems.service.TargetService;
 @Controller
 @RequestMapping("/target")
 public class TargetController {
+	private static final String ALLTARGET="all-targets";
 	@Autowired
 	private TargetService targetService;
 	
@@ -34,7 +31,7 @@ public class TargetController {
 	public String allTargets(Model model) {
 		List<Target>allTarget = targetService.allTarget();
 		model.addAttribute("alltargets", allTarget);
-		return "all-targets";
+		return ALLTARGET;
 	}
 	@GetMapping("/alltargetbyEmployeeid")//need
 	public String getAlltargetsByEmployeeId(@RequestParam("empId") int empId,Model model) {
@@ -91,7 +88,7 @@ public class TargetController {
 	public String getTaretByTargetDateAndTargetSetdate(@ModelAttribute("target")Target target,Model model) {
 		List<Target> targetList=targetService.getTargetByTwoDate(target);
 		model.addAttribute("alltargets", targetList);
-		return "all-targets";
+		return ALLTARGET;
 	}
 	@GetMapping("/goingtarget")
 	public String getCurrentTarget(@RequestParam("empId") int empId,Model model) {
@@ -105,6 +102,6 @@ public class TargetController {
 		List<Target> targetList=targetService.getTargetByDescindingOrderDate();
 		targetList=BusinessLogic.getTodayTarget(targetList);
 		model.addAttribute("alltargets", targetList);
-		return "all-targets";
+		return ALLTARGET;
 	}
 }

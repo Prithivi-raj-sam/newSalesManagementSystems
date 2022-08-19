@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.repository.TargetRepository;
@@ -15,8 +14,6 @@ import com.chainsys.salesmanagementsystems.repository.TargetRepository;
 public class TargetService {
 	@Autowired
 	private TargetRepository targetRepository;
-	@Autowired
-	private EmployeeService employeeService;
 	public void insertTarget(Target target) {
 		targetRepository.save(target);
 	}
@@ -33,9 +30,7 @@ public class TargetService {
 		return targetRepository.findByEmployeeIdOrderByTargetDateDesc(id);
 	}
 	public List<Target>getTargetByDescindingOrderDate(){
-		List<Target> targetlist=targetRepository.findAllByOrderByTargetDateDesc();
-		
-	return targetlist;
+		return targetRepository.findAllByOrderByTargetDateDesc();
 	}
 	public void deleteTarget(int id) {
 		targetRepository.deleteById(id);

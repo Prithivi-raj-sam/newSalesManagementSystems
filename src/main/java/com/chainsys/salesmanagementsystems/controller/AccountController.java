@@ -2,12 +2,10 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +16,6 @@ import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.GetId;
-import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.service.AccountService;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
@@ -27,6 +23,7 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 @Controller
 @RequestMapping("/account")
 public class AccountController {
+	private static final String ALLACOUNT="all-accounts"; 
 	@Autowired
 	private AccountService accountservice;
 	@Autowired
@@ -66,21 +63,21 @@ public class AccountController {
 		List<Account>allAccount=accountservice.allAccount();
 		model.addAttribute("allaccount", allAccount);
 		model.addAttribute("empId", empId);
-		return "all-accounts";
+		return ALLACOUNT;
 	}
 	@GetMapping("/allaccountbyemployee")//need
 	public String getAllAccountByEmployeeId(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.getAccountByEmployeeId(empId);
 		model.addAttribute("allaccount", allAccount);
 		model.addAttribute("empId", empId);
-		return "all-accounts";
+		return ALLACOUNT;
 	}
 	@PostMapping("/getaccountbycompanyname")
 	public String getAccountByCompanyName(@ModelAttribute("account")Account account,Model model) {
 		List<Account>allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
 		model.addAttribute("allaccount", allAccount);
 		model.addAttribute("empId", account.getEmployeeId());
-		return "all-accounts";
+		return ALLACOUNT;
 	}
 	@GetMapping("/deleteaccount")//need
 	public String deleteAccount(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {

@@ -16,6 +16,9 @@
 			<form:form action="" method="post" modelAttribute="account">
 				<div class="form">
 					<table>
+					<caption></caption>
+					<tr>
+					<th></th></tr>
 						<tbody>
 							<tr>
 								<td><label for="accountId"> Account id</label></td>

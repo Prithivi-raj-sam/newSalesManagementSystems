@@ -14,12 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="accounts")
@@ -30,57 +24,36 @@ public class Account {
 	@Column(name="account_id")
 	private int accountId;  
 	
-//	@Size(max = 40, min = 3, message = "Name length should be 3 to 40")
-//	@NotBlank(message = "Company Name can't be Empty")
-//	@Pattern(regexp = "^[A-Za-z]\\w{3,40}$", message = "Enter valid Company name ")
 	@Column(name="company_name")
 	private String companyName;
 	
 	@Column(name="contact_person")
-//	@NotBlank(message = "Contact Person Name can't be Empty")
-//	@Pattern(regexp = "^[a-zA-Z]+(\\s[a-zA-Z]+)?{3,30}$", message = "Enter valid Contact Person ")
 	private String contactPerson;
 	
-//	@NotBlank(message = "Contact Role can't be Empty")
-//	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Contact Person Role ")
 	@Column(name="contact_person_role")
 	private String contactPersonRole;
 	
 	@Column(name="email")
-//	@Email(message = "Email is not valid")
-//	@NotEmpty(message = "Please enter email")
 	private String email;
 	
-//	@NotEmpty(message = "Please enter Phone Numder")
-//	@Digits(message = "Invalid number", integer = 10, fraction = 0)
 	@Column(name="contact_person_phone")
 	private long contactPersonPhone;
 	
 	@Column(name="address")
-//	@NotEmpty(message = "*Please enter Address")
 	private String address;
 	
-//	@NotEmpty(message = "*Please enter Account type")
-//	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Company name ")
 	@Column(name="account_type")
 	private String accountType;
 	
-//	@NotEmpty(message = "*Please enter Marketer Id")
-//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Employee Id ")
 	@Column(name="marketer_id")
 	private int employeeId;
 	
-//	@NotEmpty(message = "*Please enter Lead Through Channel")
-//	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Channel Name ")
 	@Column(name="lead_through_channel")
 	private String leadThroughChannel;
 	
-//	@NotEmpty(message = "*Please enter Cutomer Join date")
 	@Column(name="customer_join_date")
 	private Date customerJoinDate;
 	
-//	@NotEmpty(message = "*Please enter Territory Id")
-//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Territory Id ")
 	@Column(name="territory_id")
 	private int territoryId;
 	

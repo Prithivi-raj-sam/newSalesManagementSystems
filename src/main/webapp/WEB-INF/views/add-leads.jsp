@@ -13,6 +13,7 @@
 <body>
 	<div class="table">
 		<table>
+		<caption></caption>
 			<thead>
 				<tr>
 					<th>Account Id</th>

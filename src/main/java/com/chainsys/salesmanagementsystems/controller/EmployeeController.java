@@ -3,15 +3,12 @@ package com.chainsys.salesmanagementsystems.controller;
 import java.io.IOException;
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,19 +29,11 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
-	
+	private static final String REDIRECTTOALLEMPLOYEE="redirect:/employee/allemployee";
 	@Autowired
 	private EmployeeService employeeservice;
 	@Autowired
 	private TerritoryService territoryService;
-	
-	@GetMapping("/getemployeeId")
-	public String getemployeeId(Model model) {
-		model.addAttribute("redirect", "getemployee");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
 	
 	@GetMapping("/getemployee")//
 	public String getEmployeeById(@RequestParam("getId")int id,Model model) {
@@ -86,11 +75,6 @@ public class EmployeeController {
 	@PostMapping("/addemployee")//need
 	public String addEmployee(@ModelAttribute("addEmployee")Employee employee,@RequestParam("photo")MultipartFile photo, Model model) {
 		try {
-			System.out.println(photo.getBytes().length);
-		}catch(IOException exp) {
-			exp.printStackTrace();
-		}
-		try {
 			employee.setProfile(photo.getBytes());
 		}catch(IOException exp) {
 			exp.printStackTrace();
@@ -114,7 +98,7 @@ public class EmployeeController {
 	@PostMapping("/deleteemployee")//need
 	public String deleteEmployeeById(@RequestParam("id")int id,Model model) {
 		employeeservice.deleteEmployee(id);
-		return "redirect:/employee/allemployee";
+		return REDIRECTTOALLEMPLOYEE;
 	}
 	@GetMapping("/updateemployeeform")//need
 	public String updateEmployeeForm(@RequestParam("id")int id,Model model) {
@@ -133,7 +117,7 @@ public class EmployeeController {
 	public String redirectToAchievment(@RequestParam("id")int id,Model model) {
 		Employee employee=employeeservice.getEmployeeById(id);
 		if(employee.getRole().equals("manager")) {
-			return "redirect:/employee/allemployee";
+			return REDIRECTTOALLEMPLOYEE;
 		}
 		else if(employee.getRole().equals("salesman")) {
 			SalesEmployeeDTO dto=employeeservice.getSalesEmployee(id);
@@ -148,7 +132,7 @@ public class EmployeeController {
 			return "list-accounts-employee";
 		}
 		else {
-			return "redirect:/employee/allemployee";
+			return REDIRECTTOALLEMPLOYEE;
 		}
 	}
 	@GetMapping("/getaccountsemployee")//need

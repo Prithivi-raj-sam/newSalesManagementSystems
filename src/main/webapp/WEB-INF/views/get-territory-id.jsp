@@ -21,6 +21,9 @@
 
 				<div class="form">
 					<table>
+					<caption></caption>
+					<tr>
+					<th></th></tr>
 						<tbody>
 							<tr>
 								<td><label for="territoryName">Territory Name</label></td>

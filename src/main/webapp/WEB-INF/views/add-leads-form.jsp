@@ -18,6 +18,9 @@
 			<h1>All Leads Form</h1>
 				<div class="lead-form">
 				<table>
+				<caption></caption>
+					<tr>
+					<th></th></tr>
 				<tbody>
 				<tr>
 					<td><label for="accountId">Account Id</label></td>

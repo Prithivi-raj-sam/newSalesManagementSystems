@@ -16,6 +16,9 @@
 			<form:form action="" method="post" modelAttribute="sales">
 				<div class="form">
 					<table>
+					<caption></caption>
+					<tr>
+					<th></th></tr>
 						<tbody>
 							<tr>
 								<td><label for="salesId"> Sales id</label></td>

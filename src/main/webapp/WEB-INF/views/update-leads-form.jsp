@@ -19,6 +19,9 @@
 			<form:form action="updatelead" method="post" modelAttribute="updateLead">
 				<div class="form">
 				<table>
+				<caption></caption>
+					<tr>
+					<th></th></tr>
 				<tbody>
 				<tr>
 				<td>

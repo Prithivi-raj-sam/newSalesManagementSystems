@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
      <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Get Sales By Lead Id</title>
@@ -16,7 +16,11 @@
 		<div id="form">
 			<form:form action="" method="post" modelAttribute="getLeads">
 				<div class="form">
-				<table><tbody>
+				<table>
+				<caption></caption>
+					<tr>
+					<th></th></tr>
+				<tbody>
 				<tr><td>
 					<label for="leadId">Lead Id</label>
 					</td><td>
@@ -58,6 +62,7 @@
 	</div>
 	<div class="table">
 		<table>
+		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
 					<th>Sales Id</th>

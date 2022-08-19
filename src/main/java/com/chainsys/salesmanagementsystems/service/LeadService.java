@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
-import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.Target;
-import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.LeadRepository;
 import com.chainsys.salesmanagementsystems.repository.SalesRepository;
 
@@ -49,8 +47,6 @@ public class LeadService {
 		SalesLeadsDTO dto=new SalesLeadsDTO();
 		dto.setLead(getLeadById(id));
 		dto.setSales(salesRepository.findByLeadId(id));
-		System.out.println(getLeadById(id).getLeadId());
-		System.out.println(salesRepository.findByLeadId(id).getLeadId());
 		return dto; 
 	}
 	public List<Lead> getLeadsForSalesInCome(Date startDate, Date endDate){

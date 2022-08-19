@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Get All Leads By Account Id</title>
@@ -18,6 +18,9 @@
 			<form:form action="" method="post" modelAttribute="getaccount">
 				<div class="form">
 					<table>
+					<caption></caption>
+					<tr>
+					<th></th></tr>
 						<tbody>
 							<tr>
 								<td><label for="accountId"> Account id</label></td>
@@ -82,6 +85,7 @@
 	</div>
 	<div id="table root">
 		<table>
+		<caption></caption>
 			<thead>
 				<tr style="width: 100%, height:100%">
 					<th>Lead Id</th>

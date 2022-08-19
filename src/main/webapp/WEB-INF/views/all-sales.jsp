@@ -14,6 +14,7 @@
 <h1>All Sales List</h1>
 	<div class="allsales-table">
 		<table>
+		<caption></caption>
 			<thead>
 				<tr>
 					<th>Sales Id</th>

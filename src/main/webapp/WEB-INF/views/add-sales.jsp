@@ -14,6 +14,7 @@
 <h1>Adding To Sales</h1>
 	<div class="table-root">
 		<table>
+		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
 					<th>Lead Id</th>

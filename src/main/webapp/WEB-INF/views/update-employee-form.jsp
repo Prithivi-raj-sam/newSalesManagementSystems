@@ -20,6 +20,9 @@
 			<form:form action="updateemployee" method="post" modelAttribute="updateEmployee" name="form">
 			<div class="form">
 			<table>
+			<caption></caption>
+					<tr>
+					<th></th></tr>
 			<tbody>
 			<tr>
 					<td><label for="employeeName">Employee Name</label></td>

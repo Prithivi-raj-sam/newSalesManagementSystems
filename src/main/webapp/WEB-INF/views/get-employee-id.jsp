@@ -27,7 +27,8 @@ border-radius: 50%;
 		<div class="form">
 			<table>
 				<caption></caption>
-				<thead></thead>
+					<tr>
+					<th></th></tr>
 				<tbody>
 					<tr>
 						<td></td>

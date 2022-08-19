@@ -20,6 +20,9 @@
 				modelAttribute="addAccount" name="form">
 				<div class="form">
 					<table>
+					<caption></caption>
+					<tr>
+					<th></th></tr>
 						<tbody>
 							<tr>
 								<td><label for="companyName">Company Name</label></td>

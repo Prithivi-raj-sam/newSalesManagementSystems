@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "targets")
@@ -24,34 +22,24 @@ public class Target {
 	@Column(name = "target_id")
 	private int targetId;
 	
-//	@NotEmpty(message = "*Please enter Lead Id")
 	@Column(name = "target_date")
 	private Date targetDate;
 	
-//	@NotEmpty(message = "*Please enter Planned Target")
-//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Planned Targe ")
 	@Column(name = "planned_target")
 	private int plannedTarget;
 	
-//	@NotEmpty(message = "*Please enter Closed Target")
-//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Closed Target")
 	@Column(name = "closed_target")
 	private int closedTarget;
 	
-//	@NotEmpty(message = "*Please enter Employee Id")
-//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Employee Id")
 	@Column(name = "employee_id")
 	private int employeeId;
 	
 	@Column(name = "manager_comment")
 	private String managerComment;
 	
-//	@NotEmpty(message = "*Please enter Target Set date")
 	@Column(name = "target_set_Date")
 	private Date targetSetDate;
 	
-//	@NotEmpty(message = "*Please enter Target Category")
-//	@Pattern(regexp = "^[A-Za-z]\\w{3,30}$", message = "Enter valid Target Category")
 	@Column(name="target_type")
 	private String targetCategory;
 	

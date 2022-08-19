@@ -14,6 +14,7 @@
 <body>
 	<div id="table root">
 		<table>
+		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
 					<th>Account Id</th>

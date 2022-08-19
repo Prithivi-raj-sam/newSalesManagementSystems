@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
@@ -24,6 +23,7 @@ import com.chainsys.salesmanagementsystems.service.LeadService;
 @Controller
 @RequestMapping("/leads")
 public class LeadsController {
+	private static final String ALLLEADS="all-leads";
 	@Autowired
 	private LeadService leadservice;
 	@Autowired
@@ -44,7 +44,7 @@ public class LeadsController {
 		List<Lead> leasList=leadservice.getLeadsForSalesInCome(salesInCome.getFromDate(), salesInCome.getToDate());  
 		model.addAttribute("allLeads", leasList);
 		model.addAttribute("empId", salesInCome.getPlannedLeads());
-		return "all-leads";
+		return ALLLEADS;
 	}
 	@GetMapping("/addleadfrom")//need
 	public String addLeadForm(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
@@ -78,14 +78,14 @@ public class LeadsController {
 		List<Lead>allLeads=leadservice.allLead();
 		model.addAttribute("allLeads", allLeads);
 		model.addAttribute("empId", empId);
-		return "all-leads";
+		return ALLLEADS;
 	}
 	@GetMapping("allleadsbyemployeeid")
 	public String getAllleadsByEmployeeId(@RequestParam("empId") int empId,Model model) {
 		List<Lead>allLeads=leadservice.getLeadsByEmployeeId(empId);
 		model.addAttribute("allLeads", allLeads);
 		model.addAttribute("empId", empId);
-		return "all-leads";
+		return ALLLEADS;
 	}
 	@GetMapping("/updateleadfrom")
 	public String updateLeadForm(@RequestParam("empId")int empId,Model model) {

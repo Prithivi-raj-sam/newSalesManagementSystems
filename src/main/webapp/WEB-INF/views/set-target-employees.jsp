@@ -24,6 +24,7 @@
 
 	<div class="table">
 		<table>
+		<caption></caption>
 			<thead>
 				<tr style="width: 100%, height:100%">
 					<th>Employee Id</th>

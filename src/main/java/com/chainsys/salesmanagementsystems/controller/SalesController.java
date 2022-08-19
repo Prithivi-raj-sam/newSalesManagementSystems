@@ -2,7 +2,6 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.SalesService;
@@ -24,6 +22,7 @@ import com.chainsys.salesmanagementsystems.service.EmployeeService;
 @Controller
 @RequestMapping("/sales")
 public class SalesController {
+	private static final String ALLSALES="all-sales";
 	@Autowired
 	private SalesService salesService;
 	@Autowired
@@ -51,14 +50,14 @@ public class SalesController {
 		List<Sales>allSales=salesService.allSales();
 		model.addAttribute("allSales", allSales);
 		model.addAttribute("empId", empId);
-		return "all-sales";
+		return ALLSALES;
 	}
 	@PostMapping("/getsalesfortwodates")//need
 	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
 		List<Sales>allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
 		model.addAttribute("empId", salesInCome.getPlannedSales());
 		model.addAttribute("allSales", allSales);
-		return "all-sales";
+		return ALLSALES;
 	}
 	@GetMapping("/getSales")//need
 	public String getSalesByID(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
@@ -79,7 +78,7 @@ public class SalesController {
 	@GetMapping("/deletesales")//need
 	public String deleteSales(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
 		salesService.deleteSales(id);
-		return "all-sales";
+		return ALLSALES;
 	}
 	@GetMapping("/updatesalesform")//need
 	public String updateSalesServiceForm(@RequestParam("id")int id,Model model) {

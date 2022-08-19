@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name="sales")
@@ -25,22 +23,15 @@ public class Sales {
 	@Column(name="sale_id")
 	private int salesId;
 	
-//	@NotEmpty(message = "*Please enter Seller Id")
-//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Seller Id ")
 	@Column(name="seller_id")
 	private int employeeId;
 	
-//	@NotEmpty(message = "*Please enter Lead Id")
-//	@Pattern(regexp = "^([0-9]+){1,10}$", message = "Enter valid Lead Id ")
 	@Column(name="lead_id")
 	private int leadId;
 	
-//	@NotEmpty(message = "*Please enter Lead Id")
 	@Column(name="sales_date")
 	private Date salesDate;
 	
-//	@NotEmpty(message = "*Please enter Amount")
-//	@Pattern(regexp = "^[0-9]+(.[0-9]*)?$", message = "Enter valid Amount")
 	@Column(name="amount")
 	private float amount;
 	

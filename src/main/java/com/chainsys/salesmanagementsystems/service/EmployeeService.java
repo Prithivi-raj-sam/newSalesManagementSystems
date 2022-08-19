@@ -86,7 +86,6 @@ public class EmployeeService {
             }
             else
             {    
-                System.out.println("debug:" + this.getClass().getName() + " image is null " + id);
             }    
         return imageBytes;
     }

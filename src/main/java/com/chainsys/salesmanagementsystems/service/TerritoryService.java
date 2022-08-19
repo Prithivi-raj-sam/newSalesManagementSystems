@@ -39,8 +39,8 @@ public class TerritoryService {
 	public Territory getTerritoryByName(String territoryName) {
 		return territoryRepository.findByTerritoryName(territoryName);
 	}
-	public List<Territory> gettargetByStartingTerritoryName(String TerritoryName){
-		return territoryRepository.findByTerritoryNameStartingWith(TerritoryName);
+	public List<Territory> gettargetByStartingTerritoryName(String territoryName){
+		return territoryRepository.findByTerritoryNameStartingWith(territoryName);
 	}
 	public AccountsTerritoryDTO getAccountandTerritory(int id) {
 		AccountsTerritoryDTO dto=new AccountsTerritoryDTO();
