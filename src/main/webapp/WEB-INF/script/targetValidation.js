@@ -14,9 +14,9 @@ let managerCommentCheck = function() {
 
 }
 let employeeIdCheck = function() {
-	let nameRegex = /^[0-9]{1,10}$/;
+	let nameRegex = new RegExp`(^[0-9]{1,10}$)`;
 	if (!document.form.employeeId.value.match(nameRegex)) {
-		if (alert("Empllyee ID can't be empty and must contain Number Only")) {
+		if (alert("Employee ID can't be empty and must contain Number Only")) {
 			document.form.employeeId.focus();
 		} else
 			document.activeElement.blur();
@@ -25,8 +25,8 @@ let employeeIdCheck = function() {
 	}
 
 }
-var plannedTargetCheck = function() {
-	var nameRegex = /^[0-9]{1,10}$/;
+let plannedTargetCheck = function() {
+	let nameRegex = new RegExp`(^[0-9]{1,10}$)`;
 	if (!document.form.plannedTarget.value.match(nameRegex)) {
 		if (alert("planned Target can't be empty and must contain Number Only")) {
 			document.form.plannedTarget.focus();
