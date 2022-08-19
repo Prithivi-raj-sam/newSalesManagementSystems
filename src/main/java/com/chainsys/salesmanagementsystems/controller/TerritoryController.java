@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chainsys.salesmanagementsystems.dto.AccountsTerritoryDTO;
 import com.chainsys.salesmanagementsystems.dto.EmployeeTerritoryDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
@@ -55,8 +54,8 @@ public class TerritoryController {
 		return "get-territory-id";
 	}
 	@GetMapping("/deleteterritory")
-	public String deleteTerritory(@ModelAttribute("getId")GetId id,Model model) {
-		territoryService.deleteTerritory(id.getId());
+	public String deleteTerritory(@RequestParam("getId")int id,Model model) {
+		territoryService.deleteTerritory(id);
 		return "redirect:/territories/allterritory";
 	}
 	@GetMapping("/allterritory")//need

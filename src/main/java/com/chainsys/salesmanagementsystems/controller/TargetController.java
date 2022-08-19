@@ -23,6 +23,8 @@ import com.chainsys.salesmanagementsystems.service.TargetService;
 @RequestMapping("/target")
 public class TargetController {
 	private static final String ALLTARGET="all-targets";
+	
+	
 	@Autowired
 	private TargetService targetService;
 	
@@ -30,7 +32,7 @@ public class TargetController {
 	@GetMapping("/alltargets")//need
 	public String allTargets(Model model) {
 		List<Target>allTarget = targetService.allTarget();
-		model.addAttribute("alltargets", allTarget);
+		model.addAttribute(ALLTARGET, allTarget);
 		return ALLTARGET;
 	}
 	@GetMapping("/alltargetbyEmployeeid")//need

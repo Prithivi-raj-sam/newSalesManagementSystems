@@ -22,7 +22,6 @@ import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.TargetEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.GetId;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
 
@@ -30,6 +29,8 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 @RequestMapping("/employee")
 public class EmployeeController {
 	private static final String REDIRECTTOALLEMPLOYEE="redirect:/employee/allemployee";
+	private static final String RESULT="result";
+	private static final String GETEMPLOYEE="getEmployee";
 	@Autowired
 	private EmployeeService employeeservice;
 	@Autowired
@@ -48,20 +49,7 @@ public class EmployeeController {
 		return "all-employees";
 	}
 	
-	@GetMapping("/updateId")
-	public String updateId(Model model) {
-		model.addAttribute("redirect", "updateemployeeform");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
-	@GetMapping("/deleteId")
-	public String deleteId(Model model) {
-		model.addAttribute("redirect", "deleteemployee");
-		GetId getId=new GetId();
-		model.addAttribute("getId", getId);
-		return "get-id";
-	}
+	
 	
 	
 	
@@ -80,7 +68,7 @@ public class EmployeeController {
 			exp.printStackTrace();
 		}
 		employeeservice.insertEmployee(employee);
-		model.addAttribute("result", "1 row inserted");
+		model.addAttribute(RESULT, "1 row inserted");
 		return "add-employee-form";
 	}
 	@ResponseBody
@@ -110,7 +98,7 @@ public class EmployeeController {
 	@PostMapping("/updateemployee")//need
 	public String updateEmployee(@ModelAttribute("updateEmployee")Employee employee, Model model) {
 		employeeservice.updateEmployee(employee);
-		model.addAttribute("result", "1 record updated");
+		model.addAttribute(RESULT, "1 record updated");
 		return "update-employee-form";
 	}
 	@GetMapping("/employeeachievment")//need
@@ -121,14 +109,14 @@ public class EmployeeController {
 		}
 		else if(employee.getRole().equals("salesman")) {
 			SalesEmployeeDTO dto=employeeservice.getSalesEmployee(id);
-			model.addAttribute("getEmployee", dto.getEmployee());
+			model.addAttribute(GETEMPLOYEE, dto.getEmployee());
 			model.addAttribute("getSales", dto.getSalesList());
 			return "list-employee-sales";
 		}
 		else if(employee.getRole().equals("marketer")) {
 			AccountsEmployeeDTO dto=employeeservice.getAccountsandEmployee(id);
 			model.addAttribute("getAccounts", dto.getAccountList());
-			model.addAttribute("getEmployee", dto.getEmployee());
+			model.addAttribute(GETEMPLOYEE, dto.getEmployee());
 			return "list-accounts-employee";
 		}
 		else {
@@ -139,7 +127,7 @@ public class EmployeeController {
 	public String getAccountsAndEmplyee(@RequestParam("id")int id,Model model) {
 		AccountsEmployeeDTO dto=employeeservice.getAccountsandEmployee(id);
 		model.addAttribute("getAccounts", dto.getAccountList());
-		model.addAttribute("getEmployee", dto.getEmployee());
+		model.addAttribute(GETEMPLOYEE, dto.getEmployee());
 		return "list-accounts-employee";
 	}
 	@GetMapping("/getleadsandemployee")//need
@@ -152,14 +140,14 @@ public class EmployeeController {
 	@GetMapping("/getsalesandemployee")//need
 	public String getSalesAndEmployee(@RequestParam("id")int id,Model model) {
 		SalesEmployeeDTO dto=employeeservice.getSalesEmployee(id);
-		model.addAttribute("getEmployee", dto.getEmployee());
+		model.addAttribute(GETEMPLOYEE, dto.getEmployee());
 		model.addAttribute("getSales", dto.getSalesList());
 		return "list-employee-sales";
 	}
 	@GetMapping("/getemployeeandtarget")//need
 	public String getEmployeeAndTarget(@RequestParam("id")int id,Model model) {
 		TargetEmployeeDTO dto=employeeservice.getTargetsAndEmployee(id);
-		model.addAttribute("getEmployee", dto.getEmployee());
+		model.addAttribute(GETEMPLOYEE, dto.getEmployee());
 		model.addAttribute("getTargets", dto.getTargetList());
 		return "list-employee-target";
 	}
@@ -175,7 +163,7 @@ public class EmployeeController {
 		Employee employee=employeeservice.getEmployeeById(employeePassword.getEmployeeId());
 		employee.setPassword(employeePassword.getPassword());
 		employeeservice.updateEmployee(employee);
-		model.addAttribute("result", "password has been changed");
+		model.addAttribute(RESULT, "password has been changed");
 		return "password";
 	}
 }

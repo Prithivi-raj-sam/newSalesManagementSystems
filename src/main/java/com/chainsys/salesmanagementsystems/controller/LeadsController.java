@@ -24,6 +24,8 @@ import com.chainsys.salesmanagementsystems.service.LeadService;
 @RequestMapping("/leads")
 public class LeadsController {
 	private static final String ALLLEADS="all-leads";
+	private static final String EMPID="empId";
+	
 	@Autowired
 	private LeadService leadservice;
 	@Autowired
@@ -42,8 +44,8 @@ public class LeadsController {
 	@PostMapping("/getleadsbytwodates")//need
 	public String getLeadsByDates(@ModelAttribute("salesInCome") SalesInCome salesInCome, Model model) {
 		List<Lead> leasList=leadservice.getLeadsForSalesInCome(salesInCome.getFromDate(), salesInCome.getToDate());  
-		model.addAttribute("allLeads", leasList);
-		model.addAttribute("empId", salesInCome.getPlannedLeads());
+		model.addAttribute(ALLLEADS, leasList);
+		model.addAttribute(EMPID, salesInCome.getPlannedLeads());
 		return ALLLEADS;
 	}
 	@GetMapping("/addleadfrom")//need
@@ -77,14 +79,14 @@ public class LeadsController {
 	public String getAllLeads(@RequestParam("empId") int empId,Model model) {
 		List<Lead>allLeads=leadservice.allLead();
 		model.addAttribute("allLeads", allLeads);
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
 	}
 	@GetMapping("allleadsbyemployeeid")
 	public String getAllleadsByEmployeeId(@RequestParam("empId") int empId,Model model) {
 		List<Lead>allLeads=leadservice.getLeadsByEmployeeId(empId);
 		model.addAttribute("allLeads", allLeads);
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
 	}
 	@GetMapping("/updateleadfrom")

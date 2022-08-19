@@ -28,6 +28,10 @@ import com.chainsys.salesmanagementsystems.service.AccountService;
 @RequestMapping("/home")
 public class HomeController {
 	public static final String LOGINPAGE="login-page";
+	private static final String EMPID="empId";
+	private static final String SALESINCOME="salesIncome";
+	private static final String TERRITORY="territory";
+	
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
@@ -52,10 +56,10 @@ public class HomeController {
 			model.addAttribute("message", "Employee Id or password Mismatch");
 			return LOGINPAGE;
 		}
-			model.addAttribute("empId", employee.getEmployeeId());
+			model.addAttribute(EMPID, employee.getEmployeeId());
 			if (employee.getRole().equalsIgnoreCase("manager")) {
 				SalesInCome salesInCome=new SalesInCome();
-				model.addAttribute("salesIncome", salesInCome);
+				model.addAttribute(SALESINCOME, salesInCome);
 				return "manager-page";
 			} else if (employee.getRole().equalsIgnoreCase("marketer")) {
 				
@@ -70,9 +74,9 @@ public class HomeController {
 	}
 	@GetMapping("/managerpage")
 	public String getManagerPage(@RequestParam("empId")int empId,Model model) {
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		SalesInCome salesInCome=new SalesInCome();
-		model.addAttribute("salesIncome", salesInCome);
+		model.addAttribute(SALESINCOME, salesInCome);
 		return "manager-page";
 	}
 	@GetMapping("/addemployeeform")
@@ -122,7 +126,7 @@ public class HomeController {
 		  .filter(lead -> lead.getStatus().equals("open lead"))
 		  .collect(Collectors.toList());
 		model.addAttribute("leadList", openLeadList);
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		return "add-sales";
 	}
 	@GetMapping("/updatesales")
@@ -148,7 +152,7 @@ public class HomeController {
 	public String redirectToAddLeads(@RequestParam("empId")int empId,Model model) {
 		List<Account>accountlist=accountService.allAccount();
 		model.addAttribute("accountlist", accountlist);
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		return "add-leads";
 	}
 	@GetMapping("/updateleads")
@@ -225,20 +229,20 @@ public class HomeController {
 	}
 	@GetMapping("/lead")//need
 	public String redirectToLeads(@RequestParam("empId")int empId,Model model) {
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		return"leads";
 	}
 	@GetMapping("/territorys")
 	public String redirectToTerritory(@RequestParam("empId")int empId,Model model) {
 		Territory territory=new Territory();
-		model.addAttribute("territory", territory);
-		model.addAttribute("empId", empId);
-		return"territory";
+		model.addAttribute(TERRITORY, territory);
+		model.addAttribute(EMPID, empId);
+		return TERRITORY;
 	}
 	
 	@GetMapping("/marketeraccount")
 	public String redirectToMarketerAccount(@RequestParam("empId") int empId,Model model) {
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		Account account=new Account();
 		model.addAttribute("account", account);
 		return "marketer-account";
@@ -246,15 +250,15 @@ public class HomeController {
 	@GetMapping("/marketerterritory")
 	public String redirectTomarketerTerrotory(@RequestParam("empId")int empId,Model model) {
 		Territory territory=new Territory();
-		model.addAttribute("empId", empId);
-		model.addAttribute("territory", territory);
+		model.addAttribute(EMPID, empId);
+		model.addAttribute(TERRITORY, territory);
 		return "marketer-territory";
 	}
 	@GetMapping("/employeeTarget")
 	public String redirectToMarketerTarget(@RequestParam("empId")int empId,Model model) {
 		SalesInCome salesInCome=new SalesInCome();
-		model.addAttribute("salesInCome", salesInCome);
-		model.addAttribute("empId", empId);
+		model.addAttribute(SALESINCOME, salesInCome);
+		model.addAttribute(EMPID, empId);
 		return "employee-target";
 	}
 	
@@ -262,20 +266,20 @@ public class HomeController {
 	public String redirectToSalesmanSales(@RequestParam("empId") int empId,Model model) {
 		SalesInCome salesInCome=new SalesInCome();
 		model.addAttribute("salesInCome", salesInCome);
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		return "salesman-sales";
 	}
 	@GetMapping("/salesmanLeads")
 	public String redirectToSalesmanLeads(@RequestParam("empId") int empId,Model model) {
 		SalesInCome salesInCome=new SalesInCome();
 		model.addAttribute("salesInCome", salesInCome);
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		return "salesman-leads";
 	}
 	@GetMapping("/salesIncome")
 	public String redirectToSalesIncome(Model model) {
 		SalesInCome salesIncome=new SalesInCome();
-		model.addAttribute("salesIncome", salesIncome);
+		model.addAttribute(SALESINCOME, salesIncome);
 		return "income-reports";
 	}
 	@GetMapping("/test")

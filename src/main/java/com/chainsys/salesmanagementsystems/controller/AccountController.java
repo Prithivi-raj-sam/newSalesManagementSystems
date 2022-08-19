@@ -23,7 +23,9 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 @Controller
 @RequestMapping("/account")
 public class AccountController {
-	private static final String ALLACOUNT="all-accounts"; 
+	private static final String ALLACCOUNT="all-accounts"; 
+	private static final String EMPID="empId";
+	
 	@Autowired
 	private AccountService accountservice;
 	@Autowired
@@ -52,7 +54,7 @@ public class AccountController {
 		Account account =accountservice.getAccountById(id);
 		Employee employee=employeeService.getEmployeeById(empId);
 		model.addAttribute("account", account);
-		model.addAttribute("empId", empId);
+		model.addAttribute(EMPID, empId);
 		if(employee.getRole().equals("marketer"))
 			return "get-account-marketer";
 		else return "get-account-id";
@@ -61,23 +63,23 @@ public class AccountController {
 	@GetMapping("/allaccount")//need
 	public String getAllAccount(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.allAccount();
-		model.addAttribute("allaccount", allAccount);
-		model.addAttribute("empId", empId);
-		return ALLACOUNT;
+		model.addAttribute(ALLACCOUNT, allAccount);
+		model.addAttribute(EMPID, empId);
+		return ALLACCOUNT;
 	}
 	@GetMapping("/allaccountbyemployee")//need
 	public String getAllAccountByEmployeeId(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.getAccountByEmployeeId(empId);
 		model.addAttribute("allaccount", allAccount);
-		model.addAttribute("empId", empId);
-		return ALLACOUNT;
+		model.addAttribute(EMPID, empId);
+		return ALLACCOUNT;
 	}
 	@PostMapping("/getaccountbycompanyname")
 	public String getAccountByCompanyName(@ModelAttribute("account")Account account,Model model) {
 		List<Account>allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
 		model.addAttribute("allaccount", allAccount);
-		model.addAttribute("empId", account.getEmployeeId());
-		return ALLACOUNT;
+		model.addAttribute(EMPID, account.getEmployeeId());
+		return ALLACCOUNT;
 	}
 	@GetMapping("/deleteaccount")//need
 	public String deleteAccount(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {

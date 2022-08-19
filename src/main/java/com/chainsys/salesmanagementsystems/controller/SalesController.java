@@ -23,6 +23,8 @@ import com.chainsys.salesmanagementsystems.service.EmployeeService;
 @RequestMapping("/sales")
 public class SalesController {
 	private static final String ALLSALES="all-sales";
+	private static final String SALESINCOME="salesIncome";
+	
 	@Autowired
 	private SalesService salesService;
 	@Autowired
@@ -94,21 +96,21 @@ public class SalesController {
 	@GetMapping("/salesincome")
 	public String salesIncome(Model model) {
 		SalesInCome salesIncome=new SalesInCome();
-		model.addAttribute("salesIncome", salesIncome);
+		model.addAttribute(SALESINCOME, salesIncome);
 		return "sales-income";
 	}
 	@PostMapping("/salesTotalAmount")//need
 	public String salesTotalAmount(@ModelAttribute("salesIncome")SalesInCome salesIncome, Model model) {
 		salesIncome=salesService.getTotalSalesBetweenTwoDates(salesIncome);
 		List<SalesInCome> salesIncomeList=salesService.getMonthlySales(salesIncome);
-		model.addAttribute("salesIncome", salesIncome);
+		model.addAttribute(SALESINCOME, salesIncome);
 		model.addAttribute("salesIncomeList", salesIncomeList);
 		return "sales-income-result";
 	}
 	@GetMapping("/monthlyincomeform")
 	public String monthlyIncomeForm(Model model) {
 		SalesInCome salesIncome=new SalesInCome();
-		model.addAttribute("salesIncome", salesIncome);
+		model.addAttribute(SALESINCOME, salesIncome);
 		return "monthly-income";
 	}
 	@PostMapping("/monthlysales")
