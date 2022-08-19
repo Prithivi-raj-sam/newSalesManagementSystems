@@ -83,10 +83,7 @@ public class EmployeeService {
             if(empPhoto != null)
             {
                 imageBytes = empPhoto.getProfile();
-            }
-            else
-            {    
-            }    
+            }   
         return imageBytes;
     }
 }

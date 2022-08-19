@@ -1,8 +1,8 @@
 /**
  * 
  */
-var amountCheck = function() {
-	var nameRegex = new RegExp("^[0-9]+(.[0-9]*)?$");
+let amountCheck = function() {
+	let nameRegex = new RegExp("^[0-9]+(.[0-9]*)?$");
 	if (!document.form.amount.value.match(nameRegex)) {
 		if (alert("Amount can't be empty and must contain Number Only")) {
 			document.form.amount.focus();
@@ -13,8 +13,8 @@ var amountCheck = function() {
 	}
 
 }
-var employeeIdCheck = function() {
-	var nameRegex = new RegExp("^[0-9]{1,10}$");
+let employeeIdCheck = function() {
+	let nameRegex = new RegExp("^[0-9]{1,10}$");
 	if (!document.form.employeeId.value.match(nameRegex)) {
 		if (alert("SellerId can't be empty and must contain Number Only")) {
 			document.form.employeeId.focus();

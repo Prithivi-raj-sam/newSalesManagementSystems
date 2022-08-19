@@ -1,8 +1,8 @@
 /**
  * 
  */
-var companyNameCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
+let companyNameCheck = function() {
+		let nameRegex = new RegExp("^[a-zA-z\s]+$");
 		if (!document.form.companyName.value.match(nameRegex)) {
 			if (alert("Company Name can't be empty and must contain only alphabets")) {
 				document.form.companyName.focus();
@@ -13,8 +13,8 @@ var companyNameCheck = function() {
 		}
 
 	}
-	var contactPersonCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
+	let contactPersonCheck = function() {
+		let nameRegex = new RegExp("^[a-zA-z\s]+$");
 		if (!document.form.contactPerson.value.match(nameRegex)) {
 			if (alert("Contact Person can't be empty and must contain only alphabets")) {
 				document.form.contactPerson.focus();
@@ -25,8 +25,8 @@ var companyNameCheck = function() {
 		}
 
 	}
-	var contactPersonRoleCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
+	let contactPersonRoleCheck = function() {
+		let nameRegex = new RegExp("^[a-zA-z\s]+$");
 		if (!document.form.contactPersonRole.value.match(nameRegex)) {
 			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
 				document.form.contactPersonRole.focus();
@@ -37,8 +37,8 @@ var companyNameCheck = function() {
 		}
 
 	}
-	var accountTypeCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
+	let accountTypeCheck = function() {
+		let nameRegex = new RegExp("^[a-zA-z\s]+$");
 		if (!document.form.accountType.value.match(nameRegex)) {
 			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
 				document.form.accountType.focus();
@@ -49,8 +49,8 @@ var companyNameCheck = function() {
 		}
 
 	}
-	var leadThroughChannelCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-z\s]+$");
+	let leadThroughChannelCheck = function() {
+		let nameRegex = new RegExp("^[a-zA-z\s]+$");
 		if (!document.form.leadThroughChannel.value.match(nameRegex)) {
 			if (alert("Contact Person Role can't be empty and must contain only alphabets")) {
 				document.form.leadThroughChannel.focus();
@@ -62,8 +62,8 @@ var companyNameCheck = function() {
 
 	}
 
-	var emailCheck = function() {
-		var nameRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+	let emailCheck = function() {
+		let nameRegex = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
 		if (!document.form.email.value.match(nameRegex)) {
 			if (alert("Email not in the correct format")) {
 				document.form.email.focus();
@@ -75,8 +75,8 @@ var companyNameCheck = function() {
 
 	}
 
-	var contactPersonPhoneCheck = function() {
-		var nameRegex = new RegExp("[0-9]{10}");
+	let contactPersonPhoneCheck = function() {
+		let nameRegex = new RegExp("[0-9]{10}");
 		if (!document.form.contactPersonPhone.value.match(nameRegex)) {
 			if (alert("Phone number must have 10 digits")) {
 				document.form.contactPersonPhone.focus();
@@ -86,7 +86,7 @@ var companyNameCheck = function() {
 			return false;
 		}
 	}
-	var addressCheck = function() {
+	let addressCheck = function() {
 		if (document.form.address.value == "") {
 			if (alert("Address cannot be blank")) {
 				document.form.address.focus();
