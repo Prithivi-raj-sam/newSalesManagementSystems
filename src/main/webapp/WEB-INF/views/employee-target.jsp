@@ -12,7 +12,7 @@
 </head>
 <body>
 	
-	<form:form action="/target/alltargetfortwodates" method="post" modelAttribute="salesInCome">
+	<form:form action="/target/alltargetfortwodates" method="post" modelAttribute="salesIncome">
 		<div class="navbar">
 			<form:input path="fromDate" placeholder="enter From Ended" type="date"/>
 			<form:input path="toDate" placeholder="enter To Date" type="date"/>

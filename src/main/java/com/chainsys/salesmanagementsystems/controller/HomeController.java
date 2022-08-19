@@ -254,7 +254,7 @@ public class HomeController {
 		model.addAttribute(TERRITORY, territory);
 		return "marketer-territory";
 	}
-	@GetMapping("/employeeTarget")
+	@GetMapping("/employeeTarget")//need
 	public String redirectToMarketerTarget(@RequestParam("empId")int empId,Model model) {
 		SalesInCome salesInCome=new SalesInCome();
 		model.addAttribute(SALESINCOME, salesInCome);

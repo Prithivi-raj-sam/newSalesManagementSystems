@@ -17,23 +17,19 @@
 		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
-					<th>Target Id</th>
 					<th>Target Date</th>
 					<th>Planned Target</th>
 					<th>closed Target</th>
-					<th>Employee Id</th>
 					<th>Manager Comment</th>
-					<th>Target Month</th>
+					<th>Target Set Date</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="targetList" items="${targetList}">
 			   <tr>
-			   	  <td>${targetList.targetId}</td>
 			   	  <td>${targetList.targetDate}</td>
 			   	  <td>${targetList.plannedTarget}</td>
 			   	  <td>${targetList.closedTarget}</td>
-			   	  <td>${targetList.employeeId}</td>
 			   	  <td>${targetList.managerComment}</td>
 			   	  <td>${targetList.targetSetDate}</td>
 			   </tr>

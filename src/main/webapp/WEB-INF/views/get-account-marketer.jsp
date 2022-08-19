@@ -9,11 +9,8 @@
 <style>
 <%@include file="/WEB-INF/css/getemployeebyid.css"%>
 </style>
-
 </head>
-<body style="background-color: #3d403d; color: white;">
-	<div id="root">
-		<div id="form">
+<body>
 			<form:form action="" method="post" modelAttribute="account">
 				<div class="form">
 					<table>
@@ -81,13 +78,8 @@
 					</table>
 				</div>
 			</form:form>
-		</div>
-	</div>
-	<div></div>
-	<div>
-		<a href="/account/updateaccountform?id=${account.accountId}"><button>update</button></a>
+		<a href="/account/updateaccountform?id=${account.accountId}"><button id="account-button">Update</button></a>
 		<a
-			href="/account/deleteaccount?id=${account.accountId}&empId=${empId}"><button>delete</button></a>
-	</div>
+			href="/account/deleteaccount?id=${account.accountId}&empId=${empId}"><button id="account-button">Delete</button></a>
 </body>
 </html>

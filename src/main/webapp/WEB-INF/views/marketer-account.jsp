@@ -8,22 +8,20 @@
 <title>Marketer Account</title>
 <style type="text/css">
 	<%@include file="/WEB-INF/css/employee.css"%>
-	
 </style>
 </head>
 <body>
-	<div class="menu">
+	
 	<form:form action="/account/getaccountbycompanyname" method="post" modelAttribute="account">
-		<ul>
-			<li><a href="/account/addaccountform?empId=${empId}">Add Account</a></li>
-			<li><form:input path="companyName" placeholder="enter Company Name" /></li>
-			<li><form:input path="employeeId" value="${empId}" type="hidden"/></li>
-			<li><form:button>search</form:button></li>
-		</ul>
+		<div class="navbar">
+			<a href="/account/addaccountform?empId=${empId}">Add Account</a>
+			<form:input path="companyName" placeholder="Enter Company Name" />
+			<form:input path="employeeId" value="${empId}" type="hidden"/>
+			<form:button>Search</form:button>
+			</div>
 		</form:form>
-</div>
-	<div></div>
-	<div id="emp1"><iframe id="allemployee" class="iframe" title='All Employee' src='/account/allaccountbyemployee?empId=${empId}' 
+	<div id="emp1">
+	<iframe id="allemployee" class="iframe" title='All Employee' src='/account/allaccountbyemployee?empId=${empId}' 
 	   style='border:10px solid #25195c' ></iframe></div>
 </body>
 </html>

@@ -16,15 +16,15 @@
 		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
-					<th>Territory Id</th>
 					<th>Territory Name</th>
 					<th>No Of Customer</th>
+					<th>view Account</th>
+					<th>view Employee</th>
 				</tr>
 			</thead>
 			<tbody>
 			<c:forEach var="allteritory" items="${allteritory}">
 			   <tr>
-			   	  <td>${allteritory.territoryId}</td>
 			   	  <td id="get"><a href="/territory/getterritory?id=${allteritory.territoryId}&empId=${empId}">${allteritory.territoryName}</a></td>
 			   	  <td>${allteritory.noOfCustomer}</td>
 			   	  <td id="get2"><a href="/territory/getaccountsandterritory?id=${allteritory.territoryId}&empId=${empId}"><button>view Account</button></a></td>

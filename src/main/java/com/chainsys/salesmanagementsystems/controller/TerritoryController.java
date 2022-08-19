@@ -41,7 +41,7 @@ public class TerritoryController {
 	@PostMapping("getTerritorybyname")//need
 	public String getTerritoryByName(@ModelAttribute("territory")Territory territory,Model model) {
 		List<Territory> territoryList=territoryService.gettargetByStartingTerritoryName(territory.getTerritoryName());
-		model.addAttribute("territoryList", territoryList);
+		model.addAttribute("allteritory", territoryList);
 		return "all-territory";
 	}
 	@GetMapping("/getterritory")

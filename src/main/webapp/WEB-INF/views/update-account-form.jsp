@@ -10,10 +10,11 @@
 <script type="text/javascript">
 <%@include file="/WEB-INF/script/accountValidation.js"%>
 </script>
+<style type="text/css">
+<%@include file="/WEB-INF/css/getemployeebyid.css"%>
+</style>
 </head>
-<body style="background-color: #3d403d; color: white;">
-	<div id="root">
-		<div id="form">
+<body>
 			<form:form action="updateaccount" method="post"
 				modelAttribute="updateAccount" name="form">
 				<div class="form">
@@ -116,13 +117,11 @@
 										</c:forEach>
 									</form:select></td>
 							</tr>
-							<form:button id="button">update</form:button>
-						</tbody>
+							</tbody>
 					</table>
+							<form:button id="account-button">Update</form:button>
 				</div>
 			</form:form>
-		</div>
-	</div>
 	<div>${result}</div>
 
 </body>

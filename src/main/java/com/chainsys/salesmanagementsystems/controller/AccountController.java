@@ -74,7 +74,7 @@ public class AccountController {
 		model.addAttribute(EMPID, empId);
 		return ALLACCOUNT;
 	}
-	@PostMapping("/getaccountbycompanyname")
+	@PostMapping("/getaccountbycompanyname")//need
 	public String getAccountByCompanyName(@ModelAttribute("account")Account account,Model model) {
 		List<Account>allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
 		model.addAttribute("allaccount", allAccount);

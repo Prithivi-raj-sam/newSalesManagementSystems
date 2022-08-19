@@ -14,7 +14,6 @@
 <%@include file="/WEB-INF/script/accountValidation.js"%>
 </script>
 <body style="background-color: #3d403d; color: white;">
-	<div id="root">
 		<div id="form">
 			<form:form action="addaccount" method="post"
 				modelAttribute="addAccount" name="form">
@@ -119,14 +118,12 @@
 										</c:forEach>
 									</form:select></td>
 							</tr>
-							<form:button id="button">Add New</form:button>
-						</tbody>
+								</tbody>
 					</table>
 				</div>
+							<form:button id="account-button">Add New</form:button>
 			</form:form>
 		</div>
-	</div>
-
 	<div>${result}</div>
 
 </body>

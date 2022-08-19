@@ -13,11 +13,11 @@
 <body>
 	<div class="menu">
 	<form:form action="/territory/getTerritorybyname" method="post" modelAttribute="territory">
-		<ul>
-			<li><a href="/home/addterritory">Add Territory</a></li>
-			<li><form:input path="territoryName" placeholder="enter Territory Name" /></li>
-			<li><form:button>search</form:button></li>
-		</ul>
+		<div class="navbar">
+			<a href="/home/addterritory">Add Territory</a>
+			<form:input path="territoryName" placeholder="enter Territory Name" />
+			<form:button>search</form:button>
+		</div>
 		</form:form>
 </div>
 	<div id="mark1"><iframe id="marketer" class="iframe" title='All target' src='/territory/allterritory?empId=${empId}' 
