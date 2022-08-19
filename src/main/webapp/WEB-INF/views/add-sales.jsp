@@ -6,9 +6,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add leads to sales</title>
+<style>
+<%@include file="/WEB-INF/css/allemployee.css" %>
+</style>
 </head>
-<body style="background-color:#3d403d; color:white;">
-	<div id="table root">
+<body>
+<h1>Adding To Sales</h1>
+	<div class="table-root">
 		<table>
 			<thead>
 				<tr style="width:100% , height:100%">
@@ -20,6 +24,7 @@
 					<th>Stages</th>
 					<th>Probability</th>
 					<th>Status</th>
+					<th>Close</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -33,7 +38,7 @@
 			   	  <td>${allLeads.stages}</td>
 			   	  <td>${allLeads.propability}</td>
 			   	  <td><a href="/sales/addsalesform?id=${allLeads.leadId}&empId=${empId}"><button>AddToSales</button></a></td>
-			   	  <td><a href="/leads/closeleads?id=${allLeads.leadId}&empId=${empId}"><button>close</button></a></td>
+			   	  <td><a href="/leads/closeleads?id=${allLeads.leadId}&empId=${empId}"><button>Close</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

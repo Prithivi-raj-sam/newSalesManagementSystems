@@ -32,6 +32,11 @@ public class TargetService {
 	public List<Target> getTargetByDescendingOrder(int id){
 		return targetRepository.findByEmployeeIdOrderByTargetDateDesc(id);
 	}
+	public List<Target>getTargetByDescindingOrderDate(){
+		List<Target> targetlist=targetRepository.findAllByOrderByTargetDateDesc();
+		
+	return targetlist;
+	}
 	public void deleteTarget(int id) {
 		targetRepository.deleteById(id);
 	}
@@ -42,7 +47,7 @@ public class TargetService {
 		return  targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(salesIncome.getFromDate(), salesIncome.getToDate());   
 	}
 	public List<Target> getTargetByTwoDate(Target target){
-		return targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(target.getTargetSetDate(), target.getTargetDate());
+		return targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(target.getTargetDate(), target.getTargetSetDate());
 	}
 	public List<Target> getTargetByTwoDate(Date startdate,Date endDate){
 		return targetRepository.findByTargetDateGreaterThanEqualAndTargetDateLessThanEqual(startdate,endDate);

@@ -8,31 +8,20 @@
 <title>Salesman Leads</title>
 <style type="text/css">
 	<%@include file="/WEB-INF/css/employee.css"%>
-	.iframe {
-    position: absolute;
- 	top:65%;
-    right: 0%;
-    width: 1000px;
-    height: 500px;
-    margin-top: -400px;
-    margin-right: 20px;
-    z-index: 999;
-    border-radius:20px;
-} 
 </style>
 </head>
 <body>
-	<div class="menu">
+	
 	<form:form action="/leads/getleadsbytwodates" method="post" modelAttribute="salesInCome">
-		<ul>
-			<li><a href="/home/addleads?empId=${empId}">Add Leads</a></li>
-			<li><form:input path="fromDate" placeholder="Enter Leads From date" type="date"/></li>
-			<li><form:input path="toDate" placeholder="Enter Leads To date" type="date"/></li>
-			<li><form:input path="plannedLeads" type="hidden" value="${empId}"/></li>
-			<li><form:button>search</form:button></li>
-		</ul>
+	<div class="navbar">
+		
+			<a href="/home/addleads?empId=${empId}">Add Leads</a>
+			<form:input path="fromDate" placeholder="Enter Leads From date" type="date"/>
+			<form:input path="toDate" placeholder="Enter Leads To date" type="date"/>
+			<form:input path="plannedLeads" type="hidden" value="${empId}"/>
+			<form:button>Search</form:button>
+			</div>
 		</form:form>
-</div>
 	<div>
 	<div id="emp1"><iframe id="allleads" class="iframe" title='All Leads' src='/leads/allleads?empId=${empId}' 
 	   style='border:10px solid #25195c' ></iframe></div>

@@ -1,37 +1,134 @@
 @charset "ISO-8859-1";
 
-body{
-text-align:center;
+body {
 
+	background-image:
+		url(https://wallpapercave.com/wp/wp2548614.jpg);
+	background-size: 1366px 768px;
+	backdrop-filter:blur(10px);
 }
-.form label{
-	font-family:"Trirong", serif;
-	font-size: 20px;
-	color: pink;
+h3{
+	text-align:center;
+	font-size:30px;
+	color:red;
+	font-weight:600;
+	
+}
+h1{
+	text-align:center;
+	font-size:30px;
+	font-weight:900;
+}
+
+
+
+.add-form{
+	margin-top:2%;
+	margin-left:40%;
+}
+.add-form label {
+	font-family: "Trirong", serif;
+	font-size: 25px;
+	font-weight:800;
+	color: black;
+}
+.add-form input {
+	width: 200px;
+	height: 27px;
+}
+.add-form button {
+	margin-left:13%; 
+	border-radius : 25px;
+	background: cyan;
+	color: black;
+	padding: 10px;
+	width: 120px;
+	border-radius: 25px;
+}
+
+
+
+.sales-form{
+	margin-top:2%;
+	margin-left:30%;
+}
+.sales-form label {
+	font-family: "Trirong", serif;
+	font-size: 25px;
+	font-weight:800;
+	color: black;
+}
+.sales-form input {
+	width: 200px;
+	height: 27px;
+}
+.sales-form button {
+	margin-left:10%; 
+	border-radius :25px;
+	background: cyan;
+	color: black;
+	padding: 10px;
+	width: 120px;
+	border-radius: 25px;
+}
+
+
+
+.lead-form{
+	margin-top:2%;
+	margin-left:35%;
+}
+.lead-form label {
+	font-family: "Trirong", serif;
+	font-size: 25px;
+	font-weight:800;
+	color: black;
+}
+.lead-form input {
+	width: 200px;
+	height: 27px;
+}
+.lead-form button {
+	margin-left:15%; 
+	border-radius :25px;
+	background: cyan;
+	color: black;
+	padding: 10px;
+	width: 120px;
+	border-radius: 25px;
+}
+
+
+
+
+.form{
+    margin-top:5%;
+	margin-left: 5%;
+}
+.form label {
+	font-family: "Trirong", serif;
+	font-size: 25px;
+	font-weight:800;
+	color: black;
 }
 
 .form input {
 	width: 200px;
 	height: 27px;
 }
+
 .form select {
 	width: 200px;
 	height: 27px;
 }
 
 button {
-	border-radius: 25px;
+	margin-left: 45%; 
+	border-radius : 25px;
 	background: cyan;
-	color:black;
+	color: black;
 	padding: 10px;
 	width: 120px;
-}
-
-.form button {
 	border-radius: 25px;
-	background: cyan;
-	color:black;
-	padding: 10px;
-	width: 120px;
 }
 

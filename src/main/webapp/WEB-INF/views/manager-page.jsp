@@ -10,7 +10,7 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
-<%@include file="/WEB-INF/css/managerpage.css" %>
+<%@include file="/WEB-INF/css/employees.css" %>
 </style>
 </head>
 <body>

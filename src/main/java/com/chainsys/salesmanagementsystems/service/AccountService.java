@@ -11,8 +11,6 @@ import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.LeadRepository;
-import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
-import com.chainsys.salesmanagementsystems.validation.Validator;
 
 @Service
 public class AccountService {

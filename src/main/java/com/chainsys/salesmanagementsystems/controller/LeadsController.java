@@ -29,9 +29,6 @@ public class LeadsController {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	
-
-	
 	@GetMapping("/getlead")//need
 	public String getleadsById(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
 		Lead leads=leadservice.getLeadById(id);

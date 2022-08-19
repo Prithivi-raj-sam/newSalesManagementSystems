@@ -7,16 +7,11 @@
 <meta charset="ISO-8859-1">
 <title>All Account</title>
 <style type="text/css">
-	table, th, td {
-  border: 2px solid white;
-}
-a{
-text-decoration:none;
-color:white;
-}
+<%@include file="/WEB-INF/css/allemployee.css" %>
 </style>
+
 </head>
-<body style="background-color:#3d403d; color:white;">
+<body>
 	<div id="table root">
 		<table>
 			<thead>

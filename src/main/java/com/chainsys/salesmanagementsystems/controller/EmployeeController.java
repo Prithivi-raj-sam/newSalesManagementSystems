@@ -1,10 +1,13 @@
 package com.chainsys.salesmanagementsystems.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
@@ -79,10 +84,26 @@ public class EmployeeController {
 		return "add-employee-form";
 	}
 	@PostMapping("/addemployee")//need
-	public String addEmployee(@ModelAttribute("addEmployee")Employee employee, Model model) {
+	public String addEmployee(@ModelAttribute("addEmployee")Employee employee,@RequestParam("photo")MultipartFile photo, Model model) {
+		try {
+			System.out.println(photo.getBytes().length);
+		}catch(IOException exp) {
+			exp.printStackTrace();
+		}
+		try {
+			employee.setProfile(photo.getBytes());
+		}catch(IOException exp) {
+			exp.printStackTrace();
+		}
 		employeeservice.insertEmployee(employee);
 		model.addAttribute("result", "1 row inserted");
 		return "add-employee-form";
+	}
+	@ResponseBody
+	@GetMapping("/getImage")
+	public ResponseEntity<byte[]> getImage(@RequestParam("id")int empId){
+		byte[] empPhoto=employeeservice.getEmployeeImageByteArray(empId);
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(empPhoto);
 	}
 	@GetMapping("/allemployee")
 	public String getAllEmployee(Model model) {

@@ -13,11 +13,10 @@
 <%@include file="/WEB-INF/script/salesValidation.js"%>
 </script>
 </head>
-<body style="background-color:#3d403d; color:white;">
-	<div id="root">
-		<div id="form">
+<body>
 			<form:form action="addsales" method="post" modelAttribute="addsales" name="form">
-				<div class="form">
+			<h1>Add Sales Form</h1>
+				<div class="add-form">
 				<table>
 						<tbody>
 							<tr>
@@ -46,14 +45,13 @@
 						pattern="^[0-9]+(.[0-9]*)?$" title="Please Enter valid Amount" required="true"/>
 					</td>
 			</tr>
-					<form:button id="button">Add New</form:button>
 				</tbody>
 				</table>
+				<br><br>
+				<form:button>Add New</form:button>
 				</div>
 				
 			</form:form>
-		</div>
-	</div>
 	<div>${result}</div>
 	
 </body>

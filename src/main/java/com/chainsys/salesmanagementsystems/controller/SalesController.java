@@ -54,8 +54,6 @@ public class SalesController {
 		return "all-sales";
 	}
 	@PostMapping("/getsalesfortwodates")//need
-	
-	
 	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
 		List<Sales>allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
 		model.addAttribute("empId", salesInCome.getPlannedSales());

@@ -90,14 +90,21 @@ public class TargetController {
 	@PostMapping("/gettargetbydate")
 	public String getTaretByTargetDateAndTargetSetdate(@ModelAttribute("target")Target target,Model model) {
 		List<Target> targetList=targetService.getTargetByTwoDate(target);
-		model.addAttribute("targetList", targetList);
+		model.addAttribute("alltargets", targetList);
 		return "all-targets";
 	}
-	@GetMapping("goingtarget")
+	@GetMapping("/goingtarget")
 	public String getCurrentTarget(@RequestParam("empId") int empId,Model model) {
 		List<Target> targetList=targetService.getTargetByDescendingOrder(empId);
 		Target target=targetList.get(0);
 		model.addAttribute("target", target);
 		return "current-target";
+	}
+	@GetMapping("/todaytarget")
+	public String getTodayTarget(Model model) {
+		List<Target> targetList=targetService.getTargetByDescindingOrderDate();
+		targetList=BusinessLogic.getTodayTarget(targetList);
+		model.addAttribute("alltargets", targetList);
+		return "all-targets";
 	}
 }

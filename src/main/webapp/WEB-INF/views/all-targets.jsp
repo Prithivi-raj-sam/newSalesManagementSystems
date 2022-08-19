@@ -6,9 +6,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>All Target</title>
+<style>
+<%@include file="/WEB-INF/css/allemployee.css" %>
+</style>
 </head>
-<body style="background-color:#3d403d; color:white;">
-	<div id="table root">
+<body>
+	<div class="table">
 		<table>
 			<thead>
 				<tr style="width:100% , height:100%">
@@ -31,7 +34,7 @@
 			   	  <td>${alltargets.employeeId}</td>
 			   	  <td>${alltargets.managerComment}</td>
 			   	  <td>${alltargets.targetSetDate}</td>
-			   	  <td><a href="/target/gettarget?targetId=${alltargets.targetId}"><button>view</button></a></td>
+			   	  <td id="view"><a href="/target/gettarget?targetId=${alltargets.targetId}"><button>view</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

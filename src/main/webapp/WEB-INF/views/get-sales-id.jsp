@@ -10,11 +10,10 @@
 <%@include file="/WEB-INF/css/getemployeebyid.css"%>
 </style>
 </head>
-<body style="background-color: #3d403d; color: white;">
-	<div id="root">
-		<div id="form">
+<body>
+<h1>Sales Details</h1>
 			<form:form action="" method="post" modelAttribute="sales">
-				<div class="form">
+				<div class="sales-form">
 					<table>
 						<tbody>
 							<tr>
@@ -30,7 +29,7 @@
 								<td><form:input path="leadId" readonly="true" /></td>
 							</tr>
 							<tr>
-								<td><label for="salesDate">sales Date</label></td>
+								<td><label for="salesDate">Sales Date</label></td>
 								<td><form:input path="salesDate" readonly="true" /></td>
 							</tr>
 							<tr>
@@ -39,14 +38,11 @@
 							</tr>
 						</tbody>
 					</table>
+					</form:form>
+					<br><br>
+					<a href="/sales/updatesalesform?id=${sales.salesId}"><button>Update</button></a>
+		<a href="/sales/deletesales?id=${sales.salesId}"><button>Delete</button></a>
 				</div>
-			</form:form>
-		</div>
-	</div>
-	<div>
-		<a href="/sales/updatesalesform?id=${sales.salesId}"><button>update</button></a>
-		<a href="/sales/deletesales?id=${sales.salesId}"><button>delete</button></a>
-	</div>
-
+			
 </body>
 </html>

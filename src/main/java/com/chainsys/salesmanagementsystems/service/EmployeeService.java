@@ -76,4 +76,18 @@ public class EmployeeService {
 		dto.setTargetList(targetRepository.findByEmployeeId(id));
 		return dto;
 	}
+	public byte[] getEmployeeImageByteArray(int id) {
+        Employee empPhoto = employeeRepository.findById(id);
+        byte[] imageBytes = null;
+            
+            if(empPhoto != null)
+            {
+                imageBytes = empPhoto.getProfile();
+            }
+            else
+            {    
+                System.out.println("debug:" + this.getClass().getName() + " image is null " + id);
+            }    
+        return imageBytes;
+    }
 }

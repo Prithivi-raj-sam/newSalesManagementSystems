@@ -18,10 +18,11 @@
 			<form:input path="employeeName" placeholder="Enter Employee Name" />
 			<form:button>Search</form:button>
 		</div>
+		</form:form>
 		<div>
 				<iframe id="allemployee" class="iframe" title='All Employee'
 					src='/employee/allemployee'></iframe>
 </div>
-	</form:form>
+	
 </body>
 </html>

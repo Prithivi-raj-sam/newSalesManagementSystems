@@ -14,8 +14,8 @@
 	<div class="table">
 		<table>
 			<thead>
-				<tr style="width:100% , height:100%">
-					<th>Employee Id</th>
+				<tr>
+					<th>Profile</th>
 					<th>Employee Name</th>
 					<th>Phone</th>
 					<th>Email</th>
@@ -24,7 +24,6 @@
 					<th>Password</th>
 					<th>Password Last Change Date</th>
 					<th>Role</th>
-					<th>Profile</th>
 					<th>View</th>
 				</tr>
 			</thead>
@@ -32,7 +31,7 @@
 			<c:forEach var="allEmployee" items="${allEmployee}">
 			
 			   <tr>
-			   	  <td>${allEmployee.employeeId}</td>
+			   	   <td><img width="30" height="25" src="getImage?id=${allEmployee.employeeId}" alt="image"></td>
 			   	  <td>${allEmployee.employeeName}</td>
 			   	  <td>${allEmployee.employeePhone}</td>
 			   	  <td>${allEmployee.email}</td>
@@ -41,7 +40,6 @@
 			   	  <td>${allEmployee.password}</td>
 			   	  <td>${allEmployee.passwordLastChangeDate}</td>
 			   	  <td>${allEmployee.role}</td>
-			   	  <td>${allEmployee.profile}</td>
 			   	  <td id="view"><a href="/employee/getemployee?getId=${allEmployee.employeeId}">View</a></td>
 			   </tr>
 			   

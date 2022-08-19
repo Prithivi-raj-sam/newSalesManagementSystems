@@ -1,7 +1,8 @@
 @charset "ISO-8859-1";
 body {
-background-image:url(https://previews.123rf.com/images/ipopba/ipopba1810/ipopba181000090/109473096-digital-marketing-concept-blue-tone-modern-laptop-screen-with-icon-marketing-success-and-goals-targe.jpg);
+background-image:url(https://wallpapercave.com/wp/wp2548614.jpg);
 	background-size: 1366px 768px;
+	
 }
 .navbar {
 	overflow: hidden;
@@ -37,13 +38,27 @@ border:2px solid black;
    position: absolute;
    top:65%;
    right: 0%;
-   width: 1000px;
+   width: 825px;
    height: 500px;
     backdrop-filter:blur(20px);
    margin-top:-320px;
    margin-right:20px;
    z-index: 999;
    border-radius:25px;
+   box-shadow: 5px 10px 18px #25195c;
+}
+.iframeleft{
+	position: absolute;
+   top:65%;
+   left: 0%;
+   width: 500px;
+   height: 500px;
+    backdrop-filter:blur(20px);
+   margin-top:-320px;
+   margin-right:20px;
+   z-index: 999;
+   border-radius:25px;
+   box-shadow: 5px 10px 18px #25195c;
 }
 
 

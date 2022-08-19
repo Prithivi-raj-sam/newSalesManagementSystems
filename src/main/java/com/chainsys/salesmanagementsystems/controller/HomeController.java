@@ -21,13 +21,13 @@ import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.LeadService;
-import com.chainsys.salesmanagementsystems.service.AccountService;
 import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
-import com.chainsys.salesmanagementsystems.validation.Validator;
+import com.chainsys.salesmanagementsystems.service.AccountService;
 
 @Controller
 @RequestMapping("/home")
 public class HomeController {
+	public static final String LOGINPAGE="login-page";
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
@@ -35,21 +35,22 @@ public class HomeController {
 	@Autowired
 	private AccountService accountService;
 	@GetMapping("/login")
-	public String loginPage(Model model) {
+	public String employeeLoginPage(Model model) {
 		Login login = new Login();
 		model.addAttribute("login", login);
-		return "login-page";
+		return LOGINPAGE;
 	}
 
 	@PostMapping("employeepage")
 	public String redirectToEmployeesPage(@ModelAttribute("login") Login login, Model model) {
 		Employee employee = employeeService.getEmployeeByEmployeeIdAndPassrd(login.getEmployeeId(),login.getPassword());
 		try {
-			Validator.nullValueErrorCheck(employee);
+			if(employee==null)
+				throw new InvalidInputDataException("There is no Matchinf data");
 		} catch (InvalidInputDataException exp) {
 			model.addAttribute("error", "Error Name:" + exp.getMessage());
 			model.addAttribute("message", "Employee Id or password Mismatch");
-			return "login-page";
+			return LOGINPAGE;
 		}
 			model.addAttribute("empId", employee.getEmployeeId());
 			if (employee.getRole().equalsIgnoreCase("manager")) {
@@ -63,7 +64,7 @@ public class HomeController {
 				return "salesman-page";
 			} else {
 				model.addAttribute("message", "Somthing Wrong Please Ask Manager");
-				return "login-page";
+				return LOGINPAGE;
 		}
 		
 	}

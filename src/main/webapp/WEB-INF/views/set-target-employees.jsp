@@ -3,40 +3,26 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="ISO-8859-1">
 <title>Set Target For Employee</title>
 <style>
 <%@include file="/WEB-INF/css/employee.css"%>
-#emp1{
-float:right
-}
- 
-.iframe {
-    position: absolute;
- 	top:65%;
-    right: 0%;
-    width: 1000px;
-    height: 500px;
-    margin-top: -400px;
-    margin-right: 20px;
-    z-index: 999;
-    border-radius:20px;
-} 
+<%@include file="/WEB-INF/css/allemployee.css" %>
 </style>
 </head>
 <body style="background-color: #c4f4f5; color: white;">
-<div class="menu">
+
 	<form:form action="/employee/getemployeebyname" method="post"
 		modelAttribute="employeeDetail">
-		<ul>
-			<li><form:input path="employeeName" placeholder="enter Employee Name" /></li>
-			<li><form:button>search</form:button></li>
-		</ul>
+			<div class="navbar">
+			<form:input path="employeeName" placeholder="enter Employee Name" />
+			<form:button>search</form:button>
+		</div>
 	</form:form>
-	</div>
-	<div id="table root">
+
+	<div class="table">
 		<table>
 			<thead>
 				<tr style="width: 100%, height:100%">
@@ -66,7 +52,7 @@ float:right
 						<td>${allEmployee.passwordLastChangeDate}</td>
 						<td>${allEmployee.role}</td>
 						<td>${allEmployee.profile}</td>
-						<td><a
+						<td id="view"><a
 							href="/target/addtargetform?id=${allEmployee.employeeId}"><button>SetTarget</button></a></td>
 					</tr>
 

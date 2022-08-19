@@ -6,11 +6,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employees Target</title>
+<style type="text/css">
+<%@include file="/WEB-INF/css/allemployee.css"%>
+</style>
 </head>
-<body style="background-color:#3d403d; color:white;">
-
-<div><a><button>Going target</button></a></div>
-	<div id="table root">
+<body>
+<h1>Target List Of Employees</h1>
+	<div class="employeetarget-table">
 		<table>
 			<thead>
 				<tr style="width:100% , height:100%">

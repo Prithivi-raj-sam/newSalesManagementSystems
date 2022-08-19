@@ -2,20 +2,36 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide">
 <meta charset="ISO-8859-1">
 <title>Get Employee By Id</title>
 <style>
 <%@include file="/WEB-INF/css/getemployeebyid.css"%>
+.img{
+margin-left:20%;
+width: 150px;
+height: 120px; 
+border-radius: 50%;
+}
+
 </style>
 </head>
 <body>
 	<form:form action="" method="post" modelAttribute="employee">
+	<div class="img">
+	<img class="img" src="getImage?id=${employee.employeeId}" alt="image">
+	
+	</div><hr>
 		<div class="form">
 			<table>
+				<caption></caption>
+				<thead></thead>
 				<tbody>
+					<tr>
+						<td></td>
+					</tr>
 					<tr>
 						<td><label for="employeeId">Employee id</label></td>
 						<td><form:input path="employeeId" readonly="true" /></td>

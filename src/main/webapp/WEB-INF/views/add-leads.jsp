@@ -6,12 +6,15 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Add Account to leads</title>
+<style type="text/css">
+	<%@include file="/WEB-INF/css/allemployee.css"%>
+</style>
 </head>
-<body style="background-color:#3d403d; color:white;">
-	<div id="table root">
+<body>
+	<div class="table">
 		<table>
 			<thead>
-				<tr style="width:100% , height:100%">
+				<tr>
 					<th>Account Id</th>
 					<th>Company Name</th>
 					<th>Contact Person</th>
@@ -24,6 +27,7 @@
 					<th>Lead Through Channel</th>
 					<th>Customer Join Date</th>
 					<th>Territory Id</th>
+					<th>Add Leads</th>
 				</tr>
 			</thead>
 			<tbody>

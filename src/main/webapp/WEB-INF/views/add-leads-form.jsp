@@ -13,12 +13,10 @@
 <%@include file="/WEB-INF/script/leadValidation.js"%>
 </script>
 </head>
-<body style="background-color:#3d403d; color:white;">
-	<div id="root">
-		<div id="form">
+<body>
 			<form:form action="addlead" method="post" modelAttribute="addLead" name="form">
-			
-				<div class="form">
+			<h1>All Leads Form</h1>
+				<div class="lead-form">
 				<table>
 				<tbody>
 				<tr>
@@ -69,14 +67,12 @@
 						pattern="^[0-9]+(.[0-9]*)?$" title="please Enter Valid Probabilty"/>
 					</td>
 				</tr>
-					<form:button id="button">Add New</form:button>
-				
 				</tbody>
 				</table>
+				<br><br>
+				<form:button id="button">Add New</form:button>
 				</div>
 			</form:form>
-		</div>
-	</div>
 	<div>${result}</div>
 	
 </body>

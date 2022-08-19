@@ -6,6 +6,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title></title>
+<style type="text/css">
+<%@include file="/WEB-INF/css/allemployee.css"%>
+</style>
 </head>
 <body>
 	<div id="table root">
@@ -17,6 +20,7 @@
 					<th>Lead Id</th>
 					<th>Sales Date</th>
 					<th>Amount</th>
+					<th>View</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,7 +31,7 @@
 			   	  <td>${salesList.leadId}</td>
 			   	  <td>${salesList.salesDate}</td>
 			   	  <td>${salesList.amount}</td>
-			   	  <td><a href="/sales/getSales?id=${salesList.salesId}&empId=${salesList.employeeId}"><button>view</button></a></td>
+			   	  <td><a href="/sales/getSales?id=${salesList.salesId}&empId=${salesList.employeeId}"><button>View</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

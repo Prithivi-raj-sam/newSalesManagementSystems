@@ -80,7 +80,7 @@ public class Employee {
 	private String role;
 	
 	@Column(name="emp_profile")
-	private File profile;
+	private byte[] profile;
 	
 	@OneToMany(mappedBy="employee",fetch=FetchType.LAZY)
 	private List<Account> accountList;
@@ -182,12 +182,11 @@ public class Employee {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	public File getProfile() {
+	public byte[] getProfile() {
 		return profile;
 	}
-	public void setProfile(File profile) {
+	public void setProfile(byte[] profile) {
 		this.profile = profile;
 	}
-	
 	
 }

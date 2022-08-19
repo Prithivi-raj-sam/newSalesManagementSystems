@@ -1,9 +1,34 @@
 @charset "ISO-8859-1";
+body {
+background-image:url(https://wallpapercave.com/wp/wp2548614.jpg);
+	background-size: 1366px 768px;
+	 backdrop-filter:blur(20px);
+}
+h1{
+	text-align:center;
+	font-size:30px;
+	font-weight:900;
+}
+.table-root{
+	margin-top:2%;
+	margin-left:26%
+	
+}
+.employeetarget-table{
+	margin-top:2%;
+	margin-left:26%
+	
+}
+.allsales-table{
+	margin-top:4%;
+	margin-left:35%;
+}
 
-.table{
+
+table{
 text-align:center;
-border:3px solid black;
- border-collapse: collapse;
+border:4px solid black;
+border-collapse:collapse;
 }
 
 tr:nth-child(even){
@@ -17,18 +42,24 @@ background-color:white;
 th{
 background-color:white;
 color:red;
-border:1px solid black;
+border:3px solid black;
+ border-collapse: collapse;
 }
 
 td{
 color:black;
-border:1px solid black;
+border:2px solid black;
+ border-collapse: collapse;
 }
 
 table #view{
+background-color:white;
+}
+table #get{
 background-color:pink;
 }
 table a{
 text-decoration: none;
 color:black;
 }
+

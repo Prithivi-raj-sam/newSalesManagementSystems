@@ -163,5 +163,8 @@ public class BusinessLogic {
 		dateArray[1] = Date.valueOf(endDate);
 		return dateArray;
 	}
+	public static List<Target>getTodayTarget(List<Target>targetList){
+		return targetList.stream().filter(target->target.getTargetDate().compareTo(getInstanceDate())>0).collect(Collectors.toList());
+	}
 
 }
