@@ -31,7 +31,7 @@
 			   <tr>
 			   	  <td id="get"><a href="/account/getacountandleads?id=${allLeads.accountId}">${accountName[status.index]}</a></td>
 			   	  <td>${allLeads.status}</td>
-			   	  <td id="get2"><a href="/employee/getleadsandemployee?id=${allLeads.employeeId}">${employeename[status.index]}</a></td>
+			   	  <td id="get2"><a href="/employee/getleadsandemployee?id=${allLeads.employeeId}">${employeeName[status.index]}</a></td>
 			   	  <td>${allLeads.leadDate}</td>
 			   	  <td>${allLeads.stages}</td>
 			   	  <td>${allLeads.propability}</td>

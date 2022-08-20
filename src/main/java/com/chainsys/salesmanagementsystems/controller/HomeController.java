@@ -154,7 +154,7 @@ public class HomeController {
 	public String redirectToDeleteSales(Model model) {
 		return "redirect:/sales/deleteId";
 	}
-	@GetMapping("/addleads")
+	@GetMapping("/addleads")//need
 	public String redirectToAddLeads(@RequestParam("empId")int empId,Model model) {
 		List<Account>accountlist=accountService.allAccount();
 		model.addAttribute("accountlist", accountlist);
@@ -197,7 +197,7 @@ public class HomeController {
 	public String redirectToGetAllTerritory(Model model) {
 		return "redirect:/territory/allterritory";
 	}
-	@GetMapping("/addTarget")
+	@GetMapping("/addTarget")//need
 	public String redirectToAddTarget(Model model) {
 		List<Employee> employeeList=employeeService.allEmployee();
 		model.addAttribute("allEmployee", employeeList);

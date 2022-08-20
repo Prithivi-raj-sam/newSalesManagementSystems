@@ -27,7 +27,7 @@ public class LeadsController {
 	private static final String ALLLEADS="all-leads";
 	private static final String EMPID="empId";
 	private static final String ACCOUNTNAME="accountName";
-	private static final String EMPLOYEENAME="employeename";
+	private static final String EMPLOYEENAME="employeeName";
 	private static final String ALLLEADSMODEL="allLeads";
 	@Autowired
 	private LeadService leadservice;
