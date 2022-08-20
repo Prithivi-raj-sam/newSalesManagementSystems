@@ -65,9 +65,8 @@
 		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
-					<th>Sales Id</th>
-					<th>Seller Id</th>
-					<th>Lead Id</th>
+					<th>Seller Name</th>
+					<th>Account Name</th>
 					<th>Sales Date</th>
 					<th>Amount</th>
 				</tr>
@@ -75,9 +74,8 @@
 			<tbody>
 
 			   <tr>
-			   	  <td>${getSales.salesId}</td>
-			   	  <td>${getSales.employeeId}</td>
-			   	  <td>${getSales.leadId}</td>
+			   	  <td>${getSales.employeeName}</td>
+			   	  <td>${getSales.accountName}</td>
 			   	  <td>${getSales.salesDate}</td>
 			   	  <td>${getSales.amount}</td>
 			   </tr>

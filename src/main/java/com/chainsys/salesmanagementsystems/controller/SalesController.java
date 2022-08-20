@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Sales;
+import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.SalesService;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
@@ -24,7 +25,7 @@ import com.chainsys.salesmanagementsystems.service.EmployeeService;
 public class SalesController {
 	private static final String ALLSALES="all-sales";
 	private static final String SALESINCOME="salesIncome";
-	
+	private static final String ALLSALESMODEL="allSales";
 	@Autowired
 	private SalesService salesService;
 	@Autowired
@@ -49,16 +50,17 @@ public class SalesController {
 	}
 	@GetMapping("/allsales")//need
 	public String allSales(@RequestParam("empId") int empId, Model model) {
-		List<Sales>allSales=salesService.allSales();
-		model.addAttribute("allSales", allSales);
+		List<SalesDetail>allSales=salesService.allSales();
+		model.addAttribute(ALLSALESMODEL, allSales);
 		model.addAttribute("empId", empId);
 		return ALLSALES;
 	}
 	@PostMapping("/getsalesfortwodates")//need
 	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
 		List<Sales>allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
+		List<SalesDetail>salesDetailList=salesService.getSalesDetailsOfNames(allSales);
 		model.addAttribute("empId", salesInCome.getPlannedSales());
-		model.addAttribute("allSales", allSales);
+		model.addAttribute(ALLSALESMODEL, salesDetailList);
 		return ALLSALES;
 	}
 	@GetMapping("/getSales")//need
@@ -74,13 +76,15 @@ public class SalesController {
 	@GetMapping("/getsalesbyemployeeid")//need
 	public String getSalesByEmployeeId(@RequestParam("empId")int empId,Model model) {
 		List<Sales> salesList=salesService.getSalesByEmployeeId(empId);
-		model.addAttribute("salesList", salesList);
-		return "get-sales-employeeid";
+		List<SalesDetail>salesDetailsList=salesService.getSalesDetailsOfNames(salesList);
+		model.addAttribute(ALLSALESMODEL, salesDetailsList);
+		model.addAttribute("empId", empId);
+		return ALLSALES;
 	}
 	@GetMapping("/deletesales")//need
 	public String deleteSales(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
 		salesService.deleteSales(id);
-		return ALLSALES;
+		return "redirect:/sales/allsales?empId="+empId;
 	}
 	@GetMapping("/updatesalesform")//need
 	public String updateSalesServiceForm(@RequestParam("id")int id,Model model) {

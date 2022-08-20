@@ -22,17 +22,13 @@
 					<th>Contact Person Role</th>
 					<th>Email</th>
 					<th>Contact Person Phone</th>
-					<th>Address</th>
 					<th>Account Type</th>
-					<th>Market Id</th>
-					<th>Lead Through Channel</th>
-					<th>Customer Join Date</th>
-					<th>Territory Id</th>
+					<th>Marketer Name</th>
 					<th>View</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="allaccount" items="${allaccount}">
+			<c:forEach var="allaccount" items="${allaccount}" varStatus="status">
 			   <tr>
 			   	  <td>${allaccount.companyName}</td>
 			   	  <td>${allaccount.contactPerson}</td>
@@ -40,8 +36,7 @@
 			   	  <td>${allaccount.email}</td>
 			   	  <td>${allaccount.contactPersonPhone}</td>
 			   	  <td>${allaccount.accountType}</td>
-			   	  <td id="get"><a href="/employee/getaccountsemployee?id=${allaccount.employeeId}">${allaccount.employeeId}</a></td>
-			   	  <td>${allaccount.leadThroughChannel}</td>
+                  <td><a href="/employee/getaccountsemployee?id=${allaccount.employeeId}">${employeeName[status.index]}</a></td>
 			   	  <td id="view"><a href="/account/getaccount?id=${allaccount.accountId}&empId=${empId}"><button>View</button></a></td>
 			   </tr>
 			</c:forEach>

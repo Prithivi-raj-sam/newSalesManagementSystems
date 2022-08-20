@@ -1,6 +1,8 @@
 package com.chainsys.salesmanagementsystems.service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.TargetEmployeeDTO;
+import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.EmployeeRepository;
@@ -86,4 +89,15 @@ public class EmployeeService {
             }   
         return imageBytes;
     }
+	public List<String> getEmployeeNamesByEmployeeId(List<Account>accountList){
+		List<String>employeeNameList=new ArrayList<>();
+		List<Employee> employeeList=employeeRepository.findAll();
+		for(int i=0;i<accountList.size();i++) {
+			for(int j=0;j<employeeList.size();j++) {
+				if(accountList.get(i).getEmployeeId()==employeeList.get(j).getEmployeeId())
+					employeeNameList.add(employeeList.get(j).getEmployeeName());
+			}
+		}
+		return employeeNameList;
+	}
 }

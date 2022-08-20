@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
+import com.chainsys.salesmanagementsystems.model.Account;
+import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.Sales;
+import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.repository.SalesRepository;
@@ -21,7 +24,10 @@ public class SalesService {
 	private TargetService targetService;
 	@Autowired
 	private LeadService leadService;
-	
+	@Autowired
+	private EmployeeService employeeService;
+	@Autowired
+	private AccountService accountService;
 	public void insertSales(Sales sales) {
 		salesRepository.save(sales);
 		Lead lead=leadService.getLeadById(sales.getLeadId());
@@ -31,8 +37,10 @@ public class SalesService {
 		Target target= BusinessLogic.updateClosedTarget(targetList, "sales");
 		targetService.updateTarget(target);
 	}
-	public List<Sales> allSales(){
-		return salesRepository.findAll();
+	public List<SalesDetail> allSales(){
+		List<Sales> salesList=salesRepository.findAll();
+		List<SalesDetail>salesDetailsList=BusinessLogic.getSalesdetails(salesList, accountService, employeeService, leadService);
+		 return salesDetailsList;
 	}
 	public void updateSales(Sales sales) {
 		salesRepository.save(sales);
@@ -49,6 +57,9 @@ public class SalesService {
 	public List<Sales> getSalesByEmployeeId(int id){
 		return salesRepository.findByEmployeeEmployeeId(id);
 	}
+	public List<SalesDetail> getSalesDetailsOfNames(List<Sales>salesList){
+		return BusinessLogic.getSalesdetails(salesList, accountService, employeeService, leadService);
+	}
 	public SalesInCome getTotalSalesBetweenTwoDates(SalesInCome salesIncome){
 		List<Target> targetList=targetService.getSalesInCome(salesIncome);
 		List<Sales> salesList= getSalesBetweenTwoDates(salesIncome.getFromDate(),salesIncome.getToDate());
@@ -59,6 +70,10 @@ public class SalesService {
 		salesIncome.setClosedSales(inComeAttributes[3]);
 		salesIncome.setTotalSalesAmount(BusinessLogic.getTotalSalesAmount(salesList));
 		return salesIncome;
+	}
+	public SalesDetail getSalesForLead(Sales sales) {
+		return BusinessLogic.getSalesDetailsByLeads(sales, accountService, employeeService, leadService);
+		
 	}
 	public List<SalesInCome> getMonthlySales(SalesInCome salesIncome) {
 		Date[] fromAndToDate=BusinessLogic.getFirstAndLastdayOfMonth(salesIncome.getFromDate(),salesIncome.getToDate());

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
+import com.chainsys.salesmanagementsystems.model.LeadDetail;
 import com.chainsys.salesmanagementsystems.model.Login;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
@@ -121,8 +122,8 @@ public class HomeController {
 	}
 	@GetMapping("/addsales")
 	public String redirectToAddSales(@RequestParam("empId")int empId,Model model) {
-		List<Lead> leadList=leadService.getLeadsByEmployeeId(empId);
-		List<Lead> openLeadList=leadList.stream()
+		List<LeadDetail> leadList=leadService.getLeadsByEmployeeId(empId);
+		List<LeadDetail> openLeadList=leadList.stream()
 		  .filter(lead -> lead.getStatus().equals("open lead"))
 		  .collect(Collectors.toList());
 		model.addAttribute("leadList", openLeadList);

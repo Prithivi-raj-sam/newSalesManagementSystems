@@ -76,26 +76,23 @@
 		<caption></caption>
 			<thead>
 				<tr style="width: 100%, height:100%">
-					<th>Lead Id</th>
-					<th>Account Id</th>
+					<th>Account Name</th>
 					<th>Status</th>
-					<th>Seller Id</th>
+					<th>Seller Name</th>
 					<th>Lead Date</th>
 					<th>Stages</th>
 					<th>Probability</th>
-					<th>Status</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="getleads" items="${getleads}">
 					<tr>
-						<td>${getleads.leadId}</td>
-						<td>${getleads.accountId}</td>
+						<td>${getleads.accountName}</td>
 						<td>${getleads.status}</td>
-						<td>${getleads.employeeId}</td>
+						<td>${getleads.employeeName}</td>
 						<td>${getleads.leadDate}</td>
 						<td>${getleads.stages}</td>
-						<td>${getleads.propability}</td>
+						<td>${getleads.probablity}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

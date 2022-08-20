@@ -16,6 +16,8 @@ import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
+import com.chainsys.salesmanagementsystems.model.Lead;
+import com.chainsys.salesmanagementsystems.model.LeadDetail;
 import com.chainsys.salesmanagementsystems.service.AccountService;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
@@ -25,6 +27,7 @@ import com.chainsys.salesmanagementsystems.service.TerritoryService;
 public class AccountController {
 	private static final String ALLACCOUNT="all-accounts"; 
 	private static final String EMPID="empId";
+	private static final String ALLACCOUNTMODEL="allaccount";
 	
 	@Autowired
 	private AccountService accountservice;
@@ -63,21 +66,25 @@ public class AccountController {
 	@GetMapping("/allaccount")//need
 	public String getAllAccount(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.allAccount();
-		model.addAttribute(ALLACCOUNT, allAccount);
+		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		model.addAttribute("employeeName", employeeName);
+		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, empId);
 		return ALLACCOUNT;
 	}
 	@GetMapping("/allaccountbyemployee")//need
 	public String getAllAccountByEmployeeId(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.getAccountByEmployeeId(empId);
-		model.addAttribute("allaccount", allAccount);
+		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		model.addAttribute("employeeName", employeeName);
+		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, empId);
 		return ALLACCOUNT;
 	}
 	@PostMapping("/getaccountbycompanyname")//need
 	public String getAccountByCompanyName(@ModelAttribute("account")Account account,Model model) {
 		List<Account>allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
-		model.addAttribute("allaccount", allAccount);
+		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, account.getEmployeeId());
 		return ALLACCOUNT;
 	}
@@ -102,8 +109,10 @@ public class AccountController {
 	@GetMapping("/getacountandleads")//need
 	public String getAcountAndLeads(@RequestParam("id")int id, Model model) {
 		LeadsAccountsDTO dto=accountservice.getAcountsAndLeads(id);
+		List<Lead>leadList=dto.getLeadsList();
+		List<LeadDetail>leadDetailList=BusinessLogic.getLeadDetails(leadList, accountservice, employeeService);
 		model.addAttribute("getaccount", dto.getAccount());
-		model.addAttribute("getlead", dto.getLeadsList());
+		model.addAttribute("getlead", leadDetailList);
 		return "list-account-leads";
 	}
 }

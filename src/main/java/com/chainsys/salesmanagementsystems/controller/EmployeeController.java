@@ -17,13 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.TargetEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
+import com.chainsys.salesmanagementsystems.model.Lead;
+import com.chainsys.salesmanagementsystems.model.LeadDetail;
+import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
+import com.chainsys.salesmanagementsystems.service.SalesService;
 
 @Controller
 @RequestMapping("/employee")
@@ -35,7 +40,8 @@ public class EmployeeController {
 	private EmployeeService employeeservice;
 	@Autowired
 	private TerritoryService territoryService;
-	
+	@Autowired
+	private SalesService salesService;
 	@GetMapping("/getemployee")//
 	public String getEmployeeById(@RequestParam("getId")int id,Model model) {
 		Employee employee=employeeservice.getEmployeeById(id);
@@ -133,15 +139,18 @@ public class EmployeeController {
 	@GetMapping("/getleadsandemployee")//need
 	public String getLeadsandEmployee(@RequestParam("id")int id,Model model) {
 		LeadsEmployeeDTO dto=employeeservice.getLeadsAndEmployee(id);
+		List<Lead>leadList=dto.getLeadlist();
+		List<LeadDetail>leadDetailList=BusinessLogic.getLeadDetails(leadList, null, employeeservice);
 		model.addAttribute("getemployee", dto.getEmployee());
-		model.addAttribute("getleads", dto.getLeadlist());
+		model.addAttribute("getleads", leadDetailList);
 		return "list-employee-leads";
 	}
 	@GetMapping("/getsalesandemployee")//need
 	public String getSalesAndEmployee(@RequestParam("id")int id,Model model) {
 		SalesEmployeeDTO dto=employeeservice.getSalesEmployee(id);
+		List<SalesDetail>salesDetailsList=salesService.getSalesDetailsOfNames(dto.getSalesList());
 		model.addAttribute(GETEMPLOYEE, dto.getEmployee());
-		model.addAttribute("getSales", dto.getSalesList());
+		model.addAttribute("getSales", salesDetailsList);
 		return "list-employee-sales";
 	}
 	@GetMapping("/getemployeeandtarget")//need

@@ -16,10 +16,9 @@
 		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
-					<th>Lead Id</th>
-					<th>Account Id</th>
+					<th>Account Name</th>
 					<th>Status</th>
-					<th>Seller Id</th>
+					<th>Seller Name</th>
 					<th>Lead Date</th>
 					<th>Stages</th>
 					<th>Probability</th>
@@ -28,14 +27,14 @@
 			</thead>
 			<tbody>
 			<c:forEach var="allLeads" items="${allLeads}">
+			
 			   <tr>
-			   	  <td>${allLeads.leadId}</td>
-			   	  <td id="get"><a href="/account/getacountandleads?id=${allLeads.accountId}">${allLeads.accountId}</a></td>
+			   	  <td id="get"><a href="/account/getacountandleads?id=${allLeads.accountId}">${allLeads.accountName}</a></td>
 			   	  <td>${allLeads.status}</td>
-			   	  <td id="get2"><a href="/employee/getleadsandemployee?id=${allLeads.employeeId}">${allLeads.employeeId}</a></td>
+			   	  <td id="get2"><a href="/employee/getleadsandemployee?id=${allLeads.employeeId}">${allLeads.employeeName}</a></td>
 			   	  <td>${allLeads.leadDate}</td>
 			   	  <td>${allLeads.stages}</td>
-			   	  <td>${allLeads.propability}</td>
+			   	  <td>${allLeads.probablity}</td>
 			   	  <td id="view"><a href="/leads/getlead?id=${allLeads.leadId}&empId=${empId}"><button>view</button></a></td>
 			   </tr>
 			</c:forEach>

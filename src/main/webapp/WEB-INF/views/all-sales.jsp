@@ -17,9 +17,8 @@
 		<caption></caption>
 			<thead>
 				<tr>
-					<th>Sales Id</th>
-					<th>Seller Id</th>
-					<th>Lead Id</th>
+					<th>Seller Name</th>
+					<th>Account Name</th>
 					<th>Sales Date</th>
 					<th>Amount</th>
 					<th>View</th>
@@ -28,9 +27,8 @@
 			<tbody>
 			<c:forEach var="allsales" items="${allSales}">
 			   <tr>
-			   	  <td>${allsales.salesId}</td>
-			   	  <td id="get"><a href="/employee/getsalesandemployee?id=${allsales.employeeId}">${allsales.employeeId}</a></td>
-			   	  <td id="get2"><a href="/leads/getleadsandsales?id=${allsales.leadId}">${allsales.leadId}</a></td>
+			   	  <td id="get"><a href="/employee/getsalesandemployee?id=${allsales.employeeId}">${allsales.employeeName}</a></td>
+			   	  <td id="get2"><a href="/leads/getleadsandsales?id=${allsales.leadId}">${allsales.accountName}</a></td>
 			   	  <td>${allsales.salesDate}</td>
 			   	  <td>${allsales.amount}</td>
 			   	  <td id="view"><a href="/sales/getSales?id=${allsales.salesId}&empId=${empId}"><button>View</button></a></td>

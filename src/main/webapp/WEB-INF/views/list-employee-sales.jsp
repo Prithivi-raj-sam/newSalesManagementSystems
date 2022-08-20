@@ -76,9 +76,8 @@
 		<caption></caption>
 			<thead>
 				<tr style="width: 100%, height:100%">
-					<th>Sales Id</th>
-					<th>Seller Id</th>
-					<th>Lead Id</th>
+					<th>Seller Name</th>
+					<th>Account Name</th>
 					<th>Sales Date</th>
 					<th>Amount</th>
 				</tr>
@@ -86,9 +85,8 @@
 			<tbody>
 				<c:forEach var="allsales" items="${getSales}">
 					<tr>
-						<td>${allsales.salesId}</td>
-						<td>${allsales.employeeId}</td>
-						<td>${allsales.leadId}</td>
+						<td>${allsales.employeeName}</td>
+						<td>${allsales.accountName}</td>
 						<td>${allsales.salesDate}</td>
 						<td>${allsales.amount}</td>
 					</tr>

@@ -16,9 +16,12 @@ import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
+import com.chainsys.salesmanagementsystems.model.LeadDetail;
+import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.LeadService;
+import com.chainsys.salesmanagementsystems.service.SalesService;
 
 @Controller
 @RequestMapping("/leads")
@@ -30,6 +33,8 @@ public class LeadsController {
 	private LeadService leadservice;
 	@Autowired
 	private EmployeeService employeeService;
+	@Autowired
+	private SalesService salesService;
 	
 	@GetMapping("/getlead")//need
 	public String getleadsById(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
@@ -43,7 +48,7 @@ public class LeadsController {
 	}
 	@PostMapping("/getleadsbytwodates")//need
 	public String getLeadsByDates(@ModelAttribute("salesInCome") SalesInCome salesInCome, Model model) {
-		List<Lead> leasList=leadservice.getLeadsForSalesInCome(salesInCome.getFromDate(), salesInCome.getToDate());  
+		List<LeadDetail> leasList=leadservice.getLeadsForSalesInCome(salesInCome.getFromDate(), salesInCome.getToDate());  
 		model.addAttribute(ALLLEADS, leasList);
 		model.addAttribute(EMPID, salesInCome.getPlannedLeads());
 		return ALLLEADS;
@@ -77,14 +82,14 @@ public class LeadsController {
 	}
 	@GetMapping("/allleads")//need
 	public String getAllLeads(@RequestParam("empId") int empId,Model model) {
-		List<Lead>allLeads=leadservice.allLead();
+		List<LeadDetail>allLeads=leadservice.allLead();
 		model.addAttribute("allLeads", allLeads);
 		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
 	}
 	@GetMapping("allleadsbyemployeeid")
 	public String getAllleadsByEmployeeId(@RequestParam("empId") int empId,Model model) {
-		List<Lead>allLeads=leadservice.getLeadsByEmployeeId(empId);
+		List<LeadDetail>allLeads=leadservice.getLeadsByEmployeeId(empId);
 		model.addAttribute("allLeads", allLeads);
 		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
@@ -103,8 +108,9 @@ public class LeadsController {
 	@GetMapping("/getleadsandsales")
 	public String getLeadsAndSales(@RequestParam("id")int id,Model model) {
 		SalesLeadsDTO dto=leadservice.getSalesAndLeads(id);
+		SalesDetail salesDetail= salesService.getSalesForLead( dto.getSales());
 		model.addAttribute("getLeads", dto.getLead());
-		model.addAttribute("getSales", dto.getSales());
+		model.addAttribute("getSales",salesDetail);
 		return "list-leads-sales";
 	}
 }
