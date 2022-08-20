@@ -85,14 +85,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="getleads" items="${getleads}">
+				<c:forEach var="getleads" items="${getleads}" varStatus="status">
 					<tr>
-						<td>${getleads.accountName}</td>
+						<td>${accountName[status.index]}</td>
 						<td>${getleads.status}</td>
-						<td>${getleads.employeeName}</td>
+						<td>${employeeName[status.index]}</td>
 						<td>${getleads.leadDate}</td>
 						<td>${getleads.stages}</td>
-						<td>${getleads.probablity}</td>
+						<td>${getleads.propability}</td>
 					</tr>
 				</c:forEach>
 			</tbody>

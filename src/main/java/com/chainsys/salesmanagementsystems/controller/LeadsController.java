@@ -16,8 +16,6 @@ import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
-import com.chainsys.salesmanagementsystems.model.LeadDetail;
-import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.LeadService;
@@ -28,7 +26,9 @@ import com.chainsys.salesmanagementsystems.service.SalesService;
 public class LeadsController {
 	private static final String ALLLEADS="all-leads";
 	private static final String EMPID="empId";
-	
+	private static final String ACCOUNTNAME="accountName";
+	private static final String EMPLOYEENAME="employeename";
+	private static final String ALLLEADSMODEL="allLeads";
 	@Autowired
 	private LeadService leadservice;
 	@Autowired
@@ -48,8 +48,12 @@ public class LeadsController {
 	}
 	@PostMapping("/getleadsbytwodates")//need
 	public String getLeadsByDates(@ModelAttribute("salesInCome") SalesInCome salesInCome, Model model) {
-		List<LeadDetail> leasList=leadservice.getLeadsForSalesInCome(salesInCome.getFromDate(), salesInCome.getToDate());  
-		model.addAttribute(ALLLEADS, leasList);
+		List<Lead> leasList=leadservice.getLeadsForSalesInCome(salesInCome.getFromDate(), salesInCome.getToDate());  
+		List<String>employeename=leadservice.getEmployeeNameOfleads(leasList);
+		List<String>accountName=leadservice.getAccountNameOfLeads(leasList);
+		model.addAttribute(EMPLOYEENAME, employeename);
+		model.addAttribute(ACCOUNTNAME, accountName);
+		model.addAttribute(ALLLEADSMODEL, leasList);
 		model.addAttribute(EMPID, salesInCome.getPlannedLeads());
 		return ALLLEADS;
 	}
@@ -68,7 +72,7 @@ public class LeadsController {
 		leadservice.insertLead(lead);
 		return "add-leads-form";
 	}
-	@GetMapping("/deletelead")
+	@GetMapping("/deletelead")//need
 	public String deleteLeadsById(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
 		leadservice.deleteLead(id);
 		return "redirect:/leads/allleads";
@@ -82,35 +86,45 @@ public class LeadsController {
 	}
 	@GetMapping("/allleads")//need
 	public String getAllLeads(@RequestParam("empId") int empId,Model model) {
-		List<LeadDetail>allLeads=leadservice.allLead();
-		model.addAttribute("allLeads", allLeads);
+		List<Lead>allLeads=leadservice.allLead();
+		List<String>employeename=leadservice.getEmployeeNameOfleads(allLeads);
+		List<String>accountName=leadservice.getAccountNameOfLeads(allLeads);
+		model.addAttribute(EMPLOYEENAME, employeename);
+		model.addAttribute(ACCOUNTNAME, accountName);
+		model.addAttribute(ALLLEADSMODEL, allLeads);
 		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
 	}
-	@GetMapping("allleadsbyemployeeid")
+	@GetMapping("allleadsbyemployeeid")//need
 	public String getAllleadsByEmployeeId(@RequestParam("empId") int empId,Model model) {
-		List<LeadDetail>allLeads=leadservice.getLeadsByEmployeeId(empId);
-		model.addAttribute("allLeads", allLeads);
+		List<Lead>allLeads=leadservice.getLeadsByEmployeeId(empId);
+		List<String>employeename=leadservice.getEmployeeNameOfleads(allLeads);
+		List<String>accountName=leadservice.getAccountNameOfLeads(allLeads);
+		model.addAttribute(EMPLOYEENAME, employeename);
+		model.addAttribute(ACCOUNTNAME, accountName);
+		model.addAttribute(ALLLEADSMODEL, allLeads);
 		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
 	}
-	@GetMapping("/updateleadfrom")
+	@GetMapping("/updateleadfrom")//need
 	public String updateLeadForm(@RequestParam("empId")int empId,Model model) {
 		Lead lead=leadservice.getLeadById(empId);
 		model.addAttribute("updateLead", lead);
 		return "update-leads-form";
 	}
-	@PostMapping("/updatelead")
+	@PostMapping("/updatelead")//need
 	public String updateLead(@ModelAttribute("updateLead")Lead lead,Model model) {
 		leadservice.updateLead(lead);
 		return "update-leads-form";
 	}
-	@GetMapping("/getleadsandsales")
+	@GetMapping("/getleadsandsales")//need
 	public String getLeadsAndSales(@RequestParam("id")int id,Model model) {
 		SalesLeadsDTO dto=leadservice.getSalesAndLeads(id);
-		SalesDetail salesDetail= salesService.getSalesForLead( dto.getSales());
+		List<String> salesDetail= salesService.getSalesForLead(dto.getSales());
+		model.addAttribute(ACCOUNTNAME, salesDetail.get(0));
+		model.addAttribute(EMPLOYEENAME, salesDetail.get(1));
 		model.addAttribute("getLeads", dto.getLead());
-		model.addAttribute("getSales",salesDetail);
+		model.addAttribute("getSales",dto.getSales());
 		return "list-leads-sales";
 	}
 }

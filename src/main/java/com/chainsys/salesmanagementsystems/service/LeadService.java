@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.SalesLeadsDTO;
 import com.chainsys.salesmanagementsystems.model.Lead;
-import com.chainsys.salesmanagementsystems.model.LeadDetail;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.repository.LeadRepository;
 import com.chainsys.salesmanagementsystems.repository.SalesRepository;
@@ -33,9 +32,8 @@ public class LeadService {
 		Target target= BusinessLogic.updateClosedTarget(targetList, "lead");
 		targetService.updateTarget(target);
 	}
-	public List<LeadDetail> allLead(){
-		List<Lead>leadList= leadRepository.findAll();
-		return BusinessLogic.getLeadDetails(leadList, accountService, employeeService);
+	public List<Lead> allLead(){
+		return leadRepository.findAll();
 	}
 	
 	public void updateLead(Lead lead) {
@@ -47,9 +45,8 @@ public class LeadService {
 	public Lead getLeadById(int id) {
 		return leadRepository.findById(id);
 	}
-	public List<LeadDetail> getLeadsByEmployeeId(int id){
-		List<Lead>leadList= leadRepository.findByEmployeeEmployeeId(id);
-		return BusinessLogic.getLeadDetails(leadList, accountService, employeeService);
+	public List<Lead> getLeadsByEmployeeId(int id){
+		return leadRepository.findByEmployeeEmployeeId(id);
 	}
 	public SalesLeadsDTO getSalesAndLeads(int id) {
 		SalesLeadsDTO dto=new SalesLeadsDTO();
@@ -57,9 +54,14 @@ public class LeadService {
 		dto.setSales(salesRepository.findByLeadId(id));
 		return dto; 
 	}
-	public List<LeadDetail> getLeadsForSalesInCome(Date startDate, Date endDate){
-		List<Lead>leadList= leadRepository.findByLeadDateGreaterThanEqualAndLeadDateLessThanEqual(startDate, endDate);  
-		 return BusinessLogic.getLeadDetails(leadList, accountService, employeeService);
+	public List<Lead> getLeadsForSalesInCome(Date startDate, Date endDate){
+		return leadRepository.findByLeadDateGreaterThanEqualAndLeadDateLessThanEqual(startDate, endDate);  
+	}
+	public List<String>getEmployeeNameOfleads(List<Lead>leadList){
+		return BusinessLogic.getEmployeeNameByLead(leadList,employeeService);
+	}
+	public List<String>getAccountNameOfLeads(List<Lead>leadList){
+		return BusinessLogic.getAccountNameByLead(leadList, accountService);
 	}
 	
 }

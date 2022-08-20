@@ -74,8 +74,8 @@
 			<tbody>
 
 			   <tr>
-			   	  <td>${getSales.employeeName}</td>
-			   	  <td>${getSales.accountName}</td>
+			   	  <td>${employeeName}</td>
+			   	  <td>${accountName}</td>
 			   	  <td>${getSales.salesDate}</td>
 			   	  <td>${getSales.amount}</td>
 			   </tr>

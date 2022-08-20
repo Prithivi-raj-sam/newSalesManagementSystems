@@ -25,10 +25,10 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="allsales" items="${allSales}">
+			<c:forEach var="allsales" items="${allSales}" varStatus="status">
 			   <tr>
-			   	  <td id="get"><a href="/employee/getsalesandemployee?id=${allsales.employeeId}">${allsales.employeeName}</a></td>
-			   	  <td id="get2"><a href="/leads/getleadsandsales?id=${allsales.leadId}">${allsales.accountName}</a></td>
+			   	  <td id="get"><a href="/employee/getsalesandemployee?id=${allsales.employeeId}">${employeeName[status.index]}</a></td>
+			   	  <td id="get2"><a href="/leads/getleadsandsales?id=${allsales.leadId}">${accountName[status.index]}</a></td>
 			   	  <td>${allsales.salesDate}</td>
 			   	  <td>${allsales.amount}</td>
 			   	  <td id="view"><a href="/sales/getSales?id=${allsales.salesId}&empId=${empId}"><button>View</button></a></td>

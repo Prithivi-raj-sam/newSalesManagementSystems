@@ -17,9 +17,9 @@ import com.chainsys.salesmanagementsystems.dto.LeadsAccountsDTO;
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
-import com.chainsys.salesmanagementsystems.model.LeadDetail;
 import com.chainsys.salesmanagementsystems.service.AccountService;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
+import com.chainsys.salesmanagementsystems.service.LeadService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
 
 @Controller
@@ -35,7 +35,8 @@ public class AccountController {
 	private TerritoryService territoryService;
 	@Autowired
 	private EmployeeService employeeService;
-	
+	@Autowired
+	private LeadService leadService;
 	@GetMapping("/addaccountform")//need
 	public String addAccountForm(@RequestParam("empId")int empId,Model model) {
 		Account account =new Account();
@@ -112,9 +113,12 @@ public class AccountController {
 	public String getAcountAndLeads(@RequestParam("id")int id, Model model) {
 		LeadsAccountsDTO dto=accountservice.getAcountsAndLeads(id);
 		List<Lead>leadList=dto.getLeadsList();
-		List<LeadDetail>leadDetailList=BusinessLogic.getLeadDetails(leadList, accountservice, employeeService);
+		List<String>accountName=leadService.getAccountNameOfLeads(leadList);
+		List<String> employeeName=leadService.getEmployeeNameOfleads(leadList);
+		model.addAttribute(EMPLOYEENAME, employeeName);
+		model.addAttribute("accountName", accountName);
 		model.addAttribute("getaccount", dto.getAccount());
-		model.addAttribute("getlead", leadDetailList);
+		model.addAttribute("getlead", dto.getLeadsList());
 		return "list-account-leads";
 	}
 }

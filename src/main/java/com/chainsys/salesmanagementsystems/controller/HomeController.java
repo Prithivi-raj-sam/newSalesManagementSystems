@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.LeadDetail;
+import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.Login;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
@@ -38,6 +38,8 @@ public class HomeController {
 	private LeadService leadService;
 	@Autowired
 	private AccountService accountService;
+	
+	
 	@GetMapping("/login")//need
 	public String employeeLoginPage(Model model) {
 		Login login = new Login();
@@ -121,10 +123,14 @@ public class HomeController {
 	}
 	@GetMapping("/addsales")
 	public String redirectToAddSales(@RequestParam("empId")int empId,Model model) {
-		List<LeadDetail> leadList=leadService.getLeadsByEmployeeId(empId);
-		List<LeadDetail> openLeadList=leadList.stream()
+		List<Lead> leadList=leadService.getLeadsByEmployeeId(empId);
+		List<Lead> openLeadList=leadList.stream()
 		  .filter(lead -> lead.getStatus().equals("open lead"))
 		  .collect(Collectors.toList());
+		List<String> employeeName=leadService.getEmployeeNameOfleads(openLeadList);
+		List<String> accountname=leadService.getAccountNameOfLeads(openLeadList);
+		model.addAttribute("employeeName", employeeName);
+		model.addAttribute("accountName", accountname);
 		model.addAttribute("leadList", openLeadList);
 		model.addAttribute(EMPID, empId);
 		return "add-sales";
@@ -203,7 +209,7 @@ public class HomeController {
 	public String redirectToUpdateTarget(Model model) {
 		return "redirect:/target/updateId";
 	}
-	@GetMapping("/getalltarget")
+	@GetMapping("/getalltarget")//need
 	public String redirectToGetAllTarget(Model model) {
 		return "redirect:/target/alltargets";
 	}
@@ -221,7 +227,7 @@ public class HomeController {
 		model.addAttribute("employee", employee);
 		return "employee";
 	}
-	@GetMapping("/targets")
+	@GetMapping("/targets")//need
 	public String redirectToTarget(Model model) {
 		Target target=new Target();
 		model.addAttribute("target", target);

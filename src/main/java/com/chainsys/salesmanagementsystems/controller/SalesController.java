@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
+import com.chainsys.salesmanagementsystems.dto.SalesDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Sales;
-import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.SalesService;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
@@ -26,6 +26,9 @@ public class SalesController {
 	private static final String ALLSALES="all-sales";
 	private static final String SALESINCOME="salesIncome";
 	private static final String ALLSALESMODEL="allSales";
+	private static final String ACCOUNTNAME="accountName";
+	private static final String EMPLOYEENAME="employeeName";
+	private static final String EMPLOYEEID="empId";
 	@Autowired
 	private SalesService salesService;
 	@Autowired
@@ -50,17 +53,21 @@ public class SalesController {
 	}
 	@GetMapping("/allsales")//need
 	public String allSales(@RequestParam("empId") int empId, Model model) {
-		List<SalesDetail>allSales=salesService.allSales();
-		model.addAttribute(ALLSALESMODEL, allSales);
-		model.addAttribute("empId", empId);
+		SalesDTO salesDTO=salesService.allSales();
+		model.addAttribute(ALLSALESMODEL, salesDTO.getSalesList());
+		model.addAttribute(ACCOUNTNAME, salesDTO.getAccountName());
+		model.addAttribute(EMPLOYEENAME, salesDTO.getEmployeeName());
+		model.addAttribute(EMPLOYEEID, empId);
 		return ALLSALES;
 	}
 	@PostMapping("/getsalesfortwodates")//need
 	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
 		List<Sales>allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
-		List<SalesDetail>salesDetailList=salesService.getSalesDetailsOfNames(allSales);
-		model.addAttribute("empId", salesInCome.getPlannedSales());
-		model.addAttribute(ALLSALESMODEL, salesDetailList);
+		SalesDTO saleDTO=salesService.getSalesDetailsOfNames(allSales);
+		model.addAttribute(EMPLOYEEID, salesInCome.getPlannedSales());
+		model.addAttribute(ACCOUNTNAME, saleDTO.getAccountName());
+		model.addAttribute(EMPLOYEENAME, saleDTO.getEmployeeName());
+		model.addAttribute(ALLSALESMODEL, allSales);
 		return ALLSALES;
 	}
 	@GetMapping("/getSales")//need
@@ -76,9 +83,11 @@ public class SalesController {
 	@GetMapping("/getsalesbyemployeeid")//need
 	public String getSalesByEmployeeId(@RequestParam("empId")int empId,Model model) {
 		List<Sales> salesList=salesService.getSalesByEmployeeId(empId);
-		List<SalesDetail>salesDetailsList=salesService.getSalesDetailsOfNames(salesList);
-		model.addAttribute(ALLSALESMODEL, salesDetailsList);
-		model.addAttribute("empId", empId);
+		SalesDTO salesDTO=salesService.getSalesDetailsOfNames(salesList);
+		model.addAttribute(ALLSALESMODEL, salesList);
+		model.addAttribute(ACCOUNTNAME, salesDTO.getAccountName());
+		model.addAttribute(EMPLOYEENAME, salesDTO.getEmployeeName());
+		model.addAttribute(EMPLOYEEID, empId);
 		return ALLSALES;
 	}
 	@GetMapping("/deletesales")//need
@@ -97,7 +106,7 @@ public class SalesController {
 		salesService.updateSales(sales);
 		return "update-sales-form";
 	}
-	@GetMapping("/salesincome")
+	@GetMapping("/salesincome")//need
 	public String salesIncome(Model model) {
 		SalesInCome salesIncome=new SalesInCome();
 		model.addAttribute(SALESINCOME, salesIncome);

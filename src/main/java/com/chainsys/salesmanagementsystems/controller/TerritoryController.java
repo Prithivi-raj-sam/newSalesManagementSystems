@@ -42,9 +42,10 @@ public class TerritoryController {
 	public String getTerritoryByName(@ModelAttribute("territory")Territory territory,Model model) {
 		List<Territory> territoryList=territoryService.gettargetByStartingTerritoryName(territory.getTerritoryName());
 		model.addAttribute("allteritory", territoryList);
+		model.addAttribute("empId", territory.getTerritoryId());
 		return "all-territory";
 	}
-	@GetMapping("/getterritory")
+	@GetMapping("/getterritory")//need
 	public String getTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
 		Territory territory=territoryService.getTerritoryById(id);
 		model.addAttribute("territory", territory);
@@ -53,7 +54,7 @@ public class TerritoryController {
 			return "get-territory-sales";
 		return "get-territory-id";
 	}
-	@GetMapping("/deleteterritory")
+	@GetMapping("/deleteterritory")//need
 	public String deleteTerritory(@RequestParam("getId")int id,Model model) {
 		territoryService.deleteTerritory(id);
 		return "redirect:/territories/allterritory";
@@ -65,13 +66,13 @@ public class TerritoryController {
 		model.addAttribute("empId", empId);
 		return "all-territory";
 	}
-	@GetMapping("/updateterritoryform")
+	@GetMapping("/updateterritoryform")//need
 	public String updateTerritoryForm(@RequestParam("id")int id,Model model) {
 		Territory ter=territoryService.getTerritoryById(id);
 		model.addAttribute("updateTerritory", ter);
 		return "update-territory-form";
 	}
-	@PostMapping("/updateterritory")
+	@PostMapping("/updateterritory")//need
 	public String updateTerritory(@ModelAttribute("updateTerritory")Territory ter,Model model) {
 		model.addAttribute("result", "1 Record updated");
 		territoryService.updateTerritory(ter);
@@ -84,7 +85,7 @@ public class TerritoryController {
 		model.addAttribute("getAccounts", dto.getAccountList());
 		return "list-accounts-territory";
 }
-	 @GetMapping("/getemployeeandterritory")
+	 @GetMapping("/getemployeeandterritory")//need
 	 public String getEmployeesAndTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
 		 EmployeeTerritoryDTO dto=territoryService.getTErritoryAndEmployee(id);
 		 model.addAttribute("getTerritory", dto.getTerritory());

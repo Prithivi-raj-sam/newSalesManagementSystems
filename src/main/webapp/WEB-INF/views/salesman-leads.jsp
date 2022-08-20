@@ -23,7 +23,7 @@
 			</div>
 		</form:form>
 	<div>
-	<div id="emp1"><iframe id="allleads" class="iframe" title='All Leads' src='/leads/allleads?empId=${empId}' 
+	<div id="emp1"><iframe id="allleads" class="iframe" title='All Leads' src='/leads/allleadsbyemployeeid?empId=${empId}' 
 	   style='border:10px solid #25195c' ></iframe></div>
 	</div>
 </body>

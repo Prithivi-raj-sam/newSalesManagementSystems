@@ -8,14 +8,13 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
-import com.chainsys.salesmanagementsystems.model.LeadDetail;
 import com.chainsys.salesmanagementsystems.model.Sales;
-import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.service.AccountService;
@@ -27,59 +26,63 @@ public class BusinessLogic {
 	private BusinessLogic() {
 
 	}
-	public static List<LeadDetail> getLeadDetails(List<Lead>leadList,AccountService accountService,EmployeeService employeeService){
-		List<LeadDetail> leadDetailsList=new ArrayList<>();
-		LeadDetail leadDetail=null; 
+	public static List<String> getEmployeeNameByLead(List<Lead>leadList,EmployeeService employeeService){
+		List<String> employeeNameList=new ArrayList<>();
+		List<Employee>employeeList=employeeService.allEmployee();
 		for(int i=0;i<leadList.size();i++) {
-			leadDetail=new LeadDetail();
 			Lead lead=leadList.get(i);
-			Account account=accountService.getAccountById(lead.getAccountId());
-			Employee employee=employeeService.getEmployeeById(lead.getEmployeeId());
-			leadDetail.setAccountId(account.getAccountId());
-			leadDetail.setAccountName(account.getCompanyName());
-			leadDetail.setEmployeeId(employee.getEmployeeId());
-			leadDetail.setEmployeeName(employee.getEmployeeName());
-			leadDetail.setLeadDate(lead.getLeadDate());
-			leadDetail.setLeadId(lead.getLeadId());
-			leadDetail.setStages(lead.getStages());
-			leadDetail.setStatus(lead.getStatus());
-			leadDetail.setProbablity(lead.getPropability());
-			leadDetailsList.add(leadDetail);
+			Optional<Employee>employeeOptional=employeeList.stream().filter(employee->employee.getEmployeeId()==lead.getEmployeeId()).findAny();
+			if(employeeOptional.isPresent()) {
+				employeeNameList.add(employeeOptional.get().getEmployeeName());
+			}
 		}
-		return leadDetailsList;
+		return employeeNameList;
 	}
-	public static List<SalesDetail> getSalesdetails(List<Sales>salesList,AccountService accountService,EmployeeService employeeService,LeadService leadService){
-		List<SalesDetail>salesdetailList=new ArrayList<>();
-		SalesDetail salesDetail=null;
+	public static List<String>getAccountNameByLead(List<Lead>leadList,AccountService accountService){
+		List<String> accountName=new ArrayList<>();
+		List<Account> accountList=accountService.allAccount();
+		for(int i=0;i<leadList.size();i++) {
+			Lead lead=leadList.get(i);
+			Optional<Account>accountOptional=accountList.stream().filter(account->account.getAccountId()==lead.getAccountId()).findAny();
+			if(accountOptional.isPresent()) {
+				accountName.add(accountOptional.get().getCompanyName());
+			}
+		}
+		return accountName;
+	}
+	public static List<String>getAccountNameBySales(List<Sales>salesList,AccountService accountService,LeadService leadService){
+		List<String> accountName=new ArrayList<>();
+		List<Account> accountList=accountService.allAccount();
 		for(int i=0;i<salesList.size();i++) {
-			salesDetail=new SalesDetail();
 			Sales sales=salesList.get(i);
 			Lead lead=leadService.getLeadById(sales.getLeadId());
-			Account account=accountService.getAccountById(lead.getAccountId());
-			Employee employee=employeeService.getEmployeeById(lead.getEmployeeId());
-			salesDetail.setAccountName(account.getCompanyName());
-			salesDetail.setAmount(sales.getAmount());
-			salesDetail.setEmployeeId(employee.getEmployeeId());
-			salesDetail.setEmployeeName(employee.getEmployeeName());
-			salesDetail.setLeadId(lead.getLeadId());
-			salesDetail.setSalesDate(sales.getSalesDate());
-			salesDetail.setSalesId(sales.getSalesId());
-			salesdetailList.add(salesDetail);
+			Optional<Account>accountOptional=accountList.stream().filter(account->account.getAccountId()==lead.getAccountId()).findAny();
+			if(accountOptional.isPresent()) {
+				accountName.add(accountOptional.get().getCompanyName());
+			}
 		}
-		return salesdetailList;
+		return accountName;
 	}
-	public static SalesDetail getSalesDetailsByLeads(Sales sales,AccountService accountService,EmployeeService employeeService,LeadService leadService) {
-		SalesDetail salesDetail=new SalesDetail();
+	public static List<String>getEmployeeNameBySales(List<Sales>salesList,EmployeeService employeeService){
+		List<String> employeeName=new ArrayList<>();
+		List<Employee> employeeList=employeeService.allEmployee();
+		for(int i=0;i<salesList.size();i++) {
+			Sales sales=salesList.get(i);
+			Optional<Employee>employeeOptional=employeeList.stream().filter(employee->employee.getEmployeeId()==sales.getEmployeeId()).findAny();
+			if(employeeOptional.isPresent()) {
+				employeeName.add(employeeOptional.get().getEmployeeName());
+			}
+		}
+		return employeeName;
+	}
+	
+	public static List<String> getSalesDetailsByLeads(Sales sales,AccountService accountService,EmployeeService employeeService,LeadService leadService) {
+		List<String> salesDetail=new ArrayList<>();
 		Lead lead=leadService.getLeadById(sales.getLeadId());
 		Account account=accountService.getAccountById(lead.getAccountId());
 		Employee employee =employeeService.getEmployeeById(sales.getEmployeeId());
-		salesDetail.setAccountName(account.getCompanyName());
-		salesDetail.setAmount(sales.getAmount());
-		salesDetail.setEmployeeId(employee.getEmployeeId());
-		salesDetail.setEmployeeName(employee.getEmployeeName());
-		salesDetail.setLeadId(lead.getLeadId());
-		salesDetail.setSalesDate(sales.getSalesDate());
-		salesDetail.setSalesId(sales.getSalesId());
+		salesDetail.add(account.getCompanyName());
+		salesDetail.add(employee.getEmployeeName());
 		return salesDetail;
 	}
 	public static int[] getTotalSalesAndLeadAttribute(List<Target> targetList) {

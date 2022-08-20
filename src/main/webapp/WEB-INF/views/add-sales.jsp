@@ -28,13 +28,13 @@
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="allLeads" items="${leadList}">
+			<c:forEach var="allLeads" items="${leadList}" varStatus="status">
 			   <tr>
-			   	  <td>${allLeads.accountName}</td>
-			   	  <td>${allLeads.employeeName}</td>
+			   	  <td>${accountName[status.index]}</td>
+			   	  <td>${employeeName[status.index]}</td>
 			   	  <td>${allLeads.leadDate}</td>
 			   	  <td>${allLeads.stages}</td>
-			   	  <td>${allLeads.probablity}</td>
+			   	  <td>${allLeads.propability}</td>
 			   	   <td>${allLeads.status}</td>
 			   	  <td><a href="/sales/addsalesform?id=${allLeads.leadId}&empId=${empId}"><button>AddToSales</button></a></td>
 			   	  <td><a href="/leads/closeleads?id=${allLeads.leadId}&empId=${empId}"><button>Close</button></a></td>

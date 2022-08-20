@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
+import com.chainsys.salesmanagementsystems.dto.SalesDTO;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.Sales;
-import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.repository.SalesRepository;
@@ -35,9 +35,13 @@ public class SalesService {
 		Target target= BusinessLogic.updateClosedTarget(targetList, "sales");
 		targetService.updateTarget(target);
 	}
-	public List<SalesDetail> allSales(){
+	public SalesDTO allSales(){
+		SalesDTO salesDTO=new SalesDTO();
 		List<Sales> salesList=salesRepository.findAll();
-		return BusinessLogic.getSalesdetails(salesList, accountService, employeeService, leadService);
+		salesDTO.setSalesList(salesList);
+		salesDTO.setAccountName(BusinessLogic.getAccountNameBySales(salesList, accountService, leadService));
+		salesDTO.setEmployeeName(BusinessLogic.getEmployeeNameBySales(salesList, employeeService));
+		return salesDTO;
 	}
 	public void updateSales(Sales sales) {
 		salesRepository.save(sales);
@@ -54,8 +58,11 @@ public class SalesService {
 	public List<Sales> getSalesByEmployeeId(int id){
 		return salesRepository.findByEmployeeEmployeeId(id);
 	}
-	public List<SalesDetail> getSalesDetailsOfNames(List<Sales>salesList){
-		return BusinessLogic.getSalesdetails(salesList, accountService, employeeService, leadService);
+	public SalesDTO getSalesDetailsOfNames(List<Sales>salesList){
+		SalesDTO salesDTO=new SalesDTO();
+		salesDTO.setAccountName(BusinessLogic.getAccountNameBySales(salesList, accountService, leadService));
+		salesDTO.setEmployeeName(BusinessLogic.getEmployeeNameBySales(salesList, employeeService));
+		return salesDTO;
 	}
 	public SalesInCome getTotalSalesBetweenTwoDates(SalesInCome salesIncome){
 		List<Target> targetList=targetService.getSalesInCome(salesIncome);
@@ -68,7 +75,7 @@ public class SalesService {
 		salesIncome.setTotalSalesAmount(BusinessLogic.getTotalSalesAmount(salesList));
 		return salesIncome;
 	}
-	public SalesDetail getSalesForLead(Sales sales) {
+	public List<String> getSalesForLead(Sales sales) {
 		return BusinessLogic.getSalesDetailsByLeads(sales, accountService, employeeService, leadService);
 		
 	}

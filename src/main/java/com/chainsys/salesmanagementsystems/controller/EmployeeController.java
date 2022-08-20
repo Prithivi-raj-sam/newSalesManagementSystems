@@ -17,16 +17,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
+import com.chainsys.salesmanagementsystems.dto.SalesDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.TargetEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
-import com.chainsys.salesmanagementsystems.model.LeadDetail;
-import com.chainsys.salesmanagementsystems.model.SalesDetail;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
+import com.chainsys.salesmanagementsystems.service.LeadService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
 import com.chainsys.salesmanagementsystems.service.SalesService;
 
@@ -42,6 +41,8 @@ public class EmployeeController {
 	private TerritoryService territoryService;
 	@Autowired
 	private SalesService salesService;
+	@Autowired
+	private LeadService leadService;
 	@GetMapping("/getemployee")//need
 	public String getEmployeeById(@RequestParam("getId")int id,Model model) {
 		Employee employee=employeeservice.getEmployeeById(id);
@@ -83,7 +84,7 @@ public class EmployeeController {
 		byte[] empPhoto=employeeservice.getEmployeeImageByteArray(empId);
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(empPhoto);
 	}
-	@GetMapping("/allemployee")
+	@GetMapping("/allemployee")//need
 	public String getAllEmployee(Model model) {
 		List<Employee>allEmployee =employeeservice.allEmployee();
 		model.addAttribute("allEmployee", allEmployee);
@@ -140,17 +141,22 @@ public class EmployeeController {
 	public String getLeadsandEmployee(@RequestParam("id")int id,Model model) {
 		LeadsEmployeeDTO dto=employeeservice.getLeadsAndEmployee(id);
 		List<Lead>leadList=dto.getLeadlist();
-		List<LeadDetail>leadDetailList=BusinessLogic.getLeadDetails(leadList, null, employeeservice);
+		List<String>employeeName=leadService.getAccountNameOfLeads(leadList);
+		List<String>accountName=leadService.getAccountNameOfLeads(leadList);
+		model.addAttribute("employeeName", employeeName);
+		model.addAttribute("accountName", accountName);
 		model.addAttribute("getemployee", dto.getEmployee());
-		model.addAttribute("getleads", leadDetailList);
+		model.addAttribute("getleads", dto.getLeadlist());
 		return "list-employee-leads";
 	}
 	@GetMapping("/getsalesandemployee")//need
 	public String getSalesAndEmployee(@RequestParam("id")int id,Model model) {
 		SalesEmployeeDTO dto=employeeservice.getSalesEmployee(id);
-		List<SalesDetail>salesDetailsList=salesService.getSalesDetailsOfNames(dto.getSalesList());
+		SalesDTO salesDTO=salesService.getSalesDetailsOfNames(dto.getSalesList());
 		model.addAttribute(GETEMPLOYEE, dto.getEmployee());
-		model.addAttribute("getSales", salesDetailsList);
+		model.addAttribute("getSales", dto.getSalesList());
+		model.addAttribute("accountName", salesDTO.getAccountName());
+		model.addAttribute("employeeName", salesDTO.getEmployeeName());
 		return "list-employee-sales";
 	}
 	@GetMapping("/getemployeeandtarget")//need

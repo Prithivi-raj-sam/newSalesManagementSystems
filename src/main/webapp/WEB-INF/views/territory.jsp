@@ -15,6 +15,7 @@
 <div class="navbar">
 			<a href="/home/addterritory">Add Territory</a>
 			<form:input path="territoryName" placeholder="Enter Territory Name" />
+			<form:input path="territoryId"  type="hidden" value="${empId}" />
 			<form:button>search</form:button>
 </div>
 		</form:form>

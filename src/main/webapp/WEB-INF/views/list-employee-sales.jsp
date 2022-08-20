@@ -83,10 +83,10 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="allsales" items="${getSales}">
+				<c:forEach var="allsales" items="${getSales}" varStatus="status">
 					<tr>
-						<td>${allsales.employeeName}</td>
-						<td>${allsales.accountName}</td>
+						<td>${employeeName[status.index]}</td>
+						<td>${accountName[status.index]}</td>
 						<td>${allsales.salesDate}</td>
 						<td>${allsales.amount}</td>
 					</tr>

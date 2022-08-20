@@ -23,7 +23,7 @@ import com.chainsys.salesmanagementsystems.service.TargetService;
 @RequestMapping("/target")
 public class TargetController {
 	private static final String ALLTARGET="all-targets";
-	
+	private static final String ALLTARGETMODEL="alltargets";
 	
 	@Autowired
 	private TargetService targetService;
@@ -32,7 +32,7 @@ public class TargetController {
 	@GetMapping("/alltargets")//need
 	public String allTargets(Model model) {
 		List<Target>allTarget = targetService.allTarget();
-		model.addAttribute(ALLTARGET, allTarget);
+		model.addAttribute(ALLTARGETMODEL, allTarget);
 		return ALLTARGET;
 	}
 	@GetMapping("/alltargetbyEmployeeid")//need
@@ -75,35 +75,35 @@ public class TargetController {
 		targetService.deleteTarget(targetId);
 		return "redirect:/target/alltargets";
 	}
-	@GetMapping("/updatetargetform")
+	@GetMapping("/updatetargetform")//need
 	public String updateTargetForm(@RequestParam("targetId")int targetId,Model model) {
 		Target target=targetService.getTargetById(targetId);
 		model.addAttribute("updatetarget", target);
 		return "update-target-form";
 	}
-	@PostMapping("/updatetarget")
+	@PostMapping("/updatetarget")//need
 	public String updatetarget(@ModelAttribute("updatetarget")Target target, Model model) {
 		targetService.updateTarget(target);
 		return "update-target-form";
 	}
-	@PostMapping("/gettargetbydate")
+	@PostMapping("/gettargetbydate")//need
 	public String getTaretByTargetDateAndTargetSetdate(@ModelAttribute("target")Target target,Model model) {
 		List<Target> targetList=targetService.getTargetByTwoDate(target);
-		model.addAttribute("alltargets", targetList);
+		model.addAttribute(ALLTARGETMODEL, targetList);
 		return ALLTARGET;
 	}
-	@GetMapping("/goingtarget")
+	@GetMapping("/goingtarget")//need
 	public String getCurrentTarget(@RequestParam("empId") int empId,Model model) {
 		List<Target> targetList=targetService.getTargetByDescendingOrder(empId);
 		Target target=targetList.get(0);
 		model.addAttribute("target", target);
 		return "current-target";
 	}
-	@GetMapping("/todaytarget")
+	@GetMapping("/todaytarget")//need
 	public String getTodayTarget(Model model) {
 		List<Target> targetList=targetService.getTargetByDescindingOrderDate();
 		targetList=BusinessLogic.getTodayTarget(targetList);
-		model.addAttribute("alltargets", targetList);
+		model.addAttribute(ALLTARGETMODEL, targetList);
 		return ALLTARGET;
 	}
 }
