@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
-import com.chainsys.salesmanagementsystems.model.Account;
-import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.model.SalesDetail;
@@ -39,8 +37,7 @@ public class SalesService {
 	}
 	public List<SalesDetail> allSales(){
 		List<Sales> salesList=salesRepository.findAll();
-		List<SalesDetail>salesDetailsList=BusinessLogic.getSalesdetails(salesList, accountService, employeeService, leadService);
-		 return salesDetailsList;
+		return BusinessLogic.getSalesdetails(salesList, accountService, employeeService, leadService);
 	}
 	public void updateSales(Sales sales) {
 		salesRepository.save(sales);

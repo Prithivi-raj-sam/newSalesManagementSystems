@@ -28,7 +28,7 @@ public class AccountController {
 	private static final String ALLACCOUNT="all-accounts"; 
 	private static final String EMPID="empId";
 	private static final String ALLACCOUNTMODEL="allaccount";
-	
+	private static final String EMPLOYEENAME="employeeName";
 	@Autowired
 	private AccountService accountservice;
 	@Autowired
@@ -67,7 +67,7 @@ public class AccountController {
 	public String getAllAccount(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.allAccount();
 		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
-		model.addAttribute("employeeName", employeeName);
+		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, empId);
 		return ALLACCOUNT;
@@ -76,7 +76,7 @@ public class AccountController {
 	public String getAllAccountByEmployeeId(@RequestParam("empId")int empId,Model model) {
 		List<Account>allAccount=accountservice.getAccountByEmployeeId(empId);
 		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
-		model.addAttribute("employeeName", employeeName);
+		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, empId);
 		return ALLACCOUNT;
@@ -84,6 +84,8 @@ public class AccountController {
 	@PostMapping("/getaccountbycompanyname")//need
 	public String getAccountByCompanyName(@ModelAttribute("account")Account account,Model model) {
 		List<Account>allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
+		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, account.getEmployeeId());
 		return ALLACCOUNT;

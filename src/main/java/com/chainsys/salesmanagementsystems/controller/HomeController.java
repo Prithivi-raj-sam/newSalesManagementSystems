@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
-import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.LeadDetail;
 import com.chainsys.salesmanagementsystems.model.Login;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
@@ -39,14 +38,14 @@ public class HomeController {
 	private LeadService leadService;
 	@Autowired
 	private AccountService accountService;
-	@GetMapping("/login")
+	@GetMapping("/login")//need
 	public String employeeLoginPage(Model model) {
 		Login login = new Login();
 		model.addAttribute("login", login);
 		return LOGINPAGE;
 	}
 
-	@PostMapping("employeepage")
+	@PostMapping("employeepage")//need
 	public String redirectToEmployeesPage(@ModelAttribute("login") Login login, Model model) {
 		Employee employee = employeeService.getEmployeeByEmployeeIdAndPassrd(login.getEmployeeId(),login.getPassword());
 		try {
@@ -73,7 +72,7 @@ public class HomeController {
 		}
 		
 	}
-	@GetMapping("/managerpage")
+	@GetMapping("/managerpage")//need
 	public String getManagerPage(@RequestParam("empId")int empId,Model model) {
 		model.addAttribute(EMPID, empId);
 		SalesInCome salesInCome=new SalesInCome();
@@ -282,10 +281,6 @@ public class HomeController {
 		SalesInCome salesIncome=new SalesInCome();
 		model.addAttribute(SALESINCOME, salesIncome);
 		return "income-reports";
-	}
-	@GetMapping("/test")
-	public String testSession(Model model) {
-		return "test";
 	}
 	
 }

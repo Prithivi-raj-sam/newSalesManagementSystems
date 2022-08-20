@@ -2,7 +2,7 @@ package com.chainsys.salesmanagementsystems.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,9 +93,10 @@ public class EmployeeService {
 		List<String>employeeNameList=new ArrayList<>();
 		List<Employee> employeeList=employeeRepository.findAll();
 		for(int i=0;i<accountList.size();i++) {
-			for(int j=0;j<employeeList.size();j++) {
-				if(accountList.get(i).getEmployeeId()==employeeList.get(j).getEmployeeId())
-					employeeNameList.add(employeeList.get(j).getEmployeeName());
+			Account account =accountList.get(i);
+			Optional<Employee> employeeNameObject=employeeList.stream().filter(employee->employee.getEmployeeId()==account.getEmployeeId()).findAny();
+			if (employeeNameObject.isPresent()) {
+			employeeNameList.add(employeeNameObject.get().getEmployeeName());
 			}
 		}
 		return employeeNameList;

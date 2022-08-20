@@ -42,7 +42,7 @@ public class EmployeeController {
 	private TerritoryService territoryService;
 	@Autowired
 	private SalesService salesService;
-	@GetMapping("/getemployee")//
+	@GetMapping("/getemployee")//need
 	public String getEmployeeById(@RequestParam("getId")int id,Model model) {
 		Employee employee=employeeservice.getEmployeeById(id);
 		model.addAttribute("employee", employee);
@@ -78,7 +78,7 @@ public class EmployeeController {
 		return "add-employee-form";
 	}
 	@ResponseBody
-	@GetMapping("/getImage")
+	@GetMapping("/getImage")//need
 	public ResponseEntity<byte[]> getImage(@RequestParam("id")int empId){
 		byte[] empPhoto=employeeservice.getEmployeeImageByteArray(empId);
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(empPhoto);
