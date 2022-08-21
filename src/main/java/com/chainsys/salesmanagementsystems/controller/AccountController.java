@@ -29,6 +29,8 @@ public class AccountController {
 	private static final String EMPID="empId";
 	private static final String ALLACCOUNTMODEL="allaccount";
 	private static final String EMPLOYEENAME="employeeName";
+	private static final String RESULT="result";
+	
 	@Autowired
 	private AccountService accountservice;
 	@Autowired
@@ -37,6 +39,7 @@ public class AccountController {
 	private EmployeeService employeeService;
 	@Autowired
 	private LeadService leadService;
+	
 	@GetMapping("/addaccountform")//need
 	public String addAccountForm(@RequestParam("empId")int empId,Model model) {
 		Account account =new Account();
@@ -48,8 +51,13 @@ public class AccountController {
 	}
 	@PostMapping("/addaccount")//need
 	public String addAccount(@ModelAttribute("addAccount")Account account, Model model) {
-		accountservice.insertAccount(account);
-		model.addAttribute("result", "1 Record Added");
+		try {
+			accountservice.insertAccount(account);
+			model.addAttribute(RESULT, "1 Record Added");
+		}catch(Exception exp) {
+			model.addAttribute("Error:", exp.getMessage());
+			model.addAttribute(RESULT,"Data Type Mismatch in Your AccountForm");
+		}
 		return "add-account-form";
 	}
 
@@ -106,7 +114,7 @@ public class AccountController {
 	@PostMapping("/updateaccount")//need
 	public String updateAccount(@ModelAttribute("updateAccount")Account account, Model model) {
 		accountservice.updateAccount(account);
-		model.addAttribute("result", "1 record updated");
+		model.addAttribute(RESULT, "1 record updated");
 		return "update-account-form";
 	}
 	@GetMapping("/getacountandleads")//need

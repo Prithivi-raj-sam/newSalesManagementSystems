@@ -1,5 +1,6 @@
 package com.chainsys.salesmanagementsystems.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,8 @@ public class AccountService {
 		dto.setAccount(accountRepository.findById(id));
 		dto.setLeadsList(leadRepository.findByAccountAccountId(id));
 		return dto;
+	}
+	public List<Account>getAccountByJoiningDate(Date startDate,Date endDate){
+		return accountRepository.findByCustomerJoinDateGreaterThanEqualAndCustomerJoinDateLessThanEqual(startDate, endDate);
 	}
 }

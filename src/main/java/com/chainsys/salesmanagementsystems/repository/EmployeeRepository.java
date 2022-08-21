@@ -14,4 +14,5 @@ public interface EmployeeRepository extends CrudRepository<Employee,Integer>{
 	List<Employee> findByTerritoryTerritoryId(int id);
 	Employee findByEmployeeIdAndPassword(int employeeId,String passward);
 	List<Employee> findByEmployeeName(String name);
+	List<Employee> findByEmployeeIdIn(List<Integer>employeeIdList);
 }

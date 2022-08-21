@@ -1,5 +1,6 @@
 package com.chainsys.salesmanagementsystems.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -14,4 +15,5 @@ public interface AccountRepository extends CrudRepository<Account,Integer>{
 	List<Account> findByEmployeeEmployeeId(int id);
 	List<Account> findByTerritoryTerritoryId(int id);
 	List<Account> findByCompanyName(String companyName);
+	List<Account> findByCustomerJoinDateGreaterThanEqualAndCustomerJoinDateLessThanEqual(Date startDate,Date enddate);
 }

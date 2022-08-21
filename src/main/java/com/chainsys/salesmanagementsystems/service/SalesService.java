@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.SalesDTO;
+import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
 import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
@@ -86,5 +87,11 @@ public class SalesService {
 		salesIncomeList=BusinessLogic.getMonthlyTarget(targetService, salesIncomeList);
 		return salesIncomeList;
 	}
-	
+	public List<Sales> getallSales(){
+		 salesRepository.findAll();
+		 List<Sales>salesList=getSalesBetweenTwoDates(BusinessLogic.getDateBeforeAMonth(BusinessLogic.getInstanceDate()),BusinessLogic.getInstanceDate());
+		 List<Employee> employeeList=employeeService.allEmployee();
+		 return BusinessLogic.getHighSalesGroupByEmployeeId(salesList,employeeList);
+	}
+  
 }

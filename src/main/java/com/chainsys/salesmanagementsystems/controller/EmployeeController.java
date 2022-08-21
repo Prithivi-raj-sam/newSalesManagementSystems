@@ -22,8 +22,10 @@ import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.TargetEmployeeDTO;
+import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Lead;
+import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.LeadService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
@@ -35,6 +37,7 @@ public class EmployeeController {
 	private static final String REDIRECTTOALLEMPLOYEE="redirect:/employee/allemployee";
 	private static final String RESULT="result";
 	private static final String GETEMPLOYEE="getEmployee";
+	private static final String EMPLOYEENAME="employeeName";
 	@Autowired
 	private EmployeeService employeeservice;
 	@Autowired
@@ -143,7 +146,7 @@ public class EmployeeController {
 		List<Lead>leadList=dto.getLeadlist();
 		List<String>employeeName=leadService.getAccountNameOfLeads(leadList);
 		List<String>accountName=leadService.getAccountNameOfLeads(leadList);
-		model.addAttribute("employeeName", employeeName);
+		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute("accountName", accountName);
 		model.addAttribute("getemployee", dto.getEmployee());
 		model.addAttribute("getleads", dto.getLeadlist());
@@ -156,7 +159,7 @@ public class EmployeeController {
 		model.addAttribute(GETEMPLOYEE, dto.getEmployee());
 		model.addAttribute("getSales", dto.getSalesList());
 		model.addAttribute("accountName", salesDTO.getAccountName());
-		model.addAttribute("employeeName", salesDTO.getEmployeeName());
+		model.addAttribute(EMPLOYEENAME, salesDTO.getEmployeeName());
 		return "list-employee-sales";
 	}
 	@GetMapping("/getemployeeandtarget")//need
@@ -165,6 +168,26 @@ public class EmployeeController {
 		model.addAttribute(GETEMPLOYEE, dto.getEmployee());
 		model.addAttribute("getTargets", dto.getTargetList());
 		return "list-employee-target";
+	}
+	@GetMapping("/getemployeebyhighsales")//need
+	public String getEmployeeOrderByHighSales(Model model) {
+		List<Sales>monthlyEmployeeSales=salesService.getallSales();
+		List<Integer>employeeId=monthlyEmployeeSales.stream().map(Sales::getEmployeeId).toList();
+		List<String>employeeName=employeeservice.getEmployeeName(employeeId);
+		model.addAttribute("monthlyEmployeeSales", monthlyEmployeeSales);
+		model.addAttribute(EMPLOYEENAME, employeeName);
+		return "monthly-employee-sales";
+	}
+	@GetMapping("/getemployeebyaccountcount")
+	public String getEmployeeByAccountCount(Model model) {
+		List<Account>accountList=employeeservice.getAccountCountByEmployees();
+		List<Integer>employeeId=accountList.stream().map(Account::getEmployeeId).toList();
+		List<String>employeeName=employeeservice.getEmployeeName(employeeId);
+		model.addAttribute(EMPLOYEENAME, employeeName);
+		model.addAttribute("empId", 1);
+		model.addAttribute("accountList", accountList);
+		return "monthly-account-employee";
+		
 	}
 	@GetMapping("/passwordform")
 	public String updatePasswordForm(@RequestParam("empId")int id,Model model) {

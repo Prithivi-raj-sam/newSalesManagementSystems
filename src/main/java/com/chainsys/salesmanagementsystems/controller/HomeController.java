@@ -52,7 +52,7 @@ public class HomeController {
 		Employee employee = employeeService.getEmployeeByEmployeeIdAndPassrd(login.getEmployeeId(),login.getPassword());
 		try {
 			if(employee==null)
-				throw new InvalidInputDataException("There is no Matchinf data");
+				throw new InvalidInputDataException("There is no Matching data");
 		} catch (InvalidInputDataException exp) {
 			model.addAttribute("error", "Error Name:" + exp.getMessage());
 			model.addAttribute("message", "Employee Id or password Mismatch");

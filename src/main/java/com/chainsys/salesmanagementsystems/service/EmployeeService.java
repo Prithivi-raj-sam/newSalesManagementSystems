@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.dto.AccountsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.LeadsEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
@@ -101,4 +102,13 @@ public class EmployeeService {
 		}
 		return employeeNameList;
 	}
+	 public List<String>getEmployeeName(List<Integer>employeeIdList){
+		   return BusinessLogic.getEmployeeName(employeeRepository.findByEmployeeIdIn(employeeIdList));
+	   }
+	 public List<Account>getAccountCountByEmployees(){
+		 List<Employee> employeeList=allEmployee();
+		 List<Account> accountList=
+				 accountRepository.findByCustomerJoinDateGreaterThanEqualAndCustomerJoinDateLessThanEqual(BusinessLogic.getDateBeforeAMonth(BusinessLogic.getInstanceDate()), BusinessLogic.getInstanceDate());
+		 return BusinessLogic.getTotalAccountOfEmployees(accountList, employeeList);
+	 }
 }
