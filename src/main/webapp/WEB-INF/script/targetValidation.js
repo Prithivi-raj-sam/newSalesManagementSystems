@@ -2,7 +2,7 @@
  * 
  */
 let managerCommentCheck = function() {
-	let nameRegex = /^[a-zA-z\s]+$/;
+	let nameRegex = `^[a-zA-z\s]+$`;
 	if (!document.form.managerComment.value.match(nameRegex)) {
 		if (alert("Company Name can't be empty and must contain only alphabets")) {
 			document.form.managerComment.focus();
