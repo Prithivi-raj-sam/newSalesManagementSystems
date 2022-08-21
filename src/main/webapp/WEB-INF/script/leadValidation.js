@@ -3,7 +3,7 @@
  */
 
 let probabilityCheck = function() {
-	let nameRegex = new RegExp`(^[0-9]+(.[0-9]*)?$)`;
+	let nameRegex = /^\d+(.\d*)?$/;
 	if (!document.form.propability.value.match(nameRegex)) {
 		if (alert("Probability can't be empty and must contain Number Only")) {
 			document.form.propability.focus();
@@ -15,7 +15,7 @@ let probabilityCheck = function() {
 
 }
 let employeeIdCheck = function() {
-	let nameRegex =new RegExp`(^[0-9]{1,10}$)`;
+	let nameRegex =/^\d{1,10}$/;
 	if (!document.form.employeeId.value.match(nameRegex)) {
 		if (alert("SellerId can't be empty and must contain Number Only")) {
 			document.form.employeeId.focus();

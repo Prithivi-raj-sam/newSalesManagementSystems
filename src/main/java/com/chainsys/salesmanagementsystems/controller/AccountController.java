@@ -21,6 +21,7 @@ import com.chainsys.salesmanagementsystems.service.AccountService;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.LeadService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
+import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
 
 @Controller
 @RequestMapping("/account")
@@ -30,6 +31,9 @@ public class AccountController {
 	private static final String ALLACCOUNTMODEL="allaccount";
 	private static final String EMPLOYEENAME="employeeName";
 	private static final String RESULT="result";
+	private static final String ERROR="error";
+	private static final String MESSAGE="Somthing Went Wrong Please Try Later";
+	private static final String ERRORPAGE="error-page";
 	
 	@Autowired
 	private AccountService accountservice;
@@ -55,7 +59,7 @@ public class AccountController {
 			accountservice.insertAccount(account);
 			model.addAttribute(RESULT, "1 Record Added");
 		}catch(Exception exp) {
-			model.addAttribute("Error:", exp.getMessage());
+			model.addAttribute(ERROR, exp.getMessage());
 			model.addAttribute(RESULT,"Data Type Mismatch in Your AccountForm");
 		}
 		return "add-account-form";
@@ -63,19 +67,56 @@ public class AccountController {
 
 	@GetMapping("/getaccount")//need
 	public String getAccountById(@RequestParam("id") int id,@RequestParam("empId") int empId,Model model) {
-		Account account =accountservice.getAccountById(id);
-		Employee employee=employeeService.getEmployeeById(empId);
+		Account account=null;
+		try {
+		account =accountservice.getAccountById(id);
+		if(account==null)
+			throw new InvalidInputDataException("There is no Such Account");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		Employee employee=null;
+		try {
+		employee=employeeService.getEmployeeById(empId);
+		if(employee==null)
+			throw new InvalidInputDataException("You Are Have Not Permission to Process");
+		
 		model.addAttribute("account", account);
 		model.addAttribute(EMPID, empId);
 		if(employee.getRole().equals("marketer"))
 			return "get-account-marketer";
 		else return "get-account-id";
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 	}
 	
 	@GetMapping("/allaccount")//need
 	public String getAllAccount(@RequestParam("empId")int empId,Model model) {
-		List<Account>allAccount=accountservice.allAccount();
-		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		List<Account>allAccount=null;
+		try {
+		allAccount=accountservice.allAccount();
+		if(allAccount==null)
+			throw new InvalidInputDataException("All Accounts Are Null");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<String>employeeName=null;
+		try {
+		employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		if(employeeName==null)
+			throw new InvalidInputDataException("There is No Such Employee");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, empId);
@@ -83,8 +124,27 @@ public class AccountController {
 	}
 	@GetMapping("/allaccountbyemployee")//need
 	public String getAllAccountByEmployeeId(@RequestParam("empId")int empId,Model model) {
-		List<Account>allAccount=accountservice.getAccountByEmployeeId(empId);
-		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		List<Account>allAccount=null;
+		try {
+		allAccount=accountservice.getAccountByEmployeeId(empId);
+		if(allAccount==null)
+			throw new InvalidInputDataException("There is No Accounts For this Employee");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<String>employeeName=null;
+		try {
+			employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+			if(employeeName==null)
+				throw new InvalidInputDataException("There is Some Issues in Fetching Employee Name");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, empId);

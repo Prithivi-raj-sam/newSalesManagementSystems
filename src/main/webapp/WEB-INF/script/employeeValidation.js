@@ -2,7 +2,7 @@
  * 
  */
 let employeeNameCheck = function() {
-		let nameRegex = new RegExp`(^[a-zA-z\s]+$)`;
+		let nameRegex = /^[a-zA-z\s]+$/;
 		if (!document.form.employeeName.value.match(nameRegex)) {
 			if (alert("Employee Name can't be empty and must contain only alphabets")) {
 				document.form.employeeName.focus();
@@ -15,7 +15,7 @@ let employeeNameCheck = function() {
 	}
 	
 	let emailCheck = function() {
-		let nameRegex = new RegExp`(^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$)`;
+		let nameRegex = /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/;
 		if (!document.form.email.value.match(nameRegex)) {
 			if (alert("Email not in the correct format")) {
 				document.form.email.focus();
@@ -28,8 +28,7 @@ let employeeNameCheck = function() {
 	}
 
 	let passwordCheck = function() {
-		let nameRegex = new RegExp`(
-				^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$)`;
+		let nameRegex = /^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$/;
 		if (!document.form.password.value.match(nameRegex)) {
 			if (alert("Password must begin with letter and contain atleast one number and must have atleast 8 characters")) {
 				document.form.password.focus();
@@ -41,7 +40,7 @@ let employeeNameCheck = function() {
 
 	}
 	let employeePhoneCheck = function() {
-		let nameRegex = new RegExp`([0-9]{10})`;
+		let nameRegex =/^\d{10}$/;
 		if (!document.form.employeePhone.value.match(nameRegex)) {
 			if (alert("Phone number must have 10 digits")) {
 				document.form.employeePhone.focus();
