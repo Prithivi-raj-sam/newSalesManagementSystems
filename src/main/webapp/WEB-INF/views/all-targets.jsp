@@ -23,6 +23,7 @@
 					<th>Employee Id</th>
 					<th>Manager Comment</th>
 					<th>Target Month</th>
+					<th>View</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,7 +36,7 @@
 			   	  <td>${alltargets.employeeId}</td>
 			   	  <td>${alltargets.managerComment}</td>
 			   	  <td>${alltargets.targetSetDate}</td>
-			   	  <td id="view"><a href="/target/gettarget?targetId=${alltargets.targetId}"><button>view</button></a></td>
+			   	  <td id="view"><a href="/target/gettarget?targetId=${alltargets.targetId}"><button>View</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

@@ -19,21 +19,26 @@ background-image:url(https://wallpapercave.com/wp/wp2548614.jpg);
 }
 
 .navbar input{
+	float:right;
 width:200px;
 text-align:center;
 border:2px solid black;
 margin-top:11px;
-padding:14px 16px;
-height:5px;
+margin-left:7px;
+padding:7px 16px;
+height:15px;
 } 
 
 .navbar button{
+	float:right;
+	margin-top:13px;
+	margin-left:7px;
+	margin-right:10px;
 width:100px;
 height:30px;
 text-align:center;
 border:2px solid black;
 }
-
 .iframe {
    position: absolute;
    top:65%;

@@ -152,8 +152,26 @@ public class AccountController {
 	}
 	@PostMapping("/getaccountbycompanyname")//need
 	public String getAccountByCompanyName(@ModelAttribute("account")Account account,Model model) {
-		List<Account>allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
-		List<String>employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		List<Account>allAccount=null;
+		try {
+		allAccount=accountservice.getAccountByComapnyName(account.getCompanyName());
+		if(allAccount==null)
+			throw new InvalidInputDataException("Cannot Find Account By This Company Name");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<String>employeeName=null;
+		try {
+		employeeName=employeeService.getEmployeeNamesByEmployeeId(allAccount);
+		if(employeeName==null)
+			throw new InvalidInputDataException("Cannot Find Employee Name in Account details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLACCOUNTMODEL, allAccount);
 		model.addAttribute(EMPID, account.getEmployeeId());
@@ -161,28 +179,85 @@ public class AccountController {
 	}
 	@GetMapping("/deleteaccount")//need
 	public String deleteAccount(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
-		accountservice.deleteAccount(id);
+		try {
+		   accountservice.deleteAccount(id);
+		}catch(Exception exp){
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		return "redirect:/account/allaccountbyemployee?empId="+empId;
 	}
 	@GetMapping("/updateaccountform")//need
 	public String updateAccountForm(@RequestParam("id")int id,Model model) {
-		Account account =accountservice.getAccountById(id);
+		Account account =null;
+		try {
+		 account =accountservice.getAccountById(id);
+		 if(account==null)
+			 throw new InvalidInputDataException("Cannot Find This Account Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute("updateAccount", account);
 		model.addAttribute("allTerritory", territoryService.allTerritory());
 		return "update-account-form";
 	}
 	@PostMapping("/updateaccount")//need
 	public String updateAccount(@ModelAttribute("updateAccount")Account account, Model model) {
+		try {
 		accountservice.updateAccount(account);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute(RESULT, "1 record updated");
 		return "update-account-form";
 	}
 	@GetMapping("/getacountandleads")//need
 	public String getAcountAndLeads(@RequestParam("id")int id, Model model) {
-		LeadsAccountsDTO dto=accountservice.getAcountsAndLeads(id);
-		List<Lead>leadList=dto.getLeadsList();
-		List<String>accountName=leadService.getAccountNameOfLeads(leadList);
-		List<String> employeeName=leadService.getEmployeeNameOfleads(leadList);
+		LeadsAccountsDTO dto=null;
+		try {
+		dto=accountservice.getAcountsAndLeads(id);
+		if(dto==null)
+			throw new InvalidInputDataException("Data Missing in Accounts");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<Lead>leadList=null;
+		try {
+		leadList=dto.getLeadsList();
+		if(leadList==null)
+			throw new InvalidInputDataException("Cannot Fetch Data From Leads");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<String>accountName=null;
+		try {
+		accountName=leadService.getAccountNameOfLeads(leadList);
+		if(accountName==null)
+			throw new InvalidInputDataException("Connot Find Account Name");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<String> employeeName=null;
+		try {
+		employeeName=leadService.getEmployeeNameOfleads(leadList);
+		if(employeeName==null)
+			throw new InvalidInputDataException("Cannot Find Employee Name");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute("accountName", accountName);
 		model.addAttribute("getaccount", dto.getAccount());

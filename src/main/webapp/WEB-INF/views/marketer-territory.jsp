@@ -15,8 +15,8 @@
 	<form:form action="/territory/getTerritorybyname" method="post" modelAttribute="territory">
 		<div class="navbar">
 			<a href="/home/addterritory">Add Territory</a>
-			<form:input path="territoryName" placeholder="enter Territory Name" />
-			<form:button>search</form:button>
+			<form:button>Search</form:button>
+			<form:input path="territoryName" placeholder="Enter Territory Name" />
 		</div>
 		</form:form>
 </div>

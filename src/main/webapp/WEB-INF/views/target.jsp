@@ -15,9 +15,11 @@
 <form:form action="/target/gettargetbydate" method="post" modelAttribute="target">
 <div class="navbar">
 			<a href="/home/addTarget">Add Target</a>
-			<form:input path="targetDate"  type="date" placeholder="from date"/>
+			<form:button>Search</form:button>
 			<form:input path="targetSetDate" type="date" placeholder="To date" />
-			<form:button>search</form:button>
+			<form:input path="targetDate"  type="date" placeholder="from date"/>
+			
+			
 </div>
 		</form:form>
 		<div>

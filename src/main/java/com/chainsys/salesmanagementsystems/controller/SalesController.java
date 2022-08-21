@@ -18,6 +18,7 @@ import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Sales;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.service.SalesService;
+import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 
 @Controller
@@ -29,6 +30,11 @@ public class SalesController {
 	private static final String ACCOUNTNAME="accountName";
 	private static final String EMPLOYEENAME="employeeName";
 	private static final String EMPLOYEEID="empId";
+	private static final String ERROR="error";
+	private static final String ERRORPAGE="error-page";
+	private static final String RESULT="result";
+	private static final String MESSAGE="message";
+	
 	@Autowired
 	private SalesService salesService;
 	@Autowired
@@ -47,13 +53,28 @@ public class SalesController {
 	}
 	@PostMapping("/addsales")//need
 	public String addSales(@ModelAttribute("addsales")Sales sales,Model model) {
-		salesService.insertSales(sales);
-		model.addAttribute("result", "1 sale added");
+		try {
+			salesService.insertSales(sales);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		model.addAttribute(RESULT, "1 sale added");
 		return "add-sales-form";
 	}
 	@GetMapping("/allsales")//need
 	public String allSales(@RequestParam("empId") int empId, Model model) {
-		SalesDTO salesDTO=salesService.allSales();
+		SalesDTO salesDTO=null;
+		try {
+		salesDTO=salesService.allSales();
+		if(salesDTO==null)
+			throw new InvalidInputDataException("Cannot Find Sales Detils");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute(ALLSALESMODEL, salesDTO.getSalesList());
 		model.addAttribute(ACCOUNTNAME, salesDTO.getAccountName());
 		model.addAttribute(EMPLOYEENAME, salesDTO.getEmployeeName());
@@ -62,8 +83,27 @@ public class SalesController {
 	}
 	@PostMapping("/getsalesfortwodates")//need
 	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
-		List<Sales>allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
-		SalesDTO saleDTO=salesService.getSalesDetailsOfNames(allSales);
+		List<Sales>allSales=null;
+		try {
+		allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
+		if(allSales==null)
+			throw new InvalidInputDataException("Cannot Find AllSales details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		SalesDTO saleDTO=null;
+		try {
+			saleDTO=salesService.getSalesDetailsOfNames(allSales);
+			if(saleDTO==null)
+				throw new InvalidInputDataException("Cannot Find Sales Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+
 		model.addAttribute(EMPLOYEEID, salesInCome.getPlannedSales());
 		model.addAttribute(ACCOUNTNAME, saleDTO.getAccountName());
 		model.addAttribute(EMPLOYEENAME, saleDTO.getEmployeeName());
@@ -72,8 +112,26 @@ public class SalesController {
 	}
 	@GetMapping("/getSales")//need
 	public String getSalesByID(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
-		Sales sales=salesService.getSalesById(id);
-		Employee employee=employeeservice.getEmployeeById(empId);
+		Sales sales=null;
+		try {
+			sales=salesService.getSalesById(id);
+			if(sales==null)
+				throw new InvalidInputDataException("cannot Find Sales Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		Employee employee=null;
+		try {
+			employee=employeeservice.getEmployeeById(empId);
+			if(employee==null)
+				throw new InvalidInputDataException("You Are Not Valid Employee");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute("sales", sales);
 		if(employee.getRole().equals("salesman"))
 			return "get-sales-id";
@@ -82,8 +140,27 @@ public class SalesController {
 	}
 	@GetMapping("/getsalesbyemployeeid")//need
 	public String getSalesByEmployeeId(@RequestParam("empId")int empId,Model model) {
-		List<Sales> salesList=salesService.getSalesByEmployeeId(empId);
-		SalesDTO salesDTO=salesService.getSalesDetailsOfNames(salesList);
+		List<Sales> salesList=null;
+		try {
+			salesList=salesService.getSalesByEmployeeId(empId);
+			if(salesList==null) 
+				throw new InvalidInputDataException("Cannot Find SalesList Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		SalesDTO salesDTO=null;
+		try {
+			salesDTO=salesService.getSalesDetailsOfNames(salesList);
+			if(salesDTO==null)
+				throw new InvalidInputDataException("Cannot Find EmployeeName or AccountName");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute(ALLSALESMODEL, salesList);
 		model.addAttribute(ACCOUNTNAME, salesDTO.getAccountName());
 		model.addAttribute(EMPLOYEENAME, salesDTO.getEmployeeName());
@@ -92,19 +169,41 @@ public class SalesController {
 	}
 	@GetMapping("/deletesales")//need
 	public String deleteSales(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
-		salesService.deleteSales(id);
-		return "redirect:/sales/allsales?empId="+empId;
+		try {
+			salesService.deleteSales(id);
+			return "redirect:/sales/allsales?empId="+empId;
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 	}
 	@GetMapping("/updatesalesform")//need
 	public String updateSalesServiceForm(@RequestParam("id")int id,Model model) {
-		Sales sales =salesService.getSalesById(id);
-		model.addAttribute("updatesales", sales);
-		return "update-sales-form";
+		Sales sales =null;
+		try {
+			sales =salesService.getSalesById(id);
+			model.addAttribute("updatesales", sales);
+			return "update-sales-form";
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
+		
 	}
 	@PostMapping("/updatesales")//need
 	public String updateSales(@ModelAttribute("updatesales")Sales sales,Model model) {
-		salesService.updateSales(sales);
-		return "update-sales-form";
+		try {
+			salesService.updateSales(sales);
+			return "update-sales-form";
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 	}
 	@GetMapping("/salesincome")//need
 	public String salesIncome(Model model) {
@@ -114,8 +213,26 @@ public class SalesController {
 	}
 	@PostMapping("/salesTotalAmount")//need
 	public String salesTotalAmount(@ModelAttribute("salesIncome")SalesInCome salesIncome, Model model) {
-		salesIncome=salesService.getTotalSalesBetweenTwoDates(salesIncome);
-		List<SalesInCome> salesIncomeList=salesService.getMonthlySales(salesIncome);
+		try {
+			salesIncome=salesService.getTotalSalesBetweenTwoDates(salesIncome);
+			if(salesIncome==null)
+				throw new InvalidInputDataException("Cannot Fetch Income Data");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<SalesInCome> salesIncomeList=null;
+		try {
+			salesIncomeList=salesService.getMonthlySales(salesIncome);
+			if(salesIncomeList==null)
+				throw new InvalidInputDataException("Cannot Fetch Monthly Income ");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute(SALESINCOME, salesIncome);
 		model.addAttribute("salesIncomeList", salesIncomeList);
 		return "sales-income-result";

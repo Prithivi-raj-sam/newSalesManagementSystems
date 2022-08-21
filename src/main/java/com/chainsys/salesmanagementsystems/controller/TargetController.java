@@ -18,12 +18,17 @@ import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.service.TargetService;
+import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
 
 @Controller
 @RequestMapping("/target")
 public class TargetController {
 	private static final String ALLTARGET="all-targets";
 	private static final String ALLTARGETMODEL="alltargets";
+	private static final String ERROR="error";
+	private static final String ERRORPAGE="error-page";
+	private static final String RESULT="result";
+	private static final String MESSAGE="message";
 	
 	@Autowired
 	private TargetService targetService;
@@ -31,22 +36,60 @@ public class TargetController {
 	
 	@GetMapping("/alltargets")//need
 	public String allTargets(Model model) {
-		List<Target>allTarget = targetService.allTarget();
+		List<Target>allTarget =null;
+		try {
+			allTarget = targetService.allTarget();
+			if(allTarget==null)
+				throw new InvalidInputDataException("Cannot Find Target Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+
 		model.addAttribute(ALLTARGETMODEL, allTarget);
 		return ALLTARGET;
 	}
 	@GetMapping("/alltargetbyEmployeeid")//need
 	public String getAlltargetsByEmployeeId(@RequestParam("empId") int empId,Model model) {
-		List<Target> targetList=targetService.getTargetByEMployeeId(empId);
+		List<Target> targetList=null;
+		try {
+			targetList=targetService.getTargetByEMployeeId(empId);
+			if(targetList==null)
+				throw new InvalidInputDataException("Cannot Find All Target list");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute("targetList", targetList);
 		return "employees-target";
 	}
 	@PostMapping("/alltargetfortwodates")//need
 	public String getTargetBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
-		List<Target>targetList =targetService.getSalesInCome(salesInCome);
-		List<Target>employeetargetList= targetList.stream()
-		  .filter(target-> target.getEmployeeId()==salesInCome.getCommitedLeads())
-		  .collect(Collectors.toList());
+		List<Target>targetList =null;
+		try {
+			targetList =targetService.getSalesInCome(salesInCome);
+			if(targetList==null)
+				throw new InvalidInputDataException("Cannot Find All Target list");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		List<Target>employeetargetList= null;
+		try {
+			employeetargetList= targetList.stream()
+					  .filter(target-> target.getEmployeeId()==salesInCome.getCommitedLeads())
+					  .collect(Collectors.toList());
+			if(employeetargetList==null)
+				throw new InvalidInputDataException("Cannot Extract EmployeeTarget List");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute("targetList", employeetargetList);
 		model.addAttribute("empId", salesInCome.getCommitedLeads());
 		return "employees-target";
@@ -61,48 +104,125 @@ public class TargetController {
 	}
 	@PostMapping("/addtarget")//need
 	public String addTarget(@ModelAttribute("addtarget")Target target,Model model) {
-		targetService.insertTarget(target);
+		try {
+			targetService.insertTarget(target);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		return "add-target-form";
 	}
 	@GetMapping("/gettarget")//need
 	public String getTargetById(@RequestParam("targetId")int targetId,Model model) {
-		Target target=targetService.getTargetById(targetId);
+		Target target=null;
+		try {
+			target=targetService.getTargetById(targetId);
+			if(target==null)
+				throw new InvalidInputDataException("Cannot Fetch Target Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute("target", target);
 		return "get-target-id";
 	}
 	@GetMapping("/deleteTarget")//need
 	public String deleteTarget(@RequestParam("targetId")int targetId, Model model) {
-		targetService.deleteTarget(targetId);
+		try {
+			targetService.deleteTarget(targetId);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		return "redirect:/target/alltargets";
 	}
 	@GetMapping("/updatetargetform")//need
 	public String updateTargetForm(@RequestParam("targetId")int targetId,Model model) {
-		Target target=targetService.getTargetById(targetId);
+		Target target=null;
+		try {
+			target=targetService.getTargetById(targetId);
+			if(target==null)
+				throw new InvalidInputDataException("Cannot Fetch Target Data");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+	
 		model.addAttribute("updatetarget", target);
 		return "update-target-form";
 	}
 	@PostMapping("/updatetarget")//need
 	public String updatetarget(@ModelAttribute("updatetarget")Target target, Model model) {
-		targetService.updateTarget(target);
+		try {
+			targetService.updateTarget(target);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		return "update-target-form";
 	}
 	@PostMapping("/gettargetbydate")//need
 	public String getTaretByTargetDateAndTargetSetdate(@ModelAttribute("target")Target target,Model model) {
-		List<Target> targetList=targetService.getTargetByTwoDate(target);
+		List<Target> targetList=null;
+		try {
+			targetList=targetService.getTargetByTwoDate(target);
+			if(targetList==null)
+				throw new InvalidInputDataException("Cannot Find Target List Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute(ALLTARGETMODEL, targetList);
 		return ALLTARGET;
 	}
 	@GetMapping("/goingtarget")//need
 	public String getCurrentTarget(@RequestParam("empId") int empId,Model model) {
-		List<Target> targetList=targetService.getTargetByDescendingOrder(empId);
+		List<Target> targetList=null;
+		try {
+			targetList=targetService.getTargetByDescendingOrder(empId);
+			if(targetList==null)
+				throw new InvalidInputDataException("Cannot Fetch Target Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		Target target=targetList.get(0);
 		model.addAttribute("target", target);
 		return "current-target";
 	}
 	@GetMapping("/todaytarget")//need
 	public String getTodayTarget(Model model) {
-		List<Target> targetList=targetService.getTargetByDescindingOrderDate();
-		targetList=BusinessLogic.getTodayTarget(targetList);
+		List<Target> targetList=null;
+		try {
+			targetList=targetService.getTargetByDescindingOrderDate();
+			if(targetList==null)
+				throw new InvalidInputDataException("Cannot Fetch target Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		try {
+			targetList=BusinessLogic.getTodayTarget(targetList);
+			if(targetList==null)
+				throw new InvalidInputDataException("Cannot Fetch Today target Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute(ALLTARGETMODEL, targetList);
 		return ALLTARGET;
 	}

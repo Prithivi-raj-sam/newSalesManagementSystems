@@ -15,8 +15,9 @@
 		modelAttribute="employee">
 		<div class="navbar">
 			<a href="/home/addemployeeform">Add Employee</a>
+				<form:button>Search</form:button>
 			<form:input path="employeeName" placeholder="Enter Employee Name" />
-			<form:button>Search</form:button>
+		
 		</div>
 		</form:form>
 		<div>

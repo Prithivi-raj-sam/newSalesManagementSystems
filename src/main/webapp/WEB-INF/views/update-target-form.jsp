@@ -13,9 +13,7 @@
  <%@include file="/WEB-INF/css/getemployeebyid.css"%>
 </style>
 </head>
-<body style="background-color: #3d403d; color: white;">
-	<div id="root">
-		<div id="form">
+<body>
 			<form:form action="updatetarget" method="post"
 				modelAttribute="updatetarget" name="form">
 				<div class="form">
@@ -67,13 +65,12 @@
 										<form:option value="account" label="Account"></form:option>
 									</form:select></td>
 							</tr>
-							<form:button id="button">update</form:button>
 						</tbody>
 					</table>
+					<form:button id="button">Update</form:button>
 				</div>
 			</form:form>
-		</div>
-	</div>
+			
 	<div>${result}</div>
 
 </body>

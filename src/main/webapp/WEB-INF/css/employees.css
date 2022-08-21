@@ -25,7 +25,15 @@ text-decoration:none;
 }
 
 .navbar input{
+float:right;
 margin-top:11px;
+margin-left:7px;
 padding:14px 16px;
 height:20px;
+}
+.navbar button{
+	float:right;
+	margin-top:13px;
+	margin-left:7px;
+	margin-right:10px;
 }

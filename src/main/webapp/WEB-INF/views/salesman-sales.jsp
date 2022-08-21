@@ -16,10 +16,10 @@
 	<div class="navbar">
 		
 			<a href="/home/addsales?empId=${empId}">Add Sales</a>
-			<form:input path="fromDate" placeholder="enter From date" type="date"/>
-			<form:input path="toDate" placeholder="enter To Date" type="date"/>
+			<form:button>Search</form:button>
 			<form:input path="plannedSales"  type="hidden" value="${empId}"/>
-		<form:button>Search</form:button>
+			<form:input path="toDate" placeholder="enter To Date" type="date"/>
+			<form:input path="fromDate" placeholder="enter From date" type="date"/>
 </div>		
 		</form:form>
 		 <div id="sale1"><iframe id="salesman" class="iframe" title='All Sales' src='/sales/getsalesbyemployeeid?empId=${empId}' 

@@ -14,9 +14,10 @@
 <form:form action="/territory/getTerritorybyname" method="post" modelAttribute="territory">
 <div class="navbar">
 			<a href="/home/addterritory">Add Territory</a>
+			<form:button>Search</form:button>
 			<form:input path="territoryName" placeholder="Enter Territory Name" />
 			<form:input path="territoryId"  type="hidden" value="${empId}" />
-			<form:button>search</form:button>
+			
 </div>
 		</form:form>
 		<div><iframe class="iframe" title='All territory' src='/territory/allterritory?empId=${empId}' 

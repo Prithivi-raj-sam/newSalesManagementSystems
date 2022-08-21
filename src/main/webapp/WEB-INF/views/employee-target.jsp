@@ -14,10 +14,13 @@
 	
 	<form:form action="/target/alltargetfortwodates" method="post" modelAttribute="salesIncome">
 		<div class="navbar">
+		<form:button>Search</form:button>
+		<form:input path="commitedLeads" type="hidden" value="${empId}" />
+		<form:input path="toDate" placeholder="enter To Date" type="date"/>
 			<form:input path="fromDate" placeholder="enter From Ended" type="date"/>
-			<form:input path="toDate" placeholder="enter To Date" type="date"/>
-			<form:input path="commitedLeads" type="hidden" value="${empId}" />
-			<form:button>Search</form:button>
+			
+			
+			
 			</div>
 		</form:form>
 	<div></div>

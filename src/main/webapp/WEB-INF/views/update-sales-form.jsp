@@ -15,9 +15,7 @@
  <%@include file="/WEB-INF/css/getemployeebyid.css"%>
 </style>
 </head>
-<body style="background-color: #3d403d; color: white;">
-	<div id="root">
-		<div id="form">
+<body>
 			<form:form action="updatesales" method="post"
 				modelAttribute="updatesales" name="form">
 
@@ -49,13 +47,12 @@
 										pattern="^[0-9]+(.[0-9]*)?$" title="Please Enter valid Amount"
 										required="true" /></td>
 							</tr>
-							<form:button id="button">update</form:button>
+						
 						</tbody>
 					</table>
+						<form:button id="button">update</form:button>
 				</div>
 			</form:form>
-		</div>
-	</div>
 	<div>${result}</div>
 
 </body>

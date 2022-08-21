@@ -18,10 +18,16 @@ import com.chainsys.salesmanagementsystems.model.Employee;
 import com.chainsys.salesmanagementsystems.model.Territory;
 import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TerritoryService;
+import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
 
 @Controller
 @RequestMapping("/territory")
 public class TerritoryController {
+	private static final String ERROR="error";
+	private static final String ERRORPAGE="error-page";
+	private static final String RESULT="result";
+	private static final String MESSAGE="message";
+	
 	@Autowired
 	private TerritoryService territoryService;
 	@Autowired
@@ -35,19 +41,44 @@ public class TerritoryController {
 	}
 	@PostMapping("/addterritory")//need
 	public String addTerritory(@ModelAttribute("addterritory")Territory ter,Model model) {
-		territoryService.insertTerritory(ter);
+		try {
+			territoryService.insertTerritory(ter);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		return "add-territory-form";
 	}
 	@PostMapping("getTerritorybyname")//need
 	public String getTerritoryByName(@ModelAttribute("territory")Territory territory,Model model) {
-		List<Territory> territoryList=territoryService.gettargetByStartingTerritoryName(territory.getTerritoryName());
+		List<Territory> territoryList=null;
+		try {
+			territoryList=territoryService.gettargetByStartingTerritoryName(territory.getTerritoryName());
+			if(territoryList==null)
+				throw new InvalidInputDataException("Cannot Fetch Territory Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute("allteritory", territoryList);
 		model.addAttribute("empId", territory.getTerritoryId());
 		return "all-territory";
 	}
 	@GetMapping("/getterritory")//need
 	public String getTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
-		Territory territory=territoryService.getTerritoryById(id);
+		Territory territory=null;
+		try {
+			territory=territoryService.getTerritoryById(id);
+			if(territory==null)
+				throw new InvalidInputDataException("Cannot Fetch territory Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute("territory", territory);
 		Employee employee=employeeService.getEmployeeById(empId);
 		if(employee.getRole().equals("salesman"))
@@ -56,38 +87,89 @@ public class TerritoryController {
 	}
 	@GetMapping("/deleteterritory")//need
 	public String deleteTerritory(@RequestParam("getId")int id,Model model) {
-		territoryService.deleteTerritory(id);
+		try {
+			territoryService.deleteTerritory(id);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		return "redirect:/territories/allterritory";
 	}
 	@GetMapping("/allterritory")//need
 	public String allTerritory(@RequestParam("empId")int empId,Model model) {
-		List<Territory>allterritory =territoryService.allTerritory();
+		List<Territory>allterritory =null;
+		try {
+			allterritory =territoryService.allTerritory();
+			if(allterritory==null)
+				throw new InvalidInputDataException("Cannot Fetch All Territory Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		model.addAttribute("allteritory", allterritory);
 		model.addAttribute("empId", empId);
 		return "all-territory";
 	}
 	@GetMapping("/updateterritoryform")//need
 	public String updateTerritoryForm(@RequestParam("id")int id,Model model) {
-		Territory ter=territoryService.getTerritoryById(id);
+		Territory ter=null;
+		try {
+			ter=territoryService.getTerritoryById(id);
+			if(ter==null)
+				throw new InvalidInputDataException("Cannot Fetch Territory Details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+
 		model.addAttribute("updateTerritory", ter);
 		return "update-territory-form";
 	}
 	@PostMapping("/updateterritory")//need
 	public String updateTerritory(@ModelAttribute("updateTerritory")Territory ter,Model model) {
-		model.addAttribute("result", "1 Record updated");
-		territoryService.updateTerritory(ter);
+		model.addAttribute(RESULT, "1 Record updated");
+		try {
+			territoryService.updateTerritory(ter);
+		}catch(Exception exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
 		return "update-territory-form";
 	}
 	@GetMapping("/getaccountsandterritory")//need
 	public String getAccountAndTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
-		AccountsTerritoryDTO dto=territoryService.getAccountandTerritory(id);
+		AccountsTerritoryDTO dto=null;
+		try {
+			dto=territoryService.getAccountandTerritory(id);
+			if(dto==null)
+				throw new InvalidInputDataException("Cannot Fetch Account And Territory details");
+		}catch(InvalidInputDataException exp) {
+			model.addAttribute(ERROR, exp.getMessage());
+			model.addAttribute(RESULT, MESSAGE);
+			return ERRORPAGE;
+		}
+		
 		model.addAttribute("getTerritory", dto.getTerritory());
 		model.addAttribute("getAccounts", dto.getAccountList());
 		return "list-accounts-territory";
 }
 	 @GetMapping("/getemployeeandterritory")//need
 	 public String getEmployeesAndTerritory(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
-		 EmployeeTerritoryDTO dto=territoryService.getTErritoryAndEmployee(id);
+		 EmployeeTerritoryDTO dto=null;
+		 try {
+			 dto=territoryService.getTErritoryAndEmployee(id);
+			 if(dto==null)
+				 throw new InvalidInputDataException("Cannot Fetch Employee And Territory");
+		 }catch(InvalidInputDataException exp) {
+				model.addAttribute(ERROR, exp.getMessage());
+				model.addAttribute(RESULT, MESSAGE);
+				return ERRORPAGE;
+			}
+
 		 model.addAttribute("getTerritory", dto.getTerritory());
 		 model.addAttribute("getEmployee", dto.getEmployeeList());
 		 return "list-employees-territory";

@@ -23,9 +23,9 @@
 				href="/home/lead?empId=${empId}">Leads/Sales</a> 
 				<a
 				href="/home/territorys?empId=${empId}">Territory</a>
+				<form:button id="btn">Income</form:button>
+				<form:input path="toDate" type="date" placeholder="Enter To Date" />
 			<form:input path="fromDate" type="date" placeholder="Enter From Date" />
-			<form:input path="toDate" type="date" placeholder="Enter To Date" />
-			<form:button id="btn">Income</form:button>
 		</div>
 	</form:form>
 </body>

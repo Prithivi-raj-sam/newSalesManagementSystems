@@ -10,15 +10,12 @@
 <%@include file="/WEB-INF/css/getemployeebyid.css"%>
 </style>
 </head>
-<body style="background-color: #3d403d; color: white;">
-	<div id="root">
-		<div id="form">
+<body>
 			<form:form action="" method="post" modelAttribute="target">
 				<div class="form">
 					<table>
 					<caption></caption>
-					<tr>
-					<th></th></tr>
+					<tr><th></th></tr>
 						<tbody>
 							<tr>
 								<td><label for="targetDate">Target Date</label></td>
@@ -42,19 +39,14 @@
 							</tr>
 							<tr>
 								<td><label for="targetSetDate">Target Month</label></td>
-								<form:input path="targetSetDate" readonly="true" />
+								<td><form:input path="targetSetDate" readonly="true" /></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 			</form:form>
-		</div>
-	</div>
+			<a href="/target/updatetargetform?targetId=${target.targetId}"><button>Update</button></a>
+		<a href="/target/deleteTarget?targetId=${target.targetId}"><button>Delete</button></a>
 	<div>${result}</div>
-	<div>
-		<a href="/target/updatetargetform?targetId=${target.targetId}"><button>update</button></a>
-		<a href="/target/deleteTarget?targetId=${target.targetId}"><button>delete</button></a>
-	</div>
 </body>
-
 </html>

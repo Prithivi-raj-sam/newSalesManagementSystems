@@ -16,10 +16,10 @@
 	<div class="navbar">
 		
 			<a href="/home/addleads?empId=${empId}">Add Leads</a>
-			<form:input path="fromDate" placeholder="Enter Leads From date" type="date"/>
-			<form:input path="toDate" placeholder="Enter Leads To date" type="date"/>
-			<form:input path="plannedLeads" type="hidden" value="${empId}"/>
 			<form:button>Search</form:button>
+			<form:input path="plannedLeads" type="hidden" value="${empId}"/>
+			<form:input path="toDate" placeholder="Enter Leads To date" type="date"/>
+			<form:input path="fromDate" placeholder="Enter Leads From date" type="date"/>
 			</div>
 		</form:form>
 	<div>
