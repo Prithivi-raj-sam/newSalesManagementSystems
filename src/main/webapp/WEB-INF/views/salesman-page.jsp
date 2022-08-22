@@ -10,10 +10,12 @@
 </style>
 </head>
 <body>
-	<div class="navbar">>
-			<a href="/home/employeeTarget?empId=${empId}">Target</a>
-			<a href="/home/salesmanSales?empId=${empId}">Sales</a>
-			<a href="/home/salesmanLeads?empId=${empId}">Leads</a>
+	<div class="navbar">
+			<a href="/home/employeeTarget">Target</a>
+			<a href="/home/salesmanSales">Sales</a>
+			<a href="/home/salesmanLeads">Leads</a>
 	 </div>
+	 <h1>Sales Man</h1>
+	<h3>Welcome ${employeeName}</h3>
 </body>
 </html>

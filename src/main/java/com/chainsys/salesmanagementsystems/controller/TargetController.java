@@ -32,6 +32,8 @@ public class TargetController {
 	private static final String ERRORPAGE="error-page";
 	private static final String RESULT="result";
 	private static final String MESSAGE="message";
+	private static final String EMPLOYEENAME="employeeName";
+	private static final String EmployeeId="employeeId";
 	
 	@Autowired
 	private TargetService targetService;
@@ -50,14 +52,15 @@ public class TargetController {
 			model.addAttribute(RESULT, MESSAGE);
 			return ERRORPAGE;
 		}
-
+		List<String>employeeName=employeeService.getempNameByTarget(allTarget);
+		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLTARGETMODEL, allTarget);
 		return ALLTARGET;
 	}
 	@GetMapping("/alltargetbyEmployeeid")//need
 	public String getAlltargetsByEmployeeId(HttpServletRequest request,Model model) {
 		HttpSession session= request.getSession();
-		int employeeId=(int)session.getAttribute("employeeId");
+		int employeeId=(int)session.getAttribute(EmployeeId);
 		List<Target> targetList=null;
 		try {
 			targetList=targetService.getTargetByEMployeeId(employeeId);
@@ -85,9 +88,11 @@ public class TargetController {
 			return ERRORPAGE;
 		}
 		List<Target>employeetargetList= null;
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute(EmployeeId);
 		try {
 			employeetargetList= targetList.stream()
-					  .filter(target-> target.getEmployeeId()==salesInCome.getCommitedLeads())
+					  .filter(target-> target.getEmployeeId()==employeeId)
 					  .collect(Collectors.toList());
 			if(employeetargetList==null)
 				throw new InvalidInputDataException("Cannot Extract EmployeeTarget List");
@@ -96,10 +101,7 @@ public class TargetController {
 			model.addAttribute(RESULT, MESSAGE);
 			return ERRORPAGE;
 		}
-		HttpSession session= request.getSession();
-		int employeeId=(int)session.getAttribute("employeeId");
 		model.addAttribute("targetList", employeetargetList);
-		model.addAttribute("empId", employeeId);
 		return "employees-target";
 	}
 	@GetMapping("/addtargetform")//need
@@ -188,16 +190,15 @@ public class TargetController {
 			model.addAttribute(RESULT, MESSAGE);
 			return ERRORPAGE;
 		}
-		List<String> employeeName=
-				employeeService.getEmployeeName(targetList.stream().map(Target::getEmployeeId).collect(Collectors.toList()));
 		model.addAttribute(ALLTARGETMODEL, targetList);
-		model.addAttribute("employeeName", employeeName);
+		List<String>employeeName=employeeService.getempNameByTarget(targetList);
+		model.addAttribute(EMPLOYEENAME, employeeName);
 		return ALLTARGET;
 	}
 	@GetMapping("/goingtarget")//need
 	public String getCurrentTarget(HttpServletRequest request,Model model) {
 		HttpSession session= request.getSession();
-		int employeeId=(int)session.getAttribute("employyeId");
+		int employeeId=(int)session.getAttribute(EmployeeId);
 		List<Target> targetList=null;
 		try {
 			targetList=targetService.getTargetByDescendingOrder(employeeId);
@@ -234,7 +235,8 @@ public class TargetController {
 			model.addAttribute(RESULT, MESSAGE);
 			return ERRORPAGE;
 		}
-		
+		List<String>employeeName=employeeService.getempNameByTarget(targetList);
+		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ALLTARGETMODEL, targetList);
 		return ALLTARGET;
 	}

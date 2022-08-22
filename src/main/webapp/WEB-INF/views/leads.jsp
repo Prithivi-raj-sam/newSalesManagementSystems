@@ -13,11 +13,13 @@
 <body>
 <div class="navbar">
 			<a href="/leads/allleads">All Leads</a>
-			<a href="/account/allaccount?empId=${empId}">All Account</a>
+			<a href="/account/allaccount">All Account</a>
 		</div>
 		<div>
-	  <iframe class="iframe" title='All sales' src='/sales/allsales?empId=${empId}' 
-	    ></iframe>
+	  <iframe class="iframe" title='All sales' src='/sales/allsales' 
+	     style='border:3px solid #25195c' ></iframe>
 	  </div>
+	  <div><iframe id="current" class="iframeleft" title='High Sales Employee' src='/employee/getemployeebyhighsales' 
+	   style='border:3px solid #25195c' ></iframe></div>
 </body>
 </html>

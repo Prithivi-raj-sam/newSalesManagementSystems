@@ -19,19 +19,19 @@
 					<th>Target Date</th>
 					<th>Planned Target</th>
 					<th>closed Target</th>
-					<th>Employee Id</th>
+					<th>Employee Name</th>
 					<th>Manager Comment</th>
 					<th>Target Month</th>
 					<th>View</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="alltargets" items="${alltargets}">
+			<c:forEach var="alltargets" items="${alltargets}" varStatus="status">
 			   <tr>
 			   	  <td>${alltargets.targetDate}</td>
 			   	  <td>${alltargets.plannedTarget}</td>
 			   	  <td>${alltargets.closedTarget}</td>
-			   	  <td>${alltargets.employeeId}</td>
+			   	  <td>${employeeName[status.index]}</td>
 			   	  <td>${alltargets.managerComment}</td>
 			   	  <td>${alltargets.targetSetDate}</td>
 			   	  <td id="view"><a href="/target/gettarget?targetId=${alltargets.targetId}"><button>View</button></a></td>

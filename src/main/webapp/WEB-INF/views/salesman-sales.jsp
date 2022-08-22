@@ -21,7 +21,10 @@
 			<form:input path="fromDate" placeholder="enter From date" type="date"/>
 </div>		
 		</form:form>
+		<button style="font-size: 12px; background-color: #e7e7e7; color: black;" onclick="history.back()">Go Back</button>
 		 <div id="sale1"><iframe id="salesman" class="iframe" title='All Sales' src='/sales/getsalesbyemployeeid' 
+	   style='border:3px solid #25195c' ></iframe></div>
+	   <div><iframe id="current" class="iframeleft" title='High Sales Employee' src='/employee/getemployeebyhighsales' 
 	   style='border:3px solid #25195c' ></iframe></div>
 	  
 </body>

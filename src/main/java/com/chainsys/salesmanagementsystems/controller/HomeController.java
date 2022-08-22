@@ -60,7 +60,7 @@ public class HomeController {
 			model.addAttribute("error", "Error Name:" + exp.getMessage());
 			model.addAttribute("message", "Employee Id or password Mismatch");
 			return LOGINPAGE;
-		}
+		}	model.addAttribute("employeeName", employee.getEmployeeName());
 		    session.setAttribute("employeeId", employee.getEmployeeId());
 			model.addAttribute(EMPID, employee.getEmployeeId());
 			if (employee.getRole().equalsIgnoreCase("manager")) {
@@ -239,37 +239,32 @@ public class HomeController {
 		return"target";
 	}
 	@GetMapping("/lead")//need
-	public String redirectToLeads(@RequestParam("empId")int empId,Model model) {
-		model.addAttribute(EMPID, empId);
+	public String redirectToLeads(Model model) {
 		return"leads";
 	}
 	@GetMapping("/territorys")
-	public String redirectToTerritory(@RequestParam("empId")int empId,Model model) {
+	public String redirectToTerritory(Model model) {
 		Territory territory=new Territory();
 		model.addAttribute(TERRITORY, territory);
-		model.addAttribute(EMPID, empId);
 		return TERRITORY;
 	}
 	
 	@GetMapping("/marketeraccount")
-	public String redirectToMarketerAccount(@RequestParam("empId") int empId,Model model) {
-		model.addAttribute(EMPID, empId);
+	public String redirectToMarketerAccount(Model model) {
 		Account account=new Account();
 		model.addAttribute("account", account);
 		return "marketer-account";
 	}
 	@GetMapping("/marketerterritory")
-	public String redirectTomarketerTerrotory(@RequestParam("empId")int empId,Model model) {
+	public String redirectTomarketerTerrotory(Model model) {
 		Territory territory=new Territory();
-		model.addAttribute(EMPID, empId);
 		model.addAttribute(TERRITORY, territory);
 		return "marketer-territory";
 	}
 	@GetMapping("/employeeTarget")//need
-	public String redirectToMarketerTarget(@RequestParam("empId")int empId,Model model) {
+	public String redirectToMarketerTarget(Model model) {
 		SalesInCome salesInCome=new SalesInCome();
 		model.addAttribute(SALESINCOME, salesInCome);
-		model.addAttribute(EMPID, empId);
 		return "employee-target";
 	}
 	
@@ -280,10 +275,9 @@ public class HomeController {
 		return "salesman-sales";
 	}
 	@GetMapping("/salesmanLeads")
-	public String redirectToSalesmanLeads(@RequestParam("empId") int empId,Model model) {
+	public String redirectToSalesmanLeads(Model model) {
 		SalesInCome salesInCome=new SalesInCome();
 		model.addAttribute("salesInCome", salesInCome);
-		model.addAttribute(EMPID, empId);
 		return "salesman-leads";
 	}
 	@GetMapping("/salesIncome")

@@ -18,10 +18,9 @@
 			<form:button>Search</form:button>
 			<form:input path="targetSetDate" type="date" placeholder="To date" />
 			<form:input path="targetDate"  type="date" placeholder="from date"/>
-			
-			
 </div>
 		</form:form>
+		<button style="font-size: 12px; background-color: #e7e7e7; color: black;" onclick="history.back()">Go Back</button>
 		<div>
 		<iframe class="iframe" title='All Employee' src='/home/getalltarget' ></iframe>
 	  </div>

@@ -25,7 +25,7 @@
 				<label for="password">Password</label>
 				<form:input path="password"
 					pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–[{}]:;',?/*~$^+=<>]).{8,20}$"
-					title="please enter password correctly" />
+					title="please enter password correctly" type="password"/>
 			</div>
 			<div>
 				<form:button>Log in</form:button>

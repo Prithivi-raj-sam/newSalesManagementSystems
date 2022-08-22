@@ -11,10 +11,11 @@
 </head>
 <body>
 	<div class="navbar">
-			<a href="/home/marketeraccount?empId=${empId}">Account</a>
-			<a href="/home/marketerterritory?empId=${empId}">Territory</a>
-			<a href="/home/employeeTarget?empId=${empId}">Target</a>
+			<a href="/home/marketeraccount">Account</a>
+			<a href="/home/marketerterritory">Territory</a>
+			<a href="/home/employeeTarget">Target</a>
 </div>
-	
+	<h1>Marketer</h1>
+	<h3>Welcome ${employeeName}</h3>
 </body>
 </html>

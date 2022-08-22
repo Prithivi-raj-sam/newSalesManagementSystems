@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h1>SORRY FOR THE INCONVIENIENT</h1>
-	<h3>Error: ${error}</h3>
+	<h3 style="color: red;">Error: ${error}</h3>
 	<h5>Message: ${result} !!!</h5>
 </body>
 </html>

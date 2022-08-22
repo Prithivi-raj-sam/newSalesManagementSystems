@@ -20,7 +20,7 @@
 			<form:button>Search</form:button>
 		</div>
 	</form:form>
-	
+	<button style="font-size: 12px; background-color: #e7e7e7; color: black;" onclick="history.back()">Go Back</button>
 	<div>
 		<iframe id="alltarget" class="iframe" title='All target'
 			src='/target/alltargetbyEmployeeid'
@@ -29,7 +29,7 @@
 
 	<div>
 		<iframe id="current" class="iframeleft" title='Current Target'
-			src='/target/goingtarget?empId=${empId}'
+			src='/target/goingtarget'
 			style='border: 10px solid #25195c'></iframe>
 	</div>
 </body>

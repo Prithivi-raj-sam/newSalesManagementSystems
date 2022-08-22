@@ -28,7 +28,6 @@ import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
 @RequestMapping("/leads")
 public class LeadsController {
 	private static final String ALLLEADS="all-leads";
-	private static final String EMPID="empId";
 	private static final String ACCOUNTNAME="accountName";
 	private static final String EMPLOYEENAME="employeeName";
 	private static final String ALLLEADSMODEL="allLeads";
@@ -212,10 +211,12 @@ public class LeadsController {
 		return ALLLEADS;
 	}
 	@GetMapping("allleadsbyemployeeid")//need
-	public String getAllleadsByEmployeeId(@RequestParam("empId") int empId,Model model) {
+	public String getAllleadsByEmployeeId(HttpServletRequest request,Model model) {
 		List<Lead>allLeads=null;
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
 		try {
-			allLeads=leadservice.getLeadsByEmployeeId(empId);
+			allLeads=leadservice.getLeadsByEmployeeId(employeeId);
 			if(allLeads==null)
 				throw new InvalidInputDataException("Cannot Find lead Details");
 		}catch(InvalidInputDataException exp) {
@@ -247,7 +248,6 @@ public class LeadsController {
 		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ACCOUNTNAME, accountName);
 		model.addAttribute(ALLLEADSMODEL, allLeads);
-		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
 	}
 	@GetMapping("/updateleadfrom")//need

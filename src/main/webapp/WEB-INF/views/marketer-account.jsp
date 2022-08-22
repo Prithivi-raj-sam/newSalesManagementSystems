@@ -20,8 +20,11 @@
 			<form:input path="companyName" placeholder="Enter Company Name" />
 			</div>
 		</form:form>
+		<button style="font-size: 12px; background-color: #e7e7e7; color: black;" onclick="history.back()">Go Back</button>
 	<div id="emp1">
 	<iframe id="allemployee" class="iframe" title='All Employee' src='/account/allaccountbyemployee?empId=${empId}' 
-	   style='border:10px solid #25195c' ></iframe></div>
+	   style='border:3px solid #25195c' ></iframe></div>
+	   <div><iframe id="current" class="iframeleft" title='High Account Employee' src='/employee/getemployeebyaccountcount' 
+	   style='border:3px solid #25195c' ></iframe></div>
 </body>
 </html>

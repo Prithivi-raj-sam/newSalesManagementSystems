@@ -6,6 +6,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Monthly Employee Sale</title>
+<style>
+<%@include file="/WEB-INF/css/allemployee.css"%>
+</style>
 </head>
 <body>
 <div class="allsales-table">

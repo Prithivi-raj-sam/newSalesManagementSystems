@@ -3,6 +3,7 @@ package com.chainsys.salesmanagementsystems.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import com.chainsys.salesmanagementsystems.dto.SalesEmployeeDTO;
 import com.chainsys.salesmanagementsystems.dto.TargetEmployeeDTO;
 import com.chainsys.salesmanagementsystems.model.Account;
 import com.chainsys.salesmanagementsystems.model.Employee;
+import com.chainsys.salesmanagementsystems.model.Target;
 import com.chainsys.salesmanagementsystems.repository.AccountRepository;
 import com.chainsys.salesmanagementsystems.repository.EmployeeRepository;
 import com.chainsys.salesmanagementsystems.repository.LeadRepository;
@@ -111,4 +113,18 @@ public class EmployeeService {
 				 accountRepository.findByCustomerJoinDateGreaterThanEqualAndCustomerJoinDateLessThanEqual(BusinessLogic.getDateBeforeAMonth(BusinessLogic.getInstanceDate()), BusinessLogic.getInstanceDate());
 		 return BusinessLogic.getTotalAccountOfEmployees(accountList, employeeList);
 	 }
+	 public List<String>getempNameByTarget(List<Target>targetList){
+		 List<Integer>empId=targetList.stream().map(Target::getEmployeeId).collect(Collectors.toList());
+		 List<String>employeeName=new ArrayList<>();
+		 List<Employee> employeeList=allEmployee();
+		 for(int i=0;i<empId.size();i++) {
+			 for(int j=0;j<employeeList.size();j++) {
+				 if(empId.get(i)==employeeList.get(j).getEmployeeId())
+					 employeeName.add(employeeList.get(j).getEmployeeName());
+			 }
+		 }
+		return 	employeeName;
+			
+	 }
+	 
 }

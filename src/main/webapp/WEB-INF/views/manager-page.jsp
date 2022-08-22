@@ -11,6 +11,12 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style type="text/css">
 <%@include file="/WEB-INF/css/employees.css" %>
+h1,h3{
+color:white;
+text-align:center;
+font-weight:800;
+}
+
 </style>
 </head>
 <body>
@@ -20,14 +26,16 @@
 			<a href="/home/employees">Employee</a>
 			<a href="/home/targets">Target</a> 
 			<a
-				href="/home/lead?empId=${empId}">Leads/Sales</a> 
+				href="/home/lead">Leads/Sales</a> 
 				<a
-				href="/home/territorys?empId=${empId}">Territory</a>
+				href="/home/territorys">Territory</a>
 				<form:button id="btn">Income</form:button>
 				<form:input path="toDate" type="date" placeholder="Enter To Date" />
 			<form:input path="fromDate" type="date" placeholder="Enter From Date" />
 		</div>
 	</form:form>
+	<h1>Manager</h1>
+	<h3>Welcome ${employeeName}</h3>
 </body>
 </html>
 

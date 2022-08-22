@@ -15,19 +15,16 @@
 	<form:form action="/target/alltargetfortwodates" method="post" modelAttribute="salesIncome">
 		<div class="navbar">
 		<form:button>Search</form:button>
-		<form:input path="commitedLeads" type="hidden" value="${empId}" />
 		<form:input path="toDate" placeholder="enter To Date" type="date"/>
-			<form:input path="fromDate" placeholder="enter From Ended" type="date"/>
-			
-			
-			
+		<form:input path="fromDate" placeholder="enter From Ended" type="date"/>
 			</div>
 		</form:form>
+		<button style="font-size: 12px; background-color: #e7e7e7; color: black;" onclick="history.back()">Go Back</button>
 	<div></div>
-	<div><iframe id="alltarget" class="iframe" title='All target' src='/target/alltargetbyEmployeeid?empId=${empId}' 
+	<div><iframe id="alltarget" class="iframe" title='All target' src='/target/alltargetbyEmployeeid' 
 	   style='border:3px solid #25195c' ></iframe></div>
 	   
-	   <div><iframe id="current" class="iframeleft" title='Current Target' src='/target/goingtarget?empId=${empId}' 
+	   <div><iframe id="current" class="iframeleft" title='Current Target' src='/target/goingtarget' 
 	   style='border:3px solid #25195c' ></iframe></div>
 </body>
 </html>

@@ -20,6 +20,7 @@
 		
 		</div>
 		</form:form>
+		<button style="font-size: 12px; background-color: #e7e7e7; color: black;" onclick="history.back()">Go Back</button>
 		<div>
 				<iframe id="allemployee" class="iframe" title='All Employee'
 					src='/employee/allemployee'></iframe>

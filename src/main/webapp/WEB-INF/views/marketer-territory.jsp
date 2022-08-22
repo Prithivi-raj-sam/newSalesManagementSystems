@@ -19,6 +19,7 @@
 			<form:input path="territoryName" placeholder="Enter Territory Name" />
 		</div>
 		</form:form>
+		<button style="font-size: 12px; background-color: #e7e7e7; color: black;" onclick="history.back()">Go Back</button>
 </div>
 	<div id="mark1"><iframe id="marketer" class="iframe" title='All target' src='/territory/allterritory' 
 	   style='border:10px solid #25195c' ></iframe></div>
