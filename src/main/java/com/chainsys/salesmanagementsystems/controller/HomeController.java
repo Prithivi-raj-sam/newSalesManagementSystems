@@ -3,6 +3,9 @@ package com.chainsys.salesmanagementsystems.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,7 +51,7 @@ public class HomeController {
 	}
 
 	@PostMapping("employeepage")//need
-	public String redirectToEmployeesPage(@ModelAttribute("login") Login login, Model model) {
+	public String redirectToEmployeesPage(@ModelAttribute("login") Login login, Model model,HttpSession session) {
 		Employee employee = employeeService.getEmployeeByEmployeeIdAndPassrd(login.getEmployeeId(),login.getPassword());
 		try {
 			if(employee==null)
@@ -58,6 +61,7 @@ public class HomeController {
 			model.addAttribute("message", "Employee Id or password Mismatch");
 			return LOGINPAGE;
 		}
+		    session.setAttribute("employeeId", employee.getEmployeeId());
 			model.addAttribute(EMPID, employee.getEmployeeId());
 			if (employee.getRole().equalsIgnoreCase("manager")) {
 				SalesInCome salesInCome=new SalesInCome();
@@ -122,8 +126,10 @@ public class HomeController {
 		return "redirect:/account/getId";
 	}
 	@GetMapping("/addsales")
-	public String redirectToAddSales(@RequestParam("empId")int empId,Model model) {
-		List<Lead> leadList=leadService.getLeadsByEmployeeId(empId);
+	public String redirectToAddSales(HttpServletRequest request,Model model) {
+		HttpSession session= request.getSession();
+		int employeeId =(int)session.getAttribute("employeeId");
+		List<Lead> leadList=leadService.getLeadsByEmployeeId(employeeId);
 		List<Lead> openLeadList=leadList.stream()
 		  .filter(lead -> lead.getStatus().equals("open lead"))
 		  .collect(Collectors.toList());
@@ -132,7 +138,6 @@ public class HomeController {
 		model.addAttribute("employeeName", employeeName);
 		model.addAttribute("accountName", accountname);
 		model.addAttribute("leadList", openLeadList);
-		model.addAttribute(EMPID, empId);
 		return "add-sales";
 	}
 	@GetMapping("/updatesales")
@@ -269,10 +274,9 @@ public class HomeController {
 	}
 	
 	@GetMapping("/salesmanSales")//need
-	public String redirectToSalesmanSales(@RequestParam("empId") int empId,Model model) {
+	public String redirectToSalesmanSales(Model model) {
 		SalesInCome salesInCome=new SalesInCome();
 		model.addAttribute("salesInCome", salesInCome);
-		model.addAttribute(EMPID, empId);
 		return "salesman-sales";
 	}
 	@GetMapping("/salesmanLeads")

@@ -15,14 +15,13 @@
 	<form:form action="/sales/getsalesfortwodates" method="post" modelAttribute="salesInCome">
 	<div class="navbar">
 		
-			<a href="/home/addsales?empId=${empId}">Add Sales</a>
+			<a href="/home/addsales">Add Sales</a>
 			<form:button>Search</form:button>
-			<form:input path="plannedSales"  type="hidden" value="${empId}"/>
 			<form:input path="toDate" placeholder="enter To Date" type="date"/>
 			<form:input path="fromDate" placeholder="enter From date" type="date"/>
 </div>		
 		</form:form>
-		 <div id="sale1"><iframe id="salesman" class="iframe" title='All Sales' src='/sales/getsalesbyemployeeid?empId=${empId}' 
+		 <div id="sale1"><iframe id="salesman" class="iframe" title='All Sales' src='/sales/getsalesbyemployeeid' 
 	   style='border:3px solid #25195c' ></iframe></div>
 	  
 </body>

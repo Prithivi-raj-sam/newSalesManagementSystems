@@ -17,14 +17,13 @@
 			<form:input path="fromDate" placeholder="enter From Ended"
 				type="date" />
 			<form:input path="toDate" placeholder="enter To Date" type="date" />
-			<form:input path="commitedLeads" type="hidden" value="${empId}" />
 			<form:button>Search</form:button>
 		</div>
 	</form:form>
 	
 	<div>
 		<iframe id="alltarget" class="iframe" title='All target'
-			src='/target/alltargetbyEmployeeid?empId=${empId}'
+			src='/target/alltargetbyEmployeeid'
 			style='border: 10px solid #25195c'></iframe>
 	</div>
 

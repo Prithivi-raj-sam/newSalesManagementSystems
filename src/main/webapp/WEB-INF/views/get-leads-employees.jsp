@@ -70,8 +70,8 @@
 			</form:form>
 		</div>
 	</div>
-	<div><a href="/leads/updateleadfrom?empId=${leads.leadId}"><button>update</button></a>
-		<a href="/leads/deletelead?id=${leads.leadId}&empId=${employeeId}"><button>delete</button></a>
+	<div><a href="/leads/updateleadfrom?id=${leads.leadId}"><button>update</button></a>
+		<a href="/leads/deletelead?id=${leads.leadId}"><button>delete</button></a>
 	</div>
 </body>
 </html>

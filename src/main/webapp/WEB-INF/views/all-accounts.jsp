@@ -37,7 +37,7 @@
 			   	  <td>${allaccount.contactPersonPhone}</td>
 			   	  <td>${allaccount.accountType}</td>
                   <td><a href="/employee/getaccountsemployee?id=${allaccount.employeeId}">${employeeName[status.index]}</a></td>
-			   	  <td id="view"><a href="/account/getaccount?id=${allaccount.accountId}&empId=${empId}"><button>View</button></a></td>
+			   	  <td id="view"><a href="/account/getaccount?id=${allaccount.accountId}"><button>View</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

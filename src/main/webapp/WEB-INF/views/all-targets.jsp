@@ -16,7 +16,6 @@
 		<caption></caption>
 			<thead>
 				<tr style="width:100% , height:100%">
-					<th>Target Id</th>
 					<th>Target Date</th>
 					<th>Planned Target</th>
 					<th>closed Target</th>
@@ -29,7 +28,6 @@
 			<tbody>
 			<c:forEach var="alltargets" items="${alltargets}">
 			   <tr>
-			   	  <td>${alltargets.targetId}</td>
 			   	  <td>${alltargets.targetDate}</td>
 			   	  <td>${alltargets.plannedTarget}</td>
 			   	  <td>${alltargets.closedTarget}</td>

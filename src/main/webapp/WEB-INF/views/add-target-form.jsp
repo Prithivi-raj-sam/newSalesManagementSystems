@@ -7,12 +7,10 @@
 <meta charset="ISO-8859-1">
 <title>Add Target</title>
 <style>
-
+<%@include file="/WEB-INF/css/getemployeebyid.css"%>
 </style>
 <script>
-	
 <%@include file="/WEB-INF/script/targetValidation.js"%>
-	
 </script>
 </head>
 <body style="background-color: #3d403d; color: white;">

@@ -2,6 +2,8 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,7 +47,9 @@ public class LeadsController {
 	private SalesService salesService;
 	
 	@GetMapping("/getlead")//need
-	public String getleadsById(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
+	public String getleadsById(@RequestParam("id")int id,Model model,HttpServletRequest request) {
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
 		Lead leads=null;
 		try {
 		leads=leadservice.getLeadById(id);
@@ -58,11 +62,11 @@ public class LeadsController {
 		}
 		Employee employee=null;
 		try {
-			employee=employeeService.getEmployeeById(empId);
+			employee=employeeService.getEmployeeById(employeeId);
 			if(employee==null)
 				throw new InvalidInputDataException("Your Not Valid Employee");
 			model.addAttribute("leads", leads);
-			model.addAttribute("employeeId", empId);
+			model.addAttribute("employeeId", employeeId);
 			if(employee.getRole().equals("salesman"))
 				return "get-leads-employees";
 			else return "get-leads-id";
@@ -99,7 +103,7 @@ public class LeadsController {
 		try {
 			accountName=leadservice.getAccountNameOfLeads(leasList);
 			if(accountName==null)
-				throw new InvalidInputDataException("Cannot Find Account Name");
+				throw new InvalidInputDataException("Cannot Fetch Account Name");
 		}catch(InvalidInputDataException exp) {
 			model.addAttribute(ERROR, exp.getMessage());
 			model.addAttribute(RESULT, MESSAGE);
@@ -108,14 +112,15 @@ public class LeadsController {
 		model.addAttribute(EMPLOYEENAME, employeename);
 		model.addAttribute(ACCOUNTNAME, accountName);
 		model.addAttribute(ALLLEADSMODEL, leasList);
-		model.addAttribute(EMPID, salesInCome.getPlannedLeads());
 		return ALLLEADS;
 	}
 	@GetMapping("/addleadfrom")//need
-	public String addLeadForm(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
+	public String addLeadForm(@RequestParam("id")int id,Model model,HttpServletRequest request) {
 		Lead lead=new Lead();
 		lead.setAccountId(id);
-		lead.setEmployeeId(empId);
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
+		lead.setEmployeeId(employeeId);
 		lead.setLeadDate(BusinessLogic.getInstanceDate());
 		lead.setStatus("open lead");
 		model.addAttribute("addLead", lead);
@@ -134,7 +139,7 @@ public class LeadsController {
 		return ADDLEADFORM;
 	}
 	@GetMapping("/deletelead")//need
-	public String deleteLeadsById(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
+	public String deleteLeadsById(@RequestParam("id")int id,Model model) {
 		try {
 			leadservice.deleteLead(id);
 		}catch(Exception exp) {
@@ -145,7 +150,9 @@ public class LeadsController {
 		return "redirect:/leads/allleads";
 	}
 	@GetMapping("/closeleads")//need
-	public String closingleads(@RequestParam("id") int id,@RequestParam("empId")int empId,Model model) {
+	public String closingleads(@RequestParam("id") int id,Model model,HttpServletRequest request) {
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
 		Lead lead=null;
 		try {
 			lead=leadservice.getLeadById(id);
@@ -164,10 +171,10 @@ public class LeadsController {
 			model.addAttribute(RESULT, MESSAGE);
 			return ERRORPAGE;
 		}
-		return "redirect:/home/addsales?empId="+empId;
+		return "redirect:/home/addsales?empId="+employeeId;
 	}
 	@GetMapping("/allleads")//need
-	public String getAllLeads(@RequestParam("empId") int empId,Model model) {
+	public String getAllLeads(Model model) {
 		List<Lead>allLeads=null;
 		try {
 			allLeads=leadservice.allLead();
@@ -202,7 +209,6 @@ public class LeadsController {
 		model.addAttribute(EMPLOYEENAME, employeeName);
 		model.addAttribute(ACCOUNTNAME, accountName);
 		model.addAttribute(ALLLEADSMODEL, allLeads);
-		model.addAttribute(EMPID, empId);
 		return ALLLEADS;
 	}
 	@GetMapping("allleadsbyemployeeid")//need
@@ -245,10 +251,10 @@ public class LeadsController {
 		return ALLLEADS;
 	}
 	@GetMapping("/updateleadfrom")//need
-	public String updateLeadForm(@RequestParam("empId")int empId,Model model) {
+	public String updateLeadForm(@RequestParam("id")int id,Model model) {
 		Lead lead=null;
 		try {
-			lead=leadservice.getLeadById(empId);
+			lead=leadservice.getLeadById(id);
 			if(lead==null)
 				throw new InvalidInputDataException("Cannot Find Lead Details");
 			model.addAttribute("updateLead", lead);

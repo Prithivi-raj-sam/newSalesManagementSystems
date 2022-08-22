@@ -14,7 +14,7 @@
 	
 	<form:form action="/account/getaccountbycompanyname" method="post" modelAttribute="account">
 		<div class="navbar">
-			<a href="/account/addaccountform?empId=${empId}">Add Account</a>
+			<a href="/account/addaccountform">Add Account</a>
 			<form:button>Search</form:button>
 			<form:input path="employeeId" value="${empId}" type="hidden"/>
 			<form:input path="companyName" placeholder="Enter Company Name" />

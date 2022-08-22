@@ -2,6 +2,8 @@ package com.chainsys.salesmanagementsystems.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,10 +45,12 @@ public class SalesController {
 	
 	
 	@GetMapping("/addsalesform")//need
-	public String addSalesServiceForm(@RequestParam("id")int id,@RequestParam("empId")int empId,Model model) {
+	public String addSalesServiceForm(@RequestParam("id")int id,Model model,HttpServletRequest request) {
 		Sales sales =new Sales();
 		sales.setLeadId(id);
-		sales.setEmployeeId(empId);
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
+		sales.setEmployeeId(employeeId);
 		sales.setSalesDate(BusinessLogic.getInstanceDate());
 		model.addAttribute("addsales", sales);
 		return "add-sales-form";
@@ -64,7 +68,7 @@ public class SalesController {
 		return "add-sales-form";
 	}
 	@GetMapping("/allsales")//need
-	public String allSales(@RequestParam("empId") int empId, Model model) {
+	public String allSales(Model model) {
 		SalesDTO salesDTO=null;
 		try {
 		salesDTO=salesService.allSales();
@@ -78,11 +82,12 @@ public class SalesController {
 		model.addAttribute(ALLSALESMODEL, salesDTO.getSalesList());
 		model.addAttribute(ACCOUNTNAME, salesDTO.getAccountName());
 		model.addAttribute(EMPLOYEENAME, salesDTO.getEmployeeName());
-		model.addAttribute(EMPLOYEEID, empId);
 		return ALLSALES;
 	}
 	@PostMapping("/getsalesfortwodates")//need
-	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
+	public String getSalesBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model,HttpServletRequest request) {
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
 		List<Sales>allSales=null;
 		try {
 		allSales=salesService.getSalesBetweenTwoDates(salesInCome.getFromDate(),salesInCome.getToDate());
@@ -104,14 +109,14 @@ public class SalesController {
 			return ERRORPAGE;
 		}
 
-		model.addAttribute(EMPLOYEEID, salesInCome.getPlannedSales());
+		model.addAttribute(EMPLOYEEID, employeeId);
 		model.addAttribute(ACCOUNTNAME, saleDTO.getAccountName());
 		model.addAttribute(EMPLOYEENAME, saleDTO.getEmployeeName());
 		model.addAttribute(ALLSALESMODEL, allSales);
 		return ALLSALES;
 	}
 	@GetMapping("/getSales")//need
-	public String getSalesByID(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
+	public String getSalesByID(@RequestParam("id")int id, Model model,HttpServletRequest request) {
 		Sales sales=null;
 		try {
 			sales=salesService.getSalesById(id);
@@ -124,7 +129,9 @@ public class SalesController {
 		}
 		Employee employee=null;
 		try {
-			employee=employeeservice.getEmployeeById(empId);
+			HttpSession session= request.getSession();
+			int employeeId=(int)session.getAttribute("employeeId");
+			employee=employeeservice.getEmployeeById(employeeId);
 			if(employee==null)
 				throw new InvalidInputDataException("You Are Not Valid Employee");
 		}catch(InvalidInputDataException exp) {
@@ -139,10 +146,12 @@ public class SalesController {
 		else return "get-sales-manager";
 	}
 	@GetMapping("/getsalesbyemployeeid")//need
-	public String getSalesByEmployeeId(@RequestParam("empId")int empId,Model model) {
+	public String getSalesByEmployeeId(HttpServletRequest request,Model model) {
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
 		List<Sales> salesList=null;
 		try {
-			salesList=salesService.getSalesByEmployeeId(empId);
+			salesList=salesService.getSalesByEmployeeId(employeeId);
 			if(salesList==null) 
 				throw new InvalidInputDataException("Cannot Find SalesList Details");
 		}catch(InvalidInputDataException exp) {
@@ -164,14 +173,13 @@ public class SalesController {
 		model.addAttribute(ALLSALESMODEL, salesList);
 		model.addAttribute(ACCOUNTNAME, salesDTO.getAccountName());
 		model.addAttribute(EMPLOYEENAME, salesDTO.getEmployeeName());
-		model.addAttribute(EMPLOYEEID, empId);
 		return ALLSALES;
 	}
 	@GetMapping("/deletesales")//need
-	public String deleteSales(@RequestParam("id")int id,@RequestParam("empId")int empId, Model model) {
+	public String deleteSales(@RequestParam("id")int id,Model model) {
 		try {
 			salesService.deleteSales(id);
-			return "redirect:/sales/allsales?empId="+empId;
+			return "redirect:/sales/allsales";
 		}catch(Exception exp) {
 			model.addAttribute(ERROR, exp.getMessage());
 			model.addAttribute(RESULT, MESSAGE);

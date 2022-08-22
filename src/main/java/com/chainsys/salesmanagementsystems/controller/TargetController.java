@@ -4,6 +4,8 @@ package com.chainsys.salesmanagementsystems.controller;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chainsys.salesmanagementsystems.businesslogic.BusinessLogic;
 import com.chainsys.salesmanagementsystems.model.SalesInCome;
 import com.chainsys.salesmanagementsystems.model.Target;
+import com.chainsys.salesmanagementsystems.service.EmployeeService;
 import com.chainsys.salesmanagementsystems.service.TargetService;
 import com.chainsys.salesmanagementsystems.validation.InvalidInputDataException;
 
@@ -32,7 +35,8 @@ public class TargetController {
 	
 	@Autowired
 	private TargetService targetService;
-	
+	@Autowired
+	private EmployeeService employeeService;
 	
 	@GetMapping("/alltargets")//need
 	public String allTargets(Model model) {
@@ -51,10 +55,12 @@ public class TargetController {
 		return ALLTARGET;
 	}
 	@GetMapping("/alltargetbyEmployeeid")//need
-	public String getAlltargetsByEmployeeId(@RequestParam("empId") int empId,Model model) {
+	public String getAlltargetsByEmployeeId(HttpServletRequest request,Model model) {
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
 		List<Target> targetList=null;
 		try {
-			targetList=targetService.getTargetByEMployeeId(empId);
+			targetList=targetService.getTargetByEMployeeId(employeeId);
 			if(targetList==null)
 				throw new InvalidInputDataException("Cannot Find All Target list");
 		}catch(InvalidInputDataException exp) {
@@ -67,7 +73,7 @@ public class TargetController {
 		return "employees-target";
 	}
 	@PostMapping("/alltargetfortwodates")//need
-	public String getTargetBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model) {
+	public String getTargetBetweenTwoDates(@ModelAttribute("salesInCome")SalesInCome salesInCome,Model model,HttpServletRequest request) {
 		List<Target>targetList =null;
 		try {
 			targetList =targetService.getSalesInCome(salesInCome);
@@ -90,8 +96,10 @@ public class TargetController {
 			model.addAttribute(RESULT, MESSAGE);
 			return ERRORPAGE;
 		}
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employeeId");
 		model.addAttribute("targetList", employeetargetList);
-		model.addAttribute("empId", salesInCome.getCommitedLeads());
+		model.addAttribute("empId", employeeId);
 		return "employees-target";
 	}
 	@GetMapping("/addtargetform")//need
@@ -180,15 +188,19 @@ public class TargetController {
 			model.addAttribute(RESULT, MESSAGE);
 			return ERRORPAGE;
 		}
-		
+		List<String> employeeName=
+				employeeService.getEmployeeName(targetList.stream().map(Target::getEmployeeId).collect(Collectors.toList()));
 		model.addAttribute(ALLTARGETMODEL, targetList);
+		model.addAttribute("employeeName", employeeName);
 		return ALLTARGET;
 	}
 	@GetMapping("/goingtarget")//need
-	public String getCurrentTarget(@RequestParam("empId") int empId,Model model) {
+	public String getCurrentTarget(HttpServletRequest request,Model model) {
+		HttpSession session= request.getSession();
+		int employeeId=(int)session.getAttribute("employyeId");
 		List<Target> targetList=null;
 		try {
-			targetList=targetService.getTargetByDescendingOrder(empId);
+			targetList=targetService.getTargetByDescendingOrder(employeeId);
 			if(targetList==null)
 				throw new InvalidInputDataException("Cannot Fetch Target Details");
 		}catch(InvalidInputDataException exp) {

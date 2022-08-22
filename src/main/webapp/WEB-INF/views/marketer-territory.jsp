@@ -20,7 +20,7 @@
 		</div>
 		</form:form>
 </div>
-	<div id="mark1"><iframe id="marketer" class="iframe" title='All target' src='/territory/allterritory?empId=${empId}' 
+	<div id="mark1"><iframe id="marketer" class="iframe" title='All target' src='/territory/allterritory' 
 	   style='border:10px solid #25195c' ></iframe></div>
 </body>
 </html>

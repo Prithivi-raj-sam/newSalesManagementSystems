@@ -80,6 +80,6 @@
 			</form:form>
 		<a href="/account/updateaccountform?id=${account.accountId}"><button id="account-button">Update</button></a>
 		<a
-			href="/account/deleteaccount?id=${account.accountId}&empId=${empId}"><button id="account-button">Delete</button></a>
+			href="/account/deleteaccount?id=${account.accountId}"><button id="account-button">Delete</button></a>
 </body>
 </html>

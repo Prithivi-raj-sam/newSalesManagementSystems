@@ -27,8 +27,8 @@
 			   <tr>
 			   	  <td id="get"><a href="/territory/getterritory?id=${allteritory.territoryId}&empId=${empId}">${allteritory.territoryName}</a></td>
 			   	  <td>${allteritory.noOfCustomer}</td>
-			   	  <td id="get2"><a href="/territory/getaccountsandterritory?id=${allteritory.territoryId}&empId=${empId}"><button>view Account</button></a></td>
-			   	  <td id="view"><a href="/territory/getemployeeandterritory?id=${allteritory.territoryId}&empId=${empId}"><button>view Employee</button></a></td>
+			   	  <td id="get2"><a href="/territory/getaccountsandterritory?id=${allteritory.territoryId}"><button>view Account</button></a></td>
+			   	  <td id="view"><a href="/territory/getemployeeandterritory?id=${allteritory.territoryId}"><button>view Employee</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

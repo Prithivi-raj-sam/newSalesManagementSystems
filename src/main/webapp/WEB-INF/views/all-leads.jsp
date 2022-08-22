@@ -35,7 +35,7 @@
 			   	  <td>${allLeads.leadDate}</td>
 			   	  <td>${allLeads.stages}</td>
 			   	  <td>${allLeads.propability}</td>
-			   	  <td id="view"><a href="/leads/getlead?id=${allLeads.leadId}&empId=${empId}"><button>view</button></a></td>
+			   	  <td id="view"><a href="/leads/getlead?id=${allLeads.leadId}"><button>view</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

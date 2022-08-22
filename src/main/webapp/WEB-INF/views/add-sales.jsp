@@ -36,8 +36,8 @@
 			   	  <td>${allLeads.stages}</td>
 			   	  <td>${allLeads.propability}</td>
 			   	   <td>${allLeads.status}</td>
-			   	  <td><a href="/sales/addsalesform?id=${allLeads.leadId}&empId=${empId}"><button>AddToSales</button></a></td>
-			   	  <td><a href="/leads/closeleads?id=${allLeads.leadId}&empId=${empId}"><button>Close</button></a></td>
+			   	  <td><a href="/sales/addsalesform?id=${allLeads.leadId}"><button>AddToSales</button></a></td>
+			   	  <td><a href="/leads/closeleads?id=${allLeads.leadId}"><button>Close</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

@@ -31,7 +31,7 @@
 			   	  <td id="get2"><a href="/leads/getleadsandsales?id=${allsales.leadId}">${accountName[status.index]}</a></td>
 			   	  <td>${allsales.salesDate}</td>
 			   	  <td>${allsales.amount}</td>
-			   	  <td id="view"><a href="/sales/getSales?id=${allsales.salesId}&empId=${empId}"><button>View</button></a></td>
+			   	  <td id="view"><a href="/sales/getSales?id=${allsales.salesId}"><button>View</button></a></td>
 			   </tr>
 			</c:forEach>
 			</tbody>

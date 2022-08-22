@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="navbar">
-			<a href="/leads/allleads?empId=${empId}">All Leads</a>
+			<a href="/leads/allleads">All Leads</a>
 			<a href="/account/allaccount?empId=${empId}">All Account</a>
 		</div>
 		<div>
